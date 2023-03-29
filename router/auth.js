@@ -34,7 +34,7 @@ router.get("/dashboard", isAuthorised, async (req, res) => {
 
 router.post("/enroll", isAuthorised, async (req, res) => {
     const userId = req.user.id;
-    const {courseId} = req.body;
+    const { courseId } = req.body;
 
     try {
         await User.findOneAndUpdate(
@@ -81,7 +81,7 @@ router.post('/login', (req, res) => {
 
 router.post("/note", isAuthorised, async (req, res) => {
     const userId = req.user.id;
-    const {lessonId, courseId} = req.body;
+    const { lessonId, courseId } = req.body;
     const customId = courseId + lessonId + userId;
 
     try {
@@ -145,10 +145,10 @@ router.get("/course/:_id", async (req, res) => {
 
 //Implement admin login system to allow course posting
 router.post("/new/course", isAuthorised, async (req, res) => {
-    const { _id, name, creator, rating, category, info, lessons } = req.body;
-    const isVisible = false;
+    const { _id, name, creator, rating, category, sub_category, language, course_pic, info, lessons } = req.body;
+    const isVisible = true;
 
-    if (!_id || !name || !creator || !category || !info) {
+    if (!_id || !name || !creator || !category || !info || !sub_category || !language || !course_pic) {
         return res.status(422).json({ error: "Empty input fields!" });
     }
 
@@ -158,7 +158,19 @@ router.post("/new/course", isAuthorised, async (req, res) => {
             return res.status(422).json({ error: "Course with same ID not allowed" });
         }
 
-        const course = new Course({ _id, name, creator, category, info, lessons });
+        const course = new Course({
+            _id,
+            name,
+            creator,
+            rating,
+            category,
+            sub_category,
+            language,
+            course_pic,
+            info,
+            isVisible,
+            lessons
+        });
         await course.save();
         res.status(201).json({ message: "Course added!" });
 
