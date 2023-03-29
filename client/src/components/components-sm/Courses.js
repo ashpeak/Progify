@@ -25,7 +25,7 @@ const Courses = () => {
                     {courses && courses.map(course => {
                         return <div className="col-md-3 my-card">
                             <Link className="custom-link" to={"/course-detail"} state={{ data: course }}>
-                                <div className="card"><img className="card-img-top w-100 d-block fit-cover" src={require("../../img/dsa.jpg")} />
+                                <div className="card"><img className="card-img-top w-100 d-block fit-cover" alt='course pic' src={course.course_pic} />
                                     <div className="card-body">
                                         <h4 className="card-title card-p-h4 card-h4">{course.name}</h4>
                                         <p className="card-text card-p-h4">{course.creator}</p>
