@@ -204,12 +204,6 @@ p {
   text-transform: uppercase;
 }
 
-@media (min-width: 850px) {
-  .container {
-    margin: 0 6.7784rem;
-  }
-}
-
 /* --------------------------------- */
 
 @media (max-width: 850px) {

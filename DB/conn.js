@@ -1,6 +1,7 @@
 const mongoose = require("mongoose");
 
-const url = process.env.DATABASE;
+// const url = process.env.DATABASE;
+const url = process.env.DBLOCAL;
 mongoose.set('strictQuery', false);
 mongoose.connect(url).then(() => {
     console.log("Connection successful");

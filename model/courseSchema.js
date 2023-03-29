@@ -7,7 +7,10 @@ const courseSchema = new mongoose.Schema({
     rating: Number,
     isVisible: Boolean,
     category: String,
+    sub_category: String,
     info: String,
+    course_pic: String,
+    language: String,
     lessons: [
         {
             lesson: Number,
