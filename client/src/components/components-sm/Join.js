@@ -1,7 +1,8 @@
 import React from 'react';
 
 const Join = () => {
-    return (<><section className="connect pt-4 pb-5">
+    return (<>
+    <section id='connect' className="connect pt-4 pb-5">
     <div className="container">
         <div>
             <h2>Connect with&nbsp;<span className="sub-red">Us</span></h2>

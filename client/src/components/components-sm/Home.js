@@ -16,7 +16,7 @@ const Home = () => {
                     </div>
                     <div className="col-md-5 order-md-2 order-1 banner-img" style={{ textAlign: "center" }}><img className="img-fluid"
                         src={require("../../img/juicy-man-programmer-writing-code-and-make-web-design-on-a-pc.gif")}
-                        style={{ transform: "scale(1.20)", paddingBottom: "0px", paddingTop: "0px", marginTop: "-20px" }} alt="program"/></div>
+                        style={{ paddingBottom: "0px", paddingTop: "0px", marginTop: "-20px" }} alt="program"/></div>
                 </div>
             </div>
         </section></>);

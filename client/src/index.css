@@ -149,7 +149,19 @@ p {
 }
 
 .navbar .nav-item {
-  margin: 0 0.625rem;
+  margin: 0 0.2rem;
+}
+
+.navbar-nav .my-btn,
+.navbar-nav .my-btn-outline {
+  width: 5.2rem;
+  font-weight: 700 !important;
+  margin: 0 !important;
+  margin-left: 0.5rem !important;
+}
+
+.navbar-nav .my-btn-outline:hover {
+  background-color: #d8deff5c;
 }
 
 .nav-item .nav-link {
@@ -161,11 +173,13 @@ p {
   color: #080808;
 }
 
-.nav-item .nav-link:hover, .nav-item .nav-link:active {
+.nav-item .nav-link:hover,
+.nav-item .nav-link:active {
   color: var(--han-blue-hover);
 }
 
-.navbar .navbar-toggler:focus, .navbar .navbar-toggler {
+.navbar .navbar-toggler:focus,
+.navbar .navbar-toggler {
   box-shadow: none;
   border: none;
 }
@@ -189,7 +203,8 @@ p {
   background-color: #ffffffb8 !important;
 }
 
-.dropdown:hover .dropdown-toggle, .dropdown:hover .dropdown-menu {
+.dropdown:hover .dropdown-toggle,
+.dropdown:hover .dropdown-menu {
   display: block;
 }
 
@@ -242,7 +257,8 @@ p {
   width: 7.6rem;
 }
 
-.my-btn:focus, .my-btn:hover {
+.my-btn:focus,
+.my-btn:hover {
   background-color: var(--han-blue-hover);
   color: #fff;
 }
@@ -253,7 +269,8 @@ p {
   border: 2px solid var(--han-blue);
 }
 
-.my-btn-outline:hover, .my-btn-outline:focus {
+.my-btn-outline:hover,
+.my-btn-outline:focus {
   color: #1126b1;
   background-color: #fff;
   border: 2px solid var(--han-blue-hover);
@@ -273,7 +290,8 @@ p {
 
 /* 3. Banner Content */
 
-.my-btn, .my-btn-outline {
+.my-btn,
+.my-btn-outline {
   margin: 10px 20px 10px 0 !important;
 }
 
@@ -471,19 +489,14 @@ p {
   line-height: 1.75rem;
 }
 
-.zoom-animate {
-  transition: .3s ease;
-  -webkit-transform: scale(1.06);
-  -moz-transform: scale(1.06);
-  -o-transform: scale(1.06);
-  transform: scale(1.06);
-}
-
 .zoom {
   transition: transform 250ms;
 }
 
-.facebook:hover svg, .youtube:hover svg, .instagram:hover svg, .community:hover svg {
+.facebook:hover svg,
+.youtube:hover svg,
+.instagram:hover svg,
+.community:hover svg {
   transition: .3s ease;
   transform: translateY(5px);
 }
@@ -503,10 +516,9 @@ p {
 }
 
 .my-card {
-  max-width: 300px;
   display: inline-block;
-  min-width: 300px;
-  margin: 1rem 0 .25rem 0 !important;
+  min-width: 350px;
+  padding: 0.75rem 0 .75rem !important;
 }
 
 .my-card img {
@@ -598,7 +610,8 @@ p {
   color: var(--ghost-white);
 }
 
-.course-detail h3, .course-detail h4 {
+.course-detail h3,
+.course-detail h4 {
   color: var(--ghost-white);
   text-transform: none;
 }
@@ -690,7 +703,8 @@ p {
   text-align: center;
 }
 
-.btn-enroll:hover, .btn-enroll:focus {
+.btn-enroll:hover,
+.btn-enroll:focus {
   color: var(--custom-black);
   background-color: #ffffff;
 }
@@ -827,7 +841,9 @@ p {
   resize: none;
 }
 
-.bold:hover, .italic:hover, .color:hover {
+.bold:hover,
+.italic:hover,
+.color:hover {
   color: #fff;
   background-color: var(--han-blue);
 }
@@ -848,7 +864,8 @@ p {
   background-color: var(--custom-black);
 }
 
-.save-btn:hover, .save-btn:focus {
+.save-btn:hover,
+.save-btn:focus {
   color: #fff;
   background-color: #000;
 }
@@ -972,6 +989,19 @@ p {
 
 /* 15. Course Page */
 
+.course-card {
+  display: inline-block;
+  padding: .75rem .5rem !important;
+}
+
+.course-card .card {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  border-bottom: 1px solid #d1d7dc;
+  padding-bottom: 1.2rem;
+}
+
 .srch-inp {
   padding-left: 8px;
   outline: 0;
@@ -997,6 +1027,58 @@ p {
   .search {
     margin: 1rem;
   }
+
+  .course-card .course-image {
+    height: 64px;
+    width: 64px;
+  }
+}
+
+.course-filter {
+  align-self: flex-start;
+}
+
+.search-box {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.search-input {
+  max-width: 650px;
+  border-radius: 20px;
+  padding-left: 1.45rem;
+  background-color: #f7f9fabf;
+  outline: none;
+}
+
+.search-input:focus {
+  background-color: #f7f9fabf;
+  box-shadow: 0px 0px 5px 0px #868ec1;
+  border: 1px solid #ced4da;
+}
+
+.search-btn {
+  outline: none !important;
+  box-shadow: none !important;
+  border: none;
+  background: none;
+}
+
+.search-icon:hover {
+  transition: .3s ease;
+  transform: rotate(8deg);
+}
+
+.search-icon {
+  font-size: 1.4rem;
+  margin-left: .9rem;
+  border-radius: 20px;
+  border: 1px solid #b8bdc2cc;
+  color: #6c757d;
+  background-color: #f7f9fa;
+  padding: .4rem;
+  transition: transform 300ms;
 }
 
 /* 15. Course Page end */
