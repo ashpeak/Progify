@@ -154,14 +154,15 @@ p {
 
 .navbar-nav .my-btn,
 .navbar-nav .my-btn-outline {
-  width: 5.2rem;
-  font-weight: 700 !important;
   margin: 0 !important;
   margin-left: 0.5rem !important;
 }
 
 .navbar-nav .my-btn-outline:hover {
   background-color: #d8deff5c;
+}
+.navbar-nav .my-btn-outline {
+  background-color: #fdfdfd;
 }
 
 .nav-item .nav-link {
@@ -254,19 +255,22 @@ p {
 .my-btn {
   background-color: var(--han-blue);
   color: var(--ghost-white);
-  width: 7.6rem;
-}
-
-.my-btn:focus,
-.my-btn:hover {
-  background-color: var(--han-blue-hover);
-  color: #fff;
+  font-weight: 700 !important;
+  width: 5.2rem;
 }
 
 .my-btn-outline {
   color: var(--han-blue);
   background-color: #ffffff;
   border: 2px solid var(--han-blue);
+  width: 5.2rem;
+  font-weight: 700 !important;
+}
+
+.my-btn:focus,
+.my-btn:hover {
+  background-color: var(--han-blue-hover);
+  color: #fff;
 }
 
 .my-btn-outline:hover,
@@ -280,8 +284,6 @@ p {
   padding: 6.875rem 0 5rem 0;
   z-index: 1;
   /*background: #4b58ad;*/
-  /*background-image: url(4853433.jpg);*/
-  /*background-image: linear-gradient(216deg, rgb(227 102 136 / 30%) 10%, rgb(102 112 181 / 9%) 30%), url(4853433.jpg);*/
   background-image: linear-gradient(rgb(102 112 181 / 9%) 30%), url(https://codehelp.s3.ap-south-1.amazonaws.com/mctmmnscw4snaoc9kmnn_b35808d374.svg);
   background-repeat: no-repeat;
   background-position: center;
@@ -293,6 +295,8 @@ p {
 .my-btn,
 .my-btn-outline {
   margin: 10px 20px 10px 0 !important;
+  padding-left: 0;
+  padding-right: 0;
 }
 
 .index-img {
@@ -998,7 +1002,7 @@ p {
   display: flex;
   flex-direction: row;
   align-items: center;
-  border-bottom: 1px solid #d1d7dc;
+  border-bottom: var(--border);
   padding-bottom: 1.2rem;
 }
 
@@ -1079,6 +1083,18 @@ p {
   background-color: #f7f9fa;
   padding: .4rem;
   transition: transform 300ms;
+}
+
+.testScroll {
+  max-height: 200px;
+  overflow: scroll;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+/* Hide scrollbar for Chrome, Safari and Opera */
+.testScroll::-webkit-scrollbar {
+  display: none;
 }
 
 /* 15. Course Page end */

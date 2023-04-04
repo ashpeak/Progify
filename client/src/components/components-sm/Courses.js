@@ -15,6 +15,10 @@ const Courses = () => {
 
     useEffect(() => {
         fetchCourse();
+        if (window.innerWidth < 992) {
+            const element = document.querySelector("#idfilter");
+            element.classList.remove("show");
+        }
     }, []);
 
     return (<>
@@ -28,12 +32,40 @@ const Courses = () => {
                 </div>
                 <h2 className="text-center">Some trending&nbsp;<span className="sub-red">courses</span></h2>
                 <div className="row card-holder">
-                    <div className='col-lg-3 course-filter'><h4>Filter by</h4></div>
+                    <div className='col-lg-3 course-filter'>
+
+                        <h4><a class="btn btn-secondary" data-bs-toggle="collapse" href="#idfilter" role="button" aria-expanded="true" aria-controls="idfilter">Filter by</a></h4>
+                        <div id="idfilter" className='collapse show'>
+                            <div>
+                                <h5>Language</h5>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" value="" id="english" />
+                                    <label class="form-check-label" for="english">
+                                        English
+                                    </label>
+                                    <br />
+                                    <input class="form-check-input" type="checkbox" value="" id="hindi" />
+                                    <label class="form-check-label" for="hindi">
+                                        Hindi
+                                    </label>
+                                </div>
+                            </div>
+                            <div className='testScroll'>
+                                <div><h4>Filter by</h4></div>
+                                <div><h4>Filter by</h4></div>
+                                <div><h4>Filter by</h4></div>
+                                <div><h4>Filter by</h4></div>
+                                <div><h4>Filter by</h4></div>
+                                <div><h4>Filter by</h4></div>
+                                <div><h4>Filter by</h4></div>
+                            </div>
+                        </div>
+                    </div>
                     <div className='col-lg-9'>
-                        <div className='row'>
+                        {courses ? <div className='row'>
                             {courses && courses.map(course => {
                                 return <div className="col-md-12 course-card">
-                                    <Link className="custom-link" to={"/course-detail"} state={{ data: course }}>
+                                    <Link className="custom-link" to={"/course-detail"} state={{ data: course._id }}>
                                         <div className="card">
                                             <img className="fit-cover course-image" width="260" height="145" alt='course pic' src={course.course_pic} />
                                             <div className="card-body">
@@ -76,7 +108,7 @@ const Courses = () => {
                                     </Link>
                                 </div>;
                             })}
-                        </div>
+                        </div> : <i class="fa-solid fa-3x fa-circle-notch fa-spin" style={{color: "#df3b69"}}></i>}
                     </div>
                 </div>
             </div>

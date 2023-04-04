@@ -20,7 +20,7 @@ const Navbar = () => {
                     <li className="nav-item"><Link onClick={collapse} className="nav-link" to={"/dashboard"}>ABOUT</Link></li>
                     <li className="nav-item"><Link onClick={collapse} className="nav-link" to={"/course"}>Courses</Link></li>
                     <li className="nav-item"><Link onClick={collapse} className="nav-link" to={"/blog"}>BLOG</Link></li>
-                    <li className="nav-item"><a onClick={collapse} className="nav-link" href="/#connect">CONTACT</a></li>
+                    <li className="nav-item"><a onClick={collapse} className="nav-link" href="/community">Community</a></li>
 
                     <div>
                         <Link onClick={collapse} className="btn my-btn-outline nav-item" to={"/login"}><span>Log in</span></Link>

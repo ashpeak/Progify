@@ -48,7 +48,7 @@ const Register = () => {
                     <div><input type="text" onChange={handleInput} name='name' placeholder="Name" value={user.name} /></div>
                     <div><input type="text" onChange={handleInput} name='username' placeholder="Email" value={user.username} /></div>
                     <div><input type="password" onChange={handleInput} name='password' placeholder="password" value={user.password} autoComplete="true" /></div>
-                    <div><button className="btn my-btn" onClick={formSubmit}>Sign Up</button></div>
+                    <div style={{textAlign: "center"}}><button className="btn my-btn" onClick={formSubmit}>Sign Up</button></div>
                 </form>
                 <div><span>Have an Account?&nbsp;<strong><Link className="custom-link" to={"/login"}>Login</Link></strong></span></div>
             </div>
