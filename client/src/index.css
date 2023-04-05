@@ -161,8 +161,9 @@ p {
 .navbar-nav .my-btn-outline:hover {
   background-color: #d8deff5c;
 }
+
 .navbar-nav .my-btn-outline {
-  background-color: #fdfdfd;
+  background-color: #fdfdfdb8;
 }
 
 .nav-item .nav-link {
@@ -668,6 +669,16 @@ p {
 .course-detail h4 {
   font-size: 20px;
   font-weight: 400;
+}
+
+.accordion-p {
+  margin-bottom: 0.5rem;
+  margin-top: 0.5rem;
+  font-weight: 500;
+}
+
+.acrdn-shadow {
+  box-shadow: 0 12px 15px 0 rgba(199,175,189,.25);
 }
 
 /* 11. Course Detail end */
