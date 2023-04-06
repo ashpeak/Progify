@@ -43,14 +43,23 @@ const Register = () => {
     return (<>
         <section><div className="login-holder">
             <div className="login">
-                <h4>Sign Up for Coursely</h4><a className="google-btn btn" href="#"><i className="fa-brands fa-google me-2"></i>Continue with Google</a>
-                <form method='POST'>
-                    <div><input type="text" onChange={handleInput} name='name' placeholder="Name" value={user.name} /></div>
-                    <div><input type="text" onChange={handleInput} name='username' placeholder="Email" value={user.username} /></div>
-                    <div><input type="password" onChange={handleInput} name='password' placeholder="password" value={user.password} autoComplete="true" /></div>
-                    <div style={{textAlign: "center"}}><button className="btn my-btn" onClick={formSubmit}>Sign Up</button></div>
-                </form>
-                <div><span>Have an Account?&nbsp;<strong><Link className="custom-link" to={"/login"}>Login</Link></strong></span></div>
+                <h4>Sign Up for Coursely</h4><button className="google-btn btn" href="#"><i className="fa-brands fa-google me-2"></i>Continue with Google</button>
+                <div className='emailOrgoogle'>
+                    <span className='emailOrgoogle-text'>Or continue with email</span>
+                </div>
+                <div>
+                    <div><input className='login-input form-control' type="text" onChange={handleInput} name='name' placeholder="Name" value={user.name} /></div>
+                    <div><input className='login-input form-control' type="text" onChange={handleInput} name='username' placeholder="Email" value={user.username} /></div>
+                    <div><input className='login-input form-control' type="password" onChange={handleInput} name='password' placeholder="password" value={user.password} autoComplete="true" /></div>
+                    <div>
+                        <button className="btn my-btn btn-lg-rg" onClick={formSubmit}>Sign Up</button>
+                    </div>
+                </div>
+                <div className='switch-holder'>
+                    <span className='acc-switch'>
+                        Have an Account?&nbsp;<strong><Link className="custom-link alter-lg-rg" to={"/login"}>Login</Link></strong>
+                    </span>
+                </div>
             </div>
         </div>
         </section>

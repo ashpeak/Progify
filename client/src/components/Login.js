@@ -42,17 +42,38 @@ const Login = () => {
     return (<>
         <section>
             <div className="login-holder">
-                <form method='POST'>
-                    <div className="login">
-                        <h4>Log in to Coursely</h4><Link className="google-btn btn" to={"/"}><i className="fa-brands fa-google me-2"></i>Continue with Google</Link>
-                        <div><input type="text" onChange={handleChange} autoComplete="off"
-                            placeholder="Email" name='username' value={user.email} /></div>
-                        <div><input type="password" onChange={handleChange} autoComplete="off"
-                            placeholder="password" name='password' value={user.password} /></div>
-                        <button type='submit' onClick={formSubmit} className="btn my-btn">Login</button>
-                        <div><span>Don't have an Account?&nbsp;<strong><Link className="custom-link" to={"/register"}>Sign up</Link></strong></span></div>
+                <div className="login">
+                    <h4>Log in to Coursely</h4>
+                    <div>
+                        <button className="google-btn btn">
+                            <i className="fa-brands fa-google me-2"></i>Continue with Google
+                        </button>
                     </div>
-                </form>
+                    <div className='emailOrgoogle'>
+                        <span className='emailOrgoogle-text'>Or continue with email</span>
+                    </div>
+
+                    <div>
+                        <div>
+                            <input className='form-control login-input' type="email" onChange={handleChange} autoComplete="off"
+                                placeholder="Email" name='username' value={user.email} />
+                        </div>
+                        <div>
+                            <input className='form-control login-input' type="password" onChange={handleChange} autoComplete="off"
+                                placeholder="password" name='password' value={user.password} />
+
+                        </div>
+                        <div>
+                            <button className="btn my-btn btn-lg-rg" onClick={formSubmit}>Login</button>
+                        </div>
+                    </div>
+                    <div className='my-2'>
+                        <span><strong><Link className="custom-link alter-lg-rg" to={"/register"}>Forgot password?</Link></strong></span>
+                    </div>
+                    <div className='switch-holder'>
+                        <span className='acc-switch'>Don't have an Account?&nbsp;<strong><Link className="custom-link alter-lg-rg" to={"/register"}>Sign up</Link></strong></span>
+                    </div>
+                </div>
             </div>
         </section>
     </>);
