@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
+import Google from '../img/Social-google.svg';
 
 const Login = () => {
 
@@ -46,7 +47,7 @@ const Login = () => {
                     <h4>Log in to Coursely</h4>
                     <div>
                         <button className="google-btn btn">
-                            <i className="fa-brands fa-google me-2"></i>Continue with Google
+                        <img src={Google} alt='google' />&nbsp;Continue with Google
                         </button>
                     </div>
                     <div className='emailOrgoogle'>

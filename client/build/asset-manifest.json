@@ -1,17 +1,18 @@
 {
   "files": {
-    "main.css": "/static/css/main.b8df8573.css",
-    "main.js": "/static/js/main.1c35b066.js",
+    "main.css": "/static/css/main.c0f197d1.css",
+    "main.js": "/static/js/main.c09ab900.js",
     "static/media/juicy-man-programmer-writing-code-and-make-web-design-on-a-pc.gif": "/static/media/juicy-man-programmer-writing-code-and-make-web-design-on-a-pc.3199706307423b9609e2.gif",
     "static/media/download.png": "/static/media/download.4f0eaee856a4d1a1ccd6.png",
     "static/media/user.jpg": "/static/media/user.43e64566fba87e8a1036.jpg",
     "static/media/undraw_Hello_re_3evm.png": "/static/media/undraw_Hello_re_3evm.52e516dd2a851efbcce6.png",
     "static/media/web-development.jpg": "/static/media/web-development.85519f7e02c0eb8bd1e3.jpg",
+    "static/media/Social-google.svg": "/static/media/Social-google.0f998f7a9e532ff8e8b36aa1d6270b6f.svg",
     "index.html": "/index.html",
     "static/media/circle-play-solid.svg": "/static/media/circle-play-solid.48455627717d5bf4e3a8.svg"
   },
   "entrypoints": [
-    "static/css/main.b8df8573.css",
-    "static/js/main.1c35b066.js"
+    "static/css/main.c0f197d1.css",
+    "static/js/main.c09ab900.js"
   ]
 }

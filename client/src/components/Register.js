@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import Google from '../img/Social-google.svg';
 import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 
@@ -43,7 +44,7 @@ const Register = () => {
     return (<>
         <section><div className="login-holder">
             <div className="login">
-                <h4>Sign Up for Coursely</h4><button className="google-btn btn" href="#"><i className="fa-brands fa-google me-2"></i>Continue with Google</button>
+                <h4>Sign Up for Coursely</h4><button className="google-btn btn" href="#"><img src={Google} alt='google' />&nbsp;Continue with Google</button>
                 <div className='emailOrgoogle'>
                     <span className='emailOrgoogle-text'>Or continue with email</span>
                 </div>
