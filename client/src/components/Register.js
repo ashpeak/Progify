@@ -44,7 +44,7 @@ const Register = () => {
     return (<>
         <section><div className="login-holder">
             <div className="login">
-                <h4>Sign Up for Coursely</h4><button className="google-btn btn" href="#"><img src={Google} alt='google' />&nbsp;Continue with Google</button>
+                <h4>Sign up for Coursely</h4><button className="google-btn btn" href="#"><img src={Google} alt='google' />&nbsp;Continue with Google</button>
                 <div className='emailOrgoogle'>
                     <span className='emailOrgoogle-text'>Or continue with email</span>
                 </div>
