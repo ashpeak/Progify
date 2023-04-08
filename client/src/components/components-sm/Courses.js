@@ -34,7 +34,9 @@ const Courses = () => {
                 <div className="row card-holder">
                     <div className='col-lg-3 course-filter'>
 
-                        <h4><a class="btn btn-secondary" data-bs-toggle="collapse" href="#idfilter" role="button" aria-expanded="true" aria-controls="idfilter">Filter by</a></h4>
+                        <h4>
+                        <a class="btn btn-secondary" data-bs-toggle="collapse" href="#idfilter" role="button" aria-expanded="true" aria-controls="idfilter"><i class="fa-solid fa-filter"></i> Filter by</a>
+                        </h4>
                         <div id="idfilter" className='collapse show'>
                             <div>
                                 <h5>Language</h5>

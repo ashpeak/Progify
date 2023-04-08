@@ -30,10 +30,11 @@ const Play = () => {
             const res = await axios.get('/course/' + data);
 
             const courseData = res.data;
-            const { lesson, link } = courseData.lessons[0];
+            const { lesson, link, lessonName } = courseData.lessons[0];
             const defaultLink = {
                 lesson,
-                link
+                link,
+                lessonName
             }
 
             setLink(defaultLink);
@@ -92,7 +93,7 @@ const Play = () => {
     return (<>
         <section className="sec-player">
             <div className="container">
-                <div class="ratio ratio-21x9">
+                <div class="ratio my-ratio">
                     {link && <YouTube videoId={link.link} opts={opts} />}
                 </div>
 
@@ -113,21 +114,46 @@ const Play = () => {
                         <li className="nav-item" role="presentation"><a className="nav-link" role="tab" data-bs-toggle="tab"
                             href="#tab-4"><i className="fa-solid fa-link me-2"></i>Resources</a></li>
                     </ul>
+
                     <div className="tab-content py-4">
+                        {link && <div className="playing acrdn-shadow">
+                            <div>
+                                <p style={{fontWeight: "500"}}>
+                                <img src={require("../img/wave.gif")} alt="playing" />
+                                &nbsp;&nbsp;Module {link.lesson}</p>
+                            </div>
+                            <div>
+                                <p>{link.lessonName}</p>
+                            </div>
+                        </div>}
+
                         <div id="tab-1" className="tab-pane active" role="tabpanel">
-                            <ul className="list-unstyled">
-                                {course && <>{course.lessons.map(chapter => {
-                                    const { lesson, link, lessonName } = chapter;
-                                    return <li>
-                                        <Link onClick={() => setLink({ lesson, link })}>
-                                            <div>
-                                                <h5>{lessonName}</h5><i
-                                                    className="fa-solid fa-2x me-2 fa-caret-right"></i>
-                                            </div>
-                                        </Link>
-                                    </li>
-                                })}</>}
-                            </ul>
+                            <div class="accordion acrdn-shadow" id="accordionPanelsStayOpenExample">
+                                <div class="accordion-item">
+                                    <h2 class="accordion-header" id="panelsStayOpen-headingOne">
+                                        <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseOne" aria-expanded="true" aria-controls="panelsStayOpen-collapseOne">
+                                            {course && <p className='accordion-p'>{course.lessons.length} modules</p>}
+                                        </button>
+                                    </h2>
+                                    <div id="panelsStayOpen-collapseOne" class="accordion-collapse collapse show" aria-labelledby="panelsStayOpen-headingOne">
+                                        <div class="accordion-body">
+                                            <ul className='list-group'>
+                                                {course && <>{course.lessons.map(chapter => {
+                                                    const { lesson, link, lessonName } = chapter;
+                                                    return <li className='list-group-item'>
+                                                        <Link onClick={() => setLink({ lesson, link, lessonName })}>
+                                                            <div>
+                                                                <i class="fa-solid fa-video"></i>
+                                                                <p className="module-name">{lessonName}</p>
+                                                            </div>
+                                                        </Link>
+                                                    </li>
+                                                })}</>}
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                         <div id="tab-2" className="tab-pane" role="tabpanel">
                             <h5>It's empty!<i className="fa-regular fa-folder-open ms-3"></i></h5>

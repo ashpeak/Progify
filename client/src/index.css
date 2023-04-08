@@ -728,6 +728,16 @@ p {
 
 /* 13. Player Page */
 
+.my-ratio {
+  --bs-aspect-ratio: 56.25%;
+}
+
+@media (min-width: 768px) {
+  .my-ratio {
+    --bs-aspect-ratio: 42.857%;
+  }
+}
+
 .sec-player {
   padding-top: 1rem;
   background-color: var(--custom-black);
@@ -762,29 +772,31 @@ p {
   margin-bottom: -1px !important;
 }
 
-.tab-pane h5 {
-  font-size: 1.3rem;
-  line-height: 1;
-  font-weight: bold !important;
-  margin-bottom: 0.5px;
-}
-
 .tab-pane li {
-  padding: 1rem 1rem;
-  background-color: #f7f9fa;
+  padding: 1rem;
+  background-color: #fff;
   border-bottom: 1px solid #d1d7dc;
+  overflow: hidden;
 }
 
 .tab-pane li div {
   width: 100%;
   display: flex;
-  justify-content: space-between;
+  justify-content: start;
   align-items: center;
 }
 
 .tab-pane a {
   color: #011229;
   text-decoration: none;
+}
+
+.module-name {
+  font-size: .9375rem;
+  font-weight: 500;
+  margin-bottom: 0;
+  line-height: 1.5rem;
+  margin-left: .5rem;
 }
 
 .tab-pane a:hover {
@@ -796,6 +808,19 @@ p {
     padding-left: 3rem !important;
     padding-right: 3rem !important;
   }
+}
+
+.playing {
+  border: 1px solid #dee2e6;
+  padding: 0.4rem 1rem;
+  margin-top: 1rem;
+  margin-bottom: 1.5rem;
+  border-radius: 0.375rem;
+  background-color: #e5efff4a;
+}
+
+.playing p {
+  margin-bottom: .5rem !important;
 }
 
 /* Note component */
