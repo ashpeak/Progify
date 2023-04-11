@@ -26,17 +26,11 @@ const Login = () => {
 
         try {
             const res = await axios.post('/login', user);
-
-            const data = res.data.msg;
             if (res.status === 200) {
-                console.log(data);
                 navigate("/dashboard");
-            } else if (res.status === 401) {
-                console.log(data);
             }
         } catch (error) {
             window.alert("Login Unsuccessful!")
-            console.log(error.response.data);
         }
     }
 

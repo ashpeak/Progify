@@ -126,7 +126,7 @@ router.post("/new/note", isAuthorised, async (req, res) => {
 });
 
 router.get("/course", async (req, res) => {
-    const courses = await Course.find();
+    const courses = await Course.find().limit(5);
     if (!courses.length) {
         return res.status(400).json({ error: "Can't find any courses" });
     }
@@ -139,7 +139,26 @@ router.get("/course/:_id", async (req, res) => {
     if (!response) {
         return res.status(400).json({ msg: "No matching record!" });
     } else {
-        return res.json(response);
+        return res.status(200).json(response);
+    }
+});
+
+router.post("/search", async (req, res) => {
+    const { searchText } = req.body;
+
+    const response = await Course.find(
+        {
+            "name":
+                { $regex: '.*' + searchText + '.*', $options: 'i' }
+        });
+
+    if (!response) {
+        return res.status(400).json({ msg: "Try again" });
+    } else {
+        if(response.length === 0){
+            return res.status(400).json({ msg: "Can't find course with matching name" });
+        }
+        return res.status(200).json(response);
     }
 });
 
