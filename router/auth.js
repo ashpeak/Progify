@@ -94,7 +94,7 @@ router.post("/note", isAuthorised, async (req, res) => {
     }
 });
 
-router.post("/new/note", isAuthorised, async (req, res) => {
+router.post("/note/new", isAuthorised, async (req, res) => {
     let { courseId, lessonId, title, content } = req.body;
     const userId = req.user.id;
     const customId = courseId + lessonId + userId;
@@ -125,8 +125,44 @@ router.post("/new/note", isAuthorised, async (req, res) => {
     }
 });
 
+router.post("/note/edit", isAuthorised, async (req, res) => {
+    const userId = req.user.id;
+    const { lessonId, courseId, noteId, content } = req.body;
+    const customid = courseId + lessonId + userId;
+
+    try {
+        const result = await Note.updateOne({
+            _id: noteId,
+            customId: customid
+        }, {
+            $set: { content: content }
+        });
+
+        return res.status(201).json({ msg: result.modifiedCount });
+    } catch (e) {
+        return res.status(400).json({ msg: 0 });
+    }
+});
+
+router.post("/note/delete", isAuthorised, async (req, res) => {
+    const userId = req.user.id;
+    const { lessonId, courseId, noteId } = req.body;
+    const customid = courseId + lessonId + userId;
+
+    try {
+        const list = await Note.deleteOne({
+            _id: noteId,
+            customId: customid
+        });
+
+        return res.status(200).json({ msg: list.deletedCount });
+    } catch (e) {
+        return res.status(400).json({ msg: "0" });
+    }
+});
+
 router.get("/course", async (req, res) => {
-    const courses = await Course.find().limit(5);
+    const courses = await Course.find();
     if (!courses.length) {
         return res.status(400).json({ error: "Can't find any courses" });
     }
@@ -155,7 +191,7 @@ router.post("/search", async (req, res) => {
     if (!response) {
         return res.status(400).json({ msg: "Try again" });
     } else {
-        if(response.length === 0){
+        if (response.length === 0) {
             return res.status(400).json({ msg: "Can't find course with matching name" });
         }
         return res.status(200).json(response);

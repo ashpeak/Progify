@@ -46,6 +46,9 @@ const Play = () => {
     }
 
     const saveNote = async () => {
+        if (!noteMsg) {
+            return;
+        }
         const note = {
             courseId: course._id,
             lessonId: link.lesson,
@@ -53,7 +56,7 @@ const Play = () => {
             content: noteMsg
         }
         try {
-            const res = await axios.post('/new/note', note);
+            const res = await axios.post('/note/new', note);
 
             if (res.status === 201) {
                 setNoteMsg("");
@@ -61,6 +64,46 @@ const Play = () => {
             }
         } catch (error) {
             window.alert("Failed to save!");
+        }
+    }
+    const editNote = async (id) => {
+
+        console.log("error");
+        if (!noteMsg) {
+            return;
+        }
+        const note = {
+            courseId: course._id,
+            lessonId: link.lesson,
+            content: noteMsg,
+            noteId: id
+        }
+        try {
+            const res = await axios.post('/note/edit', note);
+
+            if (res.status === 201) {
+                setNoteMsg("");
+                fetchNotes();
+            }
+        } catch (error) {
+            window.alert("Failed to save!");
+        }
+    }
+    const deleteNote = async (id) => {
+        const note = {
+            courseId: course._id,
+            lessonId: link.lesson,
+            noteId: id
+        }
+
+        try {
+            const res = await axios.post('/note/delete', note);
+
+            if (res.status === 200 && res.data.msg === 1) {
+                fetchNotes();
+            }
+        } catch (error) {
+            window.alert("Failed to delete!");
         }
     }
 
@@ -81,6 +124,12 @@ const Play = () => {
 
     const handleNote = e => setNoteMsg(e.target.value);
 
+    const testFunc = () => {
+        const ytvideo = document.getElementById("video-player");
+        const time = ytvideo.getCurrentTime();
+        console.log(time);
+    }
+
     useEffect(() => {
         if (!data) {
             return navigate("/dashboard");
@@ -94,7 +143,11 @@ const Play = () => {
         <section className="sec-player">
             <div className="container">
                 <div class="ratio my-ratio">
-                    {link && <YouTube videoId={link.link} opts={opts} />}
+                    {link && <YouTube
+                        videoId={link.link}
+                        opts={opts}
+                        loading={"Loading..."}
+                    />}
                 </div>
 
             </div>
@@ -118,9 +171,9 @@ const Play = () => {
                     <div className="tab-content py-4">
                         {link && <div className="playing acrdn-shadow">
                             <div>
-                                <p style={{fontWeight: "500"}}>
-                                <img src={require("../img/wave.gif")} alt="playing" />
-                                &nbsp;&nbsp;Module {link.lesson}</p>
+                                <p style={{ fontWeight: "500" }}>
+                                    <img src={require("../img/wave.gif")} alt="playing" />
+                                    &nbsp;&nbsp;Module {link.lesson}</p>
                             </div>
                             <div>
                                 <p>{link.lessonName}</p>
@@ -162,7 +215,7 @@ const Play = () => {
                             <div className="note mb-5">
                                 <div className="note-top">
                                     <div className="timestamp">
-                                        <h6 style={{ marginBottom: "0" }}>01:20</h6>
+                                        <h6 style={{ marginBottom: "0" }}>N</h6>
                                     </div>
                                     <div className="input-field">
                                         <input type="text" className="name-field" onFocus={(event) => event.target.select()} name="title"
@@ -194,14 +247,14 @@ const Play = () => {
                                     <div className="show-note">
                                         <div className="note-top">
                                             <div className="timestamp me-3">
-                                                <h6 style={{ color: "ghostwhite" }} className="saved-note">01:20</h6>
+                                                <h6 style={{ color: "ghostwhite" }} className="saved-note">N</h6>
                                             </div>
                                             <div className="saved-note">
                                                 <h6>{note.title}</h6>
                                             </div>
                                             <div className="del-edit">
-                                                <div><button className="btn"><i class="fa-solid fa-pencil"></i></button></div>
-                                                <div><button className="btn"><i className="fa-solid fa-trash"></i></button></div>
+                                                {/* <div><button onClick={(e) => editNote(e, note._id)} className="btn"><i class="fa-solid fa-pencil"></i></button></div> */}
+                                                <div><button onClick={() => deleteNote(note._id)} className="btn"><i className="fa-solid fa-trash"></i></button></div>
                                             </div>
                                         </div>
                                         <div className="show-noteText">
