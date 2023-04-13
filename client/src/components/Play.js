@@ -15,6 +15,8 @@ const Play = () => {
     const [link, setLink] = useState(null);
     const [noteMsg, setNoteMsg] = useState(null);
     const [notes, setNotes] = useState([]);
+    const [isEditing, setIsEditing] = useState(false);
+    const [editingId, setEditingId] = useState(null);
 
     const opts = {
         height: '100%',
@@ -23,6 +25,18 @@ const Play = () => {
             // https://developers.google.com/youtube/player_parameters
             autoplay: 0,
         },
+    }
+
+    const clickScroll = (id) => {
+        const element = document.querySelector('#'+id);
+        if (element) {
+            element.scrollIntoView({ behavior: 'smooth' });
+        }
+    };
+
+    const nextLesson = (data) => {
+        clickScroll("mainPlayer");
+        setLink(data);
     }
 
     const fetchCourseData = async (data) => {
@@ -66,9 +80,21 @@ const Play = () => {
             window.alert("Failed to save!");
         }
     }
+
+    const setEdit = (id) => {
+        setIsEditing(true);
+        setEditingId(id);
+        clickScroll("notes-sec");
+
+        const element = document.querySelector("#i" + id);
+        const prevNote = element.innerText;
+        if (prevNote) {
+            setNoteMsg(prevNote);
+        }
+    }
+
     const editNote = async (id) => {
 
-        console.log("error");
         if (!noteMsg) {
             return;
         }
@@ -84,12 +110,19 @@ const Play = () => {
             if (res.status === 201) {
                 setNoteMsg("");
                 fetchNotes();
+                setIsEditing(false);
+                setEditingId(null);
             }
         } catch (error) {
-            window.alert("Failed to save!");
+            window.alert("Failed to savessssssss!");
         }
     }
     const deleteNote = async (id) => {
+
+        setNoteMsg("");
+        setIsEditing(false);
+        setEditingId(null);
+
         const note = {
             courseId: course._id,
             lessonId: link.lesson,
@@ -124,12 +157,6 @@ const Play = () => {
 
     const handleNote = e => setNoteMsg(e.target.value);
 
-    const testFunc = () => {
-        const ytvideo = document.getElementById("video-player");
-        const time = ytvideo.getCurrentTime();
-        console.log(time);
-    }
-
     useEffect(() => {
         if (!data) {
             return navigate("/dashboard");
@@ -140,7 +167,7 @@ const Play = () => {
 
 
     return (<>
-        <section className="sec-player">
+        <section id="mainPlayer" className="sec-player">
             <div className="container">
                 <div class="ratio my-ratio">
                     {link && <YouTube
@@ -194,7 +221,7 @@ const Play = () => {
                                                 {course && <>{course.lessons.map(chapter => {
                                                     const { lesson, link, lessonName } = chapter;
                                                     return <li className='list-group-item'>
-                                                        <Link onClick={() => setLink({ lesson, link, lessonName })}>
+                                                        <Link onClick={() => nextLesson({ lesson, link, lessonName })}>
                                                             <div>
                                                                 <i class="fa-solid fa-video"></i>
                                                                 <p className="module-name">{lessonName}</p>
@@ -212,7 +239,7 @@ const Play = () => {
                             <h5>It's empty!<i className="fa-regular fa-folder-open ms-3"></i></h5>
                         </div>
                         <div id="tab-3" className="tab-pane" role="tabpanel">
-                            <div className="note mb-5">
+                            <div id="notes-sec" className="note mb-5">
                                 <div className="note-top">
                                     <div className="timestamp">
                                         <h6 style={{ marginBottom: "0" }}>N</h6>
@@ -236,7 +263,7 @@ const Play = () => {
                                     <textarea value={noteMsg} onChange={handleNote} className="note-content" placeholder="Write note here..." rows="4" />
                                 </div>
                                 <div className="note-bottom">
-                                    <button onClick={saveNote} className="btn save-btn">Save note</button>
+                                    <button onClick={isEditing ? () => editNote(editingId) : saveNote} className="btn save-btn">Save note</button>
                                 </div>
                             </div>
                             <div className="mb-3">
@@ -253,12 +280,12 @@ const Play = () => {
                                                 <h6>{note.title}</h6>
                                             </div>
                                             <div className="del-edit">
-                                                {/* <div><button onClick={(e) => editNote(e, note._id)} className="btn"><i class="fa-solid fa-pencil"></i></button></div> */}
+                                                <div><button onClick={() => setEdit(note._id)} className="btn"><i class="fa-solid fa-pencil"></i></button></div>
                                                 <div><button onClick={() => deleteNote(note._id)} className="btn"><i className="fa-solid fa-trash"></i></button></div>
                                             </div>
                                         </div>
                                         <div className="show-noteText">
-                                            <p>{note.content}</p>
+                                            <p id={"i" + note._id}>{note.content}</p>
                                         </div>
                                     </div>
                                 </>
