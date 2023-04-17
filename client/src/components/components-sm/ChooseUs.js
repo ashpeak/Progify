@@ -15,7 +15,7 @@ const ChooseUs = () => {
                             <div className="bs-icon-md bs-icon-circle bs-icon-primary-light d-inline-block justify-content-center align-items-center d-inline-block mb-3 bs-icon"
                                 style={{ background: "rgba(87,102,199,0.48)" }}><div className="my-icon"><i className="fa-brands fa-free-code-camp" style={{ color: "#001fe8" }}></i></div></div>
                             <h4 className="card-title">Coding</h4>
-                            <p className="card-text">Erat netus est hendrerit, nullam et quis ad cras porttitor iaculis.
+                            <p>Erat netus est hendrerit, nullam et quis ad cras porttitor iaculis.
                                 Bibendum vulputate cras aenean.</p>
                         </div>
                     </div>
@@ -26,7 +26,7 @@ const ChooseUs = () => {
                             <div className="bs-icon-md bs-icon-circle bs-icon-primary-light d-inline-block justify-content-center align-items-center d-inline-block mb-3 bs-icon"
                                 style={{ background: "rgba(87,102,199,0.48)" }}><div className="my-icon"><i className="fa-brands fa-free-code-camp" style={{ color: "#001fe8" }}></i></div></div>
                             <h4 className="card-title">Coding</h4>
-                            <p className="card-text">Erat netus est hendrerit, nullam et quis ad cras porttitor iaculis.
+                            <p>Erat netus est hendrerit, nullam et quis ad cras porttitor iaculis.
                                 Bibendum vulputate cras aenean.</p>
                         </div>
                     </div>
@@ -37,7 +37,7 @@ const ChooseUs = () => {
                             <div className="bs-icon-md bs-icon-circle bs-icon-primary-light d-inline-block justify-content-center align-items-center d-inline-block mb-3 bs-icon"
                                 style={{ background: "rgba(87,102,199,0.48)" }}><div className="my-icon"><i className="fa-brands fa-free-code-camp" style={{ color: "#001fe8" }}></i></div></div>
                             <h4 className="card-title">Coding</h4>
-                            <p className="card-text">Erat netus est hendrerit, nullam et quis ad cras porttitor iaculis.
+                            <p>Erat netus est hendrerit, nullam et quis ad cras porttitor iaculis.
                                 Bibendum vulputate cras aenean.</p>
                         </div>
                     </div>
@@ -48,7 +48,7 @@ const ChooseUs = () => {
                             <div className="bs-icon-md bs-icon-circle bs-icon-primary-light d-inline-block justify-content-center align-items-center d-inline-block mb-3 bs-icon"
                                 style={{ background: "rgba(87,102,199,0.48)" }}><div className="my-icon"><i className="fa-brands fa-free-code-camp" style={{ color: "#001fe8" }}></i></div></div>
                             <h4 className="card-title">Coding</h4>
-                            <p className="card-text">Erat netus est hendrerit, nullam et quis ad cras porttitor iaculis.
+                            <p>Erat netus est hendrerit, nullam et quis ad cras porttitor iaculis.
                                 Bibendum vulputate cras aenean.</p>
                         </div>
                     </div>
@@ -59,7 +59,7 @@ const ChooseUs = () => {
                             <div className="bs-icon-md bs-icon-circle bs-icon-primary-light d-inline-block justify-content-center align-items-center d-inline-block mb-3 bs-icon"
                                 style={{ background: "rgba(87,102,199,0.48)" }}><div className="my-icon"><i className="fa-brands fa-free-code-camp" style={{ color: "#001fe8" }}></i></div></div>
                             <h4 className="card-title">Coding</h4>
-                            <p className="card-text">Erat netus est hendrerit, nullam et quis ad cras porttitor iaculis.
+                            <p>Erat netus est hendrerit, nullam et quis ad cras porttitor iaculis.
                                 Bibendum vulputate cras aenean.</p>
                         </div>
                     </div>
@@ -70,7 +70,7 @@ const ChooseUs = () => {
                             <div className="bs-icon-md bs-icon-circle bs-icon-primary-light d-inline-block justify-content-center align-items-center d-inline-block mb-3 bs-icon"
                                 style={{ background: "rgba(87,102,199,0.48)" }}><div className="my-icon"><i className="fa-brands fa-free-code-camp" style={{ color: "#001fe8" }}></i></div></div>
                             <h4 className="card-title">Coding</h4>
-                            <p className="card-text">Erat netus est hendrerit, nullam et quis ad cras porttitor iaculis.
+                            <p>Erat netus est hendrerit, nullam et quis ad cras porttitor iaculis.
                                 Bibendum vulputate cras aenean.</p>
                         </div>
                     </div>

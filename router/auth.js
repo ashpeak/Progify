@@ -107,7 +107,7 @@ router.post("/note/new", isAuthorised, async (req, res) => {
     }
 
     title = title.substring(0, 6);
-    content = content.substring(0, 20);
+    content = content.substring(0, 100);
 
     try {
         const note = new Note({
@@ -193,6 +193,20 @@ router.post("/search", async (req, res) => {
     } else {
         if (response.length === 0) {
             return res.status(400).json({ msg: "Can't find course with matching name" });
+        }
+        return res.status(200).json(response);
+    }
+});
+
+router.get("/recommend", async (req, res) => {
+    const response = await Course.aggregate([{ $sample: { size: 4 } }]);
+
+
+    if (!response) {
+        return res.status(400).json({ msg: "Try again" });
+    } else {
+        if (response.length === 0) {
+            return res.status(400).json({ msg: "Try again" });
         }
         return res.status(200).json(response);
     }

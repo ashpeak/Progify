@@ -1,26 +1,42 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import CardCourse from './CardCourse';
+import axios from 'axios';
 
 const Recommended = () => {
+
+    const [courses, setCourses] = useState(null);
+
+    const fetchCourse = async () => {
+        try {
+            const res = await axios.get("/recommend");
+            if (res.status === 200) {
+                setCourses(res.data);
+            }
+        } catch (error) {
+        }
+    }
+
+    useEffect(() => {
+        fetchCourse();
+    }, []);
+
     return (<>
-        <section>
-    <div className="container">
-        <h4 className="fw-bold">Recommended for you</h4>
-        <div className="row card-holder">
-            <CardCourse
-            chapter={{lessons: [{lessonName: "Introduction to mern stack"}]}}
-            course="Complete Web Development Course"
-            creator="Ashish Kumar Singh"
-            star="4"
-            rating="56,667" />
-            <CardCourse
-            course="Complete Django Development"
-            creator="Ashish Singh"
-            star="5"
-            rating="6,667" />
-        </div>
-    </div>
-</section>
+        <section className='my-4'>
+            <div className="container">
+                <h4 className="fw-bold">Recommended for you</h4>
+                <div className="row card-holder">
+                    {courses && courses.map((course) => {
+                        return <CardCourse
+                            id={course._id}
+                            name={course.name}
+                            creator={course.creator}
+                            language={course.language}
+                            course_pic={course.course_pic}
+                        />
+                    })}
+                </div>
+            </div>
+        </section>
     </>);
 }
 

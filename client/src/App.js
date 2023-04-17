@@ -10,6 +10,9 @@ import Errorpage from "./components/Errorpage";
 import CourseDetail from "./components/courseDetail";
 import Courses from "./components/components-sm/Courses";
 import AddCourse from "./components/AddCourse";
+import Blog from "./components/Blog";
+import About from "./components/About";
+import Community from "./components/Community";
 
 function App() {
   return (
@@ -26,6 +29,9 @@ function App() {
           <Route path="/play" element={<Play />} />
           <Route path="/course" element={<Courses />} />
           <Route path="/add-course" element={<AddCourse />} />
+          <Route path="/blog" element={<Blog />} />
+          <Route path="/about" element={<About />} />
+          <Route path="/community" element={<Community />} />
           <Route path="*" element={<Errorpage />} />
       </Routes>
       <Footer />

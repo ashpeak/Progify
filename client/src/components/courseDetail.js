@@ -123,7 +123,7 @@ const CourseDetail = () => {
                 <div className="container">
                     <div className="enroll">
                         <p>FREE&nbsp;&nbsp;</p>
-                        <div className="mx-4" style={{ width: "100%" }}><button onClick={() => enrollCourse(data._id)} className="btn btn-enroll py-2">
+                        <div className="mx-4" style={{ width: "100%" }}><button onClick={() => enrollCourse(courseData._id)} className="btn btn-enroll py-2">
                             <p style={{ fontSize: "1.125rem" }}>Enroll Now</p>
                         </button></div>
                     </div>

@@ -19,6 +19,7 @@
 13. Player Page
 14. Login Page
 15. Course Page
+16. AboutUs Page
 --------------------- */
 
 /* 1. General */
@@ -35,7 +36,7 @@
 }
 
 body {
-  background-color: var(--ghost-white);
+  background-color: #fff;
   color: #080808;
   padding-top: 71px;
 }
@@ -66,7 +67,7 @@ body {
 }
 
 h1 {
-  font-size: 4.375rem;
+  font-size: 2.625rem;
   line-height: 3.75rem;
   margin-bottom: 1.25rem;
   font-weight: 700 !important;
@@ -113,10 +114,6 @@ p {
   color: #df3b69;
 }
 
-.card {
-  --bs-card-border-width: 0px;
-}
-
 /* 1. General ends */
 
 /* 2. Navbar */
@@ -156,14 +153,6 @@ p {
 .navbar-nav .my-btn-outline {
   margin: 0 !important;
   margin-left: 0.5rem !important;
-}
-
-.navbar-nav .my-btn-outline:hover {
-  background-color: #d8deff5c;
-}
-
-.navbar-nav .my-btn-outline {
-  background-color: #fdfdfdb8;
 }
 
 .nav-item .nav-link {
@@ -214,34 +203,28 @@ p {
 
 .subheading {
   color: #363a45;
-  font-size: 1.8125rem;
+  font-size: 1.5rem;
   font-weight: normal;
   letter-spacing: 0.00rem;
-  line-height: 1.2;
+  line-height: 1.86;
   text-transform: uppercase;
 }
 
 /* --------------------------------- */
 
-@media (max-width: 850px) {
+@media (min-width: 992px) {
   h1 {
-    font-size: 2.625rem;
+    font-size: 4.375rem;
   }
-}
 
-@media (max-width: 850px) {
   .subheading {
-    font-size: 24px;
+    font-size: 1.8125rem;
   }
 }
 
 @media (min-width: 300px) {
-  .banner-content {
-    text-align: center;
-  }
-}
 
-@media (min-width: 300px) {
+  .banner-content,
   .banner-img {
     text-align: center;
   }
@@ -251,6 +234,19 @@ p {
   .banner-content {
     text-align: left;
   }
+
+  .banner-wrapper {
+    padding: 6.875rem 0 5rem 0 !important;
+  }
+}
+
+.banner-content h2 {
+  margin-bottom: .375rem;
+}
+
+.banner-content h4 {
+  color: #4a4f5c;
+  padding-top: .625rem;
 }
 
 .my-btn {
@@ -262,7 +258,7 @@ p {
 
 .my-btn-outline {
   color: var(--han-blue);
-  background-color: #ffffff;
+  background-color: #fdfdfdb8;
   border: 2px solid var(--han-blue);
   width: 5.2rem;
   font-weight: 700 !important;
@@ -277,17 +273,16 @@ p {
 .my-btn-outline:hover,
 .my-btn-outline:focus {
   color: #1126b1;
-  background-color: #fff;
+  background-color: #d8deff5c;
   border: 2px solid var(--han-blue-hover);
 }
 
 .banner-wrapper {
-  padding: 6.875rem 0 5rem 0;
-  z-index: 1;
-  /*background: #4b58ad;*/
-  background-image: linear-gradient(rgb(102 112 181 / 9%) 30%), url(https://codehelp.s3.ap-south-1.amazonaws.com/mctmmnscw4snaoc9kmnn_b35808d374.svg);
+  padding: 4rem 0 5rem 0;
+  /* background-image: url(https://codehelp.s3.ap-south-1.amazonaws.com/mctmmnscw4snaoc9kmnn_b35808d374.svg);
+  background-image: url(https://codehelp.s3.ap-south-1.amazonaws.com/mctmmnscw4snaoc9kmnn_b35808d374.svg), linear-gradient(#6670b517 30%, #6670b517); */
   background-repeat: no-repeat;
-  background-position: center;
+  background-position: bottom;
   background-size: cover;
 }
 
@@ -352,11 +347,6 @@ p {
   -webkit-box-shadow: 0 0px 25px rgba(0, 0, 0, 0.07);
   box-shadow: 0 0px 25px rgba(0, 0, 0, 0.07);
   border-bottom: 5px solid var(--han-blue);
-}
-
-.card p {
-  max-width: 80%;
-  display: inline-block;
 }
 
 /* 5. Why Choose Us ends */
@@ -516,14 +506,10 @@ p {
   justify-content: center;
 }
 
-.card-text {
-  color: #000;
-}
-
 .my-card {
   display: inline-block;
-  min-width: 350px;
-  padding: 0.75rem 0 .75rem !important;
+  min-width: 280px;
+  margin-bottom: 10px;
 }
 
 .my-card img {
@@ -534,11 +520,6 @@ p {
   margin-bottom: 0;
   line-height: 1.5;
   letter-spacing: -.02rem;
-}
-
-.card-h4 {
-  font-weight: bold;
-  font-size: 1.2rem;
 }
 
 .custom-link {
@@ -557,7 +538,18 @@ p {
   text-align: center;
   border-radius: 5px;
   line-height: 1.5;
-  /*margin-top: 6px;*/
+  margin-top: .3125rem;
+}
+
+.active-creator {
+  margin-bottom: 0;
+  margin-top: .375rem;
+}
+
+.recommend {
+  font-size: .9rem;
+  margin-bottom: 3px;
+  margin-top: 4px;
 }
 
 /* 9. Dashboard ends */
@@ -568,11 +560,14 @@ p {
   display: flex;
   justify-content: center;
   align-items: center;
-  color: #fff;
-  background: linear-gradient(rgba(0, 0, 0, 0.40) 0%, rgba(0, 0, 0, 0.70)), url("./img/web-development.jpg");
-  background-repeat: no-repeat;
-  width: 240px;
-  height: 135px;
+  color: #fefefe;
+}
+
+.play-icon-holder {
+  position: absolute;
+  background-color: #3d3838;
+  border-radius: 999px;
+  box-shadow: 0 0 40px 0 #4b4147;
 }
 
 .course-active-card {
@@ -586,10 +581,6 @@ p {
   background-color: #8d8d8d12;
 }
 
-.card-content {
-  margin-left: 1rem;
-}
-
 .card-content h4 {
   padding-bottom: 1rem;
 }
@@ -600,10 +591,8 @@ p {
 
 .module {
   font-weight: bold;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-  color: #6a6f73;
+  color: #393b3c;
+  font-size: 1.1rem !important;
 }
 
 /* 10. Active Course Card */
@@ -1134,7 +1123,7 @@ p {
     margin: 1rem;
   }
 
-  .course-card .course-image {
+  .course-image {
     height: 64px;
     width: 64px;
   }
@@ -1205,3 +1194,15 @@ p {
 }
 
 /* 15. Course Page end */
+
+/* 16. AboutUs Page start */
+
+.about-banner {
+  background-image: url("./img/hero-banner.png");
+  background-position: left;
+  background-size: cover;
+  color: #fff !important;
+  background-repeat: no-repeat;
+}
+
+/* 16. AboutUs Page end */

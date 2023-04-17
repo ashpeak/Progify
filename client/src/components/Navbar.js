@@ -17,7 +17,7 @@ const Navbar = () => {
             <div className="collapse navbar-collapse flex-row justify-content-center align-items-center navbar-menu"
                 id="navcol-2">
                 <ul className="navbar-nav ms-auto">
-                    <li className="nav-item"><Link onClick={collapse} className="nav-link" to={"/dashboard"}>ABOUT</Link></li>
+                    <li className="nav-item"><Link onClick={collapse} className="nav-link" to={"/about"}>ABOUT US</Link></li>
                     <li className="nav-item"><Link onClick={collapse} className="nav-link" to={"/course"}>Courses</Link></li>
                     <li className="nav-item"><Link onClick={collapse} className="nav-link" to={"/blog"}>BLOG</Link></li>
                     <li className="nav-item"><a onClick={collapse} className="nav-link" href="/community">Community</a></li>
