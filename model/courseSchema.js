@@ -4,7 +4,7 @@ const courseSchema = new mongoose.Schema({
     _id: String,
     name: String,
     creator: String,
-    rating: Number,
+    love: Number,
     isVisible: Boolean,
     category: String,
     sub_category: String,

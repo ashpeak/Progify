@@ -87,8 +87,8 @@ const Dashboard = () => {
                     return <CardActive
                         id={course._id}
                         course={course.name}
-                        chapter={course.lessonName}
-                        module="4"
+                        creator={course.creator}
+                        course_pic={course.course_pic}
                     />;
                 })}</div>}
             </div>

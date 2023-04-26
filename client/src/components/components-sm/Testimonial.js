@@ -5,7 +5,7 @@ const Testimonial = () => {
         <div className="container">
             <div className="row">
                 <div className="col-md-8 order-1">
-                    <h2 className="review" style={{ "color": "var(--han-blue)" }}>Student Reviews on Us</h2>
+                    <h2 className="review" style={{ color: "var(--han-blue)" }}>Student Reviews on Us</h2>
                 </div>
                 <div className="testimonial-btn col-md-4 order-2"><a className="btn my-btn-outline" href="#carousel-1"
                     role="button" data-bs-slide="prev"><svg xmlns="http://www.w3.org/2000/svg"
@@ -26,8 +26,8 @@ const Testimonial = () => {
             <div className="review-underline"></div>
             <div className="carousel slide" data-bs-ride="carousel" id="carousel-1">
                 <div className="carousel-inner">
-                    <div className="carousel-item active" style={{ "text-align": "center;" }}>
-                        <div className="card d-inline-block" style={{ "text-align": "center", "background": "rgba(255,255,255,0)" }}>
+                    <div className="carousel-item active" style={{ textAlign: "center" }}>
+                        <div className="card d-inline-block" style={{ textAlign: "center", background: "rgba(255,255,255,0)" }}>
                             <div className="card-body">
                                 <h2 className="card-title">Name</h2>
                                 <p className="lead card-text">Nullam id dolor id nibh ultricies vehicula ut id elit. Cras
@@ -71,8 +71,8 @@ const Testimonial = () => {
                             </div>
                         </div>
                     </div>
-                    <div className="carousel-item" style={{ "text-align": "center;" }}>
-                        <div className="card d-inline-block" style={{ "text-align": "center", "background": "rgba(255,255,255,0)" }}>
+                    <div className="carousel-item" style={{ textAlign: "center" }}>
+                        <div className="card d-inline-block" style={{ textAlign: "center", background: "rgba(255,255,255,0)" }}>
                             <div className="card-body">
                                 <h2 className="card-title">Name</h2>
                                 <p className="lead card-text">Nullam id dolor id nibh ultricies vehicula ut id elit. Cras
@@ -116,8 +116,8 @@ const Testimonial = () => {
                             </div>
                         </div>
                     </div>
-                    <div className="carousel-item" style={{ "text-align": "center;" }}>
-                        <div className="card d-inline-block" style={{ "text-align": "center", "background": "rgba(255,255,255,0)" }}>
+                    <div className="carousel-item" style={{ "textAlign": "center" }}>
+                        <div className="card d-inline-block" style={{ "textAlign": "center", "background": "rgba(255,255,255,0)" }}>
                             <div className="card-body">
                                 <h2 className="card-title">Name</h2>
                                 <p className="lead card-text">Nullam id dolor id nibh ultricies vehicula ut id elit. Cras

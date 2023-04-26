@@ -25,12 +25,12 @@ const Login = () => {
         e.preventDefault();
 
         try {
-            const res = await axios.post('/login', user);
-            if (res.status === 200) {
+            const response = await axios.post('/login', user);
+            if (response.status === 200) {
                 navigate("/dashboard");
             }
         } catch (error) {
-            window.alert("Login Unsuccessful!")
+            window.alert("Login Unsuccessful!");
         }
     }
 
@@ -41,27 +41,29 @@ const Login = () => {
                     <h4>Log in to Coursely</h4>
                     <div>
                         <button className="google-btn btn">
-                        <img src={Google} alt='google' />&nbsp;Continue with Google
+                            <img src={Google} alt='google' />&nbsp;Continue with Google
                         </button>
                     </div>
                     <div className='emailOrgoogle'>
                         <span className='emailOrgoogle-text'>Or continue with email</span>
                     </div>
 
-                    <div>
+                    <form method='POST'>
                         <div>
-                            <input className='form-control login-input' type="email" onChange={handleChange} autoComplete="off"
-                                placeholder="Email" name='username' value={user.email} />
-                        </div>
-                        <div>
-                            <input className='form-control login-input' type="password" onChange={handleChange} autoComplete="off"
-                                placeholder="password" name='password' value={user.password} />
+                            <div>
+                                <input className='form-control login-input' type="email" onChange={handleChange} autoComplete="off"
+                                    placeholder="Email" name='username' value={user.email} />
+                            </div>
+                            <div>
+                                <input className='form-control login-input' type="password" onChange={handleChange} autoComplete="off"
+                                    placeholder="password" name='password' value={user.password} />
 
+                            </div>
+                            <div>
+                                <button className="btn my-btn btn-lg-rg" onClick={formSubmit}>Login</button>
+                            </div>
                         </div>
-                        <div>
-                            <button className="btn my-btn btn-lg-rg" onClick={formSubmit}>Login</button>
-                        </div>
-                    </div>
+                    </form>
                     <div className='my-2'>
                         <span><strong><Link className="custom-link alter-lg-rg" to={"/register"}>Forgot password?</Link></strong></span>
                     </div>

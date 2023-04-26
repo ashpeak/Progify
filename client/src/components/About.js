@@ -23,7 +23,7 @@ const About = () => {
                         Who we are ?
                     </h2>
                     <p>
-                        Welcome to our <strong style={{ color: "var(--han-blue)" }}>Coursely</strong>! We are a leading brand providing top-quality free courses across a wide range of fields. Whether you are looking to enhance your skills, develop new ones or just learn something new, we have something for everyone.
+                        Welcome to <strong style={{ color: "var(--han-blue)" }}>Coursely</strong>! We are a leading brand providing top-quality free courses across a wide range of fields. Whether you are looking to enhance your skills, develop new ones or just learn something new, we have something for everyone.
 
                         Our mission is to make education accessible to all, irrespective of their background or financial status. We believe that everyone has the right to learn and grow, and our platform is designed to empower individuals with the knowledge and skills they need to succeed.
 

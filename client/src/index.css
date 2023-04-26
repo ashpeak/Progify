@@ -137,6 +137,13 @@ p {
   .navbar {
     box-shadow: rgb(157 157 157 / 40%) 0px 4px 13px;
   }
+  .navbar-expand-md .navbar-nav .dropdown-menu {
+    margin-left: -5rem !important;
+  }
+}
+
+.custom-dropdown {
+  position: relative;
 }
 
 .navbar {
