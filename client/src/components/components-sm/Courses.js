@@ -152,7 +152,7 @@ const Courses = () => {
                     </div>
                     <div className='col-lg-9'>
                         {courses ? <div className='row'>
-                            {courses && courses.map(course => {
+                            {courses.map(course => {
                                 return <SearchCourseCard
                                     _id={course._id}
                                     course_pic={course.course_pic}
