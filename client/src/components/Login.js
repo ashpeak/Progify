@@ -3,7 +3,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import Google from '../img/Social-google.svg';
 
-const Login = () => {
+const Login = (props) => {
 
     const [user, setUser] = useState({
         username: "",
@@ -28,6 +28,7 @@ const Login = () => {
             const response = await axios.post('/login', user);
             if (response.status === 200) {
                 navigate("/dashboard");
+                props.ontoggle();
             }
         } catch (error) {
             window.alert("Login Unsuccessful!");

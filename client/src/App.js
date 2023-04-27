@@ -18,16 +18,35 @@ import Community from "./components/Community";
 
 class App extends React.Component {
 
+  constructor() {
+    super();
+    this.state = {
+      loggedin: false
+    }
+  }
+
+  toggleState = () => {
+    this.setState(prevState => {
+      return {
+        loggedin: !prevState.loggedin
+      }
+    });
+  }
+
   render() {
     return (
       <>
         <BrowserRouter>
-          <Navbar />
+          <Navbar
+            status={this.state}
+            ontoggle={this.toggleState}
+          />
           <Routes>
             <Route path="/" element={<Landing />} />
             <Route path="/dashboard" element={<Dashboard />} />
             <Route path="/course" element={<Courses />} />
-            <Route path="/login" element={<Login />} />
+            <Route path="/login" element={<Login ontoggle={this.toggleState} />}
+            />
             <Route path="/register" element={<Register />} />
             <Route path="/course-detail" element={<CourseDetail />} />
             <Route path="/play" element={<Play />} />

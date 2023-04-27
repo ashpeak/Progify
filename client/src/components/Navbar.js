@@ -2,14 +2,14 @@ import React from "react";
 import { Link } from "react-router-dom";
 
 
-
-const Navbar = () => {
+const Navbar = (props) => {
 
     const collapse = () => {
         const item = document.getElementById("navcol-2");
         item.classList.remove('show');
     }
-    const isLoggedIn = false;
+
+    const isLoggedIn = props.status.loggedin;
 
     return (<>
         <nav className="navbar navbar-light navbar-expand-md py-3 fixed-top blur-background">
@@ -18,26 +18,24 @@ const Navbar = () => {
                 <div className="collapse navbar-collapse flex-row justify-content-center align-items-center navbar-menu"
                     id="navcol-2">
                     <ul className="navbar-nav ms-auto">
-                        <li className="nav-item"><Link onClick={collapse} className="nav-link" to={"/about"}>ABOUT US</Link></li>
+                        <li className="nav-item"><Link onClick={collapse} className="nav-link" to={"/dashboard"}>ABOUT US</Link></li>
                         <li className="nav-item"><Link onClick={collapse} className="nav-link" to={"/course"}>Courses</Link></li>
                         <li className="nav-item"><Link onClick={collapse} className="nav-link" to={"/blog"}>BLOG</Link></li>
                         <li className="nav-item"><a onClick={collapse} className="nav-link" href="/community">Community</a></li>
 
                         {isLoggedIn ?
-                            <li class="nav-item custom-dropdown">
-                                <a class="dropdown-toggle nav-link" aria-expanded="true" data-bs-toggle="dropdown" href="#">Ashish</a>
-                                <div class="dropdown-menu" data-bs-popper="none">
-                                    <a class="dropdown-item" href="#">
-                                        <i class="fa-solid fa-gear me-2"></i>Account Setting</a>
-                                    <a class="dropdown-item" href="#"><i class="fa-solid fa-wallet me-2"></i>
+                            <li className="nav-item custom-dropdown">
+                                <a className="dropdown-toggle nav-link" aria-expanded="true" data-bs-toggle="dropdown" href="#">Ashish</a>
+                                <div className="dropdown-menu" data-bs-popper="none">
+                                    <a className="dropdown-item" href="#">
+                                        <i className="fa-solid fa-gear me-2"></i>Account Setting</a>
+                                    <a className="dropdown-item" href="#"><i className="fa-solid fa-wallet me-2"></i>
                                         <span style={{ color: "rgb(29, 215, 166)" }}>240 </span>C-Coins</a>
-                                    <a onClick={() => isLoggedIn=false} class="dropdown-item" href="#"><i class="fa-solid fa-right-from-bracket me-2"></i>Logout</a>
+                                    <a onClick={() => props.ontoggle()} className="dropdown-item" href="#"><i className="fa-solid fa-right-from-bracket me-2"></i>Logout</a>
                                 </div>
                             </li> :
                             <div>
-                                <Link onClick={() => {
-                                    collapse();
-                                }} className="btn my-btn-outline nav-item" to={"/login"}><span>Log in</span></Link>
+                                <Link onClick={() => collapse()} className="btn my-btn-outline nav-item" to={"/login"}><span>Log in</span></Link>
                                 <Link onClick={collapse} className="btn my-btn nav-item" to={"/register"}><span>Sign up</span></Link>
                             </div>}
                     </ul>
