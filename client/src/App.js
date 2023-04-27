@@ -1,5 +1,6 @@
 import React from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
+import Cookies from 'js-cookie'
 
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
@@ -21,16 +22,26 @@ class App extends React.Component {
   constructor() {
     super();
     this.state = {
-      loggedin: false
+      isLoggedIn: false
     }
   }
 
-  toggleState = () => {
-    this.setState(prevState => {
-      return {
-        loggedin: !prevState.loggedin
-      }
+  setLoggedIn = () => {
+    const inTwoDay = new Date(new Date().getTime() + 2880 * 60 * 1000); //2 days
+    Cookies.set('user', JSON.stringify({ name: 'ashish', isLoggedIn: true, coins: '500' }), { expires: inTwoDay });
+
+    this.setState({
+      isLoggedIn: JSON.parse(Cookies.get('user')).isLoggedIn
     });
+  }
+
+  componentDidMount() {
+    const status = Cookies.get('user');
+    if (status) {
+      this.setState({
+        isLoggedIn: JSON.parse(Cookies.get('user')).isLoggedIn
+      });
+    }
   }
 
   render() {
@@ -39,14 +50,13 @@ class App extends React.Component {
         <BrowserRouter>
           <Navbar
             status={this.state}
-            ontoggle={this.toggleState}
+            setLoggedIn={this.setLoggedIn}
           />
           <Routes>
             <Route path="/" element={<Landing />} />
             <Route path="/dashboard" element={<Dashboard />} />
             <Route path="/course" element={<Courses />} />
-            <Route path="/login" element={<Login ontoggle={this.toggleState} />}
-            />
+            <Route path="/login" element={<Login setLoggedIn={this.setLoggedIn} />} />
             <Route path="/register" element={<Register />} />
             <Route path="/course-detail" element={<CourseDetail />} />
             <Route path="/play" element={<Play />} />

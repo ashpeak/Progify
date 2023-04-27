@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
-import Cookies from 'js-cookie';
 
 import CardActive from "./components-sm/CardActive";
 import Recommended from "./components-sm/Recommended";
@@ -53,7 +52,6 @@ const Dashboard = () => {
             <div className="container">
                 {!userData && <h2>Hey! Pick some course to continue</h2>}
                 <h2>My Courses</h2>
-                {console.log(Cookies.get())}
             </div>
             <div className="container">
                 <div className="row">

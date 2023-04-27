@@ -1,5 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import Cookies from 'js-cookie'
 
 
 const Navbar = (props) => {
@@ -9,7 +10,7 @@ const Navbar = (props) => {
         item.classList.remove('show');
     }
 
-    const isLoggedIn = props.status.loggedin;
+    const isLoggedIn = props.status.isLoggedIn;
 
     return (<>
         <nav className="navbar navbar-light navbar-expand-md py-3 fixed-top blur-background">
@@ -31,7 +32,7 @@ const Navbar = (props) => {
                                         <i className="fa-solid fa-gear me-2"></i>Account Setting</a>
                                     <a className="dropdown-item" href="#"><i className="fa-solid fa-wallet me-2"></i>
                                         <span style={{ color: "rgb(29, 215, 166)" }}>240 </span>C-Coins</a>
-                                    <a onClick={() => props.ontoggle()} className="dropdown-item" href="#"><i className="fa-solid fa-right-from-bracket me-2"></i>Logout</a>
+                                    <a onClick={() => Cookies.remove('user')} className="dropdown-item" href="#"><i className="fa-solid fa-right-from-bracket me-2"></i>Logout</a>
                                 </div>
                             </li> :
                             <div>
