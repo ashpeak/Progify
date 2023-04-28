@@ -57,36 +57,7 @@ const Dashboard = (props) => {
                 <h2>My Courses</h2>
             </div>
             <div className="container">
-                <div className="row">
-                    <CardActive
-                        id="1"
-                        course="C++ Full Course | Data Structures & Algorithms ctures & Algorithms"
-                        chapter="Lecture 1: Intro to Programming & Flowcharts"
-                        module="4"
-                        creator="Apna College"
-                        course_pic="https://i.ytimg.com/vi/j8nAHeVKL08/hqdefault.jpg?sqp=-oaymwEXCNACELwBSFryq4qpAwkIARUAAIhCGAE=&rs=AOn4CLC_BwiZmJ_tj2A5CM-xX3-4lcabVw"
-                    />
-                    <CardActive
-                        id="2"
-                        course="C++ Full Course | Data Structures & Algorithms"
-                        creator="Apna College"
-                        course_pic="https://i.ytimg.com/vi/j8nAHeVKL08/hqdefault.jpg?sqp=-oaymwEXCNACELwBSFryq4qpAwkIARUAAIhCGAE=&rs=AOn4CLC_BwiZmJ_tj2A5CM-xX3-4lcabVw"
-                    />
-                    <CardActive
-                        id="3"
-                        course="C++ Full Course | Data Structures & Algorithms"
-                        creator="Apna College"
-                        course_pic="https://i.ytimg.com/vi/z9bZufPHFLU/hqdefault.jpg?sqp=-oaymwEXCNACELwBSFryq4qpAwkIARUAAIhCGAE=&rs=AOn4CLATcUN7NPjsdcKSq8bFSEeilhzrMA"
-                    />
-                    <CardActive
-                        id="3"
-                        course="C++ Full Course | Data Structures & Algorithms"
-                        chapter="Lecture 1: Intro to Programming & Flowcharts"
-                        module="4"
-                        creator="Apna College"
-                        course_pic="https://i.ytimg.com/vi/z9bZufPHFLU/hqdefault.jpg?sqp=-oaymwEXCNACELwBSFryq4qpAwkIARUAAIhCGAE=&rs=AOn4CLATcUN7NPjsdcKSq8bFSEeilhzrMA"
-                    />
-                </div>
+
                 {userData && <div className="row">{userData.map(course => {
                     return <CardActive
                         id={course._id}

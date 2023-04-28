@@ -21,7 +21,7 @@ router.get("/logout", (req, res) => {
 
 router.get("/dashboard", isAuthorised, async (req, res) => {
     const { courseEnrolled } = req.user;
-
+    console.log('hello: '+courseEnrolled);
     try {
         const result = await Course.find({ _id: { $in: courseEnrolled } });
 
@@ -42,7 +42,8 @@ router.post("/enroll", isAuthorised, async (req, res) => {
     try {
         await User.findOneAndUpdate(
             { _id: userId },
-            { $push: { courseEnrolled: courseId } }
+            { $push: { courseEnrolled: courseId } },
+            {upsert: true}
         );
         return res.status(200).json({ msg: "Enrolled successfully!" });
     } catch (error) {

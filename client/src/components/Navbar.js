@@ -1,4 +1,4 @@
-import React, {useEffect} from "react";
+import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
 import Cookies from 'js-cookie'
 import axios from "axios";
@@ -38,7 +38,7 @@ const Navbar = (props) => {
                 <div className="collapse navbar-collapse flex-row justify-content-center align-items-center navbar-menu"
                     id="navcol-2">
                     <ul className="navbar-nav ms-auto">
-                        <li className="nav-item"><Link onClick={collapse} className="nav-link" to={"/dashboard"}>ABOUT US</Link></li>
+                        <li className="nav-item"><Link onClick={collapse} className="nav-link" to={"/about"}>ABOUT US</Link></li>
                         <li className="nav-item"><Link onClick={collapse} className="nav-link" to={"/course"}>Courses</Link></li>
                         <li className="nav-item"><Link onClick={collapse} className="nav-link" to={"/blog"}>BLOG</Link></li>
                         <li className="nav-item"><a onClick={collapse} className="nav-link" href="/community">Community</a></li>
@@ -47,11 +47,13 @@ const Navbar = (props) => {
                             <li className="nav-item custom-dropdown">
                                 <a className="dropdown-toggle nav-link" aria-expanded="true" data-bs-toggle="dropdown" href="#">{props.status.name}</a>
                                 <div className="dropdown-menu" data-bs-popper="none">
-                                    <a className="dropdown-item" href="#">
-                                        <i className="fa-solid fa-gear me-2"></i>Account Setting</a>
-                                    <a className="dropdown-item" href="#"><i className="fa-solid fa-wallet me-2"></i>
-                                        <span style={{ color: "rgb(29, 215, 166)" }}>240 </span>C-Coins</a>
-                                    <a onClick={() => Cookies.remove('user')} className="dropdown-item" href="#"><i className="fa-solid fa-right-from-bracket me-2"></i>Logout</a>
+                                    <Link className="dropdown-item" to={'/dashboard'}>
+                                        <i class="fa-solid fa-user me-2"></i>Dashboard</Link>
+                                    <Link className="dropdown-item" to={''}>
+                                        <i class="fa-solid fa-gear me-2"></i>Account Setting</Link>
+                                    <Link className="dropdown-item" to={''}><i className="fa-solid fa-wallet me-2"></i>
+                                        <span style={{ color: "rgb(29, 215, 166)" }}>240 </span>C-Coins</Link>
+                                    <Link onClick={() => Cookies.remove('user')} className="dropdown-item" to={''}><i className="fa-solid fa-right-from-bracket me-2"></i>Logout</Link>
                                 </div>
                             </li> :
                             <div>

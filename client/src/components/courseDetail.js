@@ -35,7 +35,6 @@ const CourseDetail = () => {
             }
         } catch (error) {
             window.alert("Check your network connection!");
-            console.log(error.response);
         }
     }
 
