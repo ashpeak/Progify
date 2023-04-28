@@ -19,7 +19,6 @@ router.get("/logout", (req, res) => {
     })
 })
 
-
 router.get("/dashboard", isAuthorised, async (req, res) => {
     const { courseEnrolled } = req.user;
 
@@ -30,6 +29,10 @@ router.get("/dashboard", isAuthorised, async (req, res) => {
     } catch (error) {
         return res.status(400).json({ msg: "Not Found, don't exists or might removed" });
     }
+})
+
+router.get("/checklogin", isAuthorised, async (req, res) => {
+    return res.status(200).json({ loggedin: true, name: req.user.name });
 })
 
 router.post("/enroll", isAuthorised, async (req, res) => {
@@ -65,15 +68,14 @@ router.post('/login', (req, res) => {
         (err, user, info) => {
 
             if (err || !user) {
-                return res.status(401).json({ msg: "login Uuuuunsuccessful" });
+                return res.status(401).json({ msg: "login Unsuccessful" });
             }
 
             req.logIn(user, function (err) {
                 if (err) {
-                    console.log(err);
                     return res.status(401).json({ msg: "login Unsuccessful" });
                 }
-                return res.status(200).json({ msg: "login Successful" });
+                return res.status(200).json({ name: user.name });
             });
 
         })(req, res);

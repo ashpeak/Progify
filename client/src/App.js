@@ -12,7 +12,6 @@ import Register from "./components/Register";
 import Errorpage from "./components/Errorpage";
 import CourseDetail from "./components/courseDetail";
 import Courses from "./components/components-sm/Courses";
-import AddCourse from "./components/AddCourse";
 import Blog from "./components/Blog";
 import About from "./components/About";
 import Community from "./components/Community";
@@ -22,24 +21,62 @@ class App extends React.Component {
   constructor() {
     super();
     this.state = {
-      isLoggedIn: false
+      isLoggedIn: 'false',
+      name: 'user'
     }
   }
 
-  setLoggedIn = () => {
+  setLoggedIn = (username) => {
     const inTwoDay = new Date(new Date().getTime() + 2880 * 60 * 1000); //2 days
-    Cookies.set('user', JSON.stringify({ name: 'ashish', isLoggedIn: true, coins: '500' }), { expires: inTwoDay });
+    Cookies.set('user', JSON.stringify({ name: username, isLoggedIn: 'true', coins: '500' }), { expires: inTwoDay });
 
+    const {isLoggedIn, name} = JSON.parse(Cookies.get('user'));
     this.setState({
-      isLoggedIn: JSON.parse(Cookies.get('user')).isLoggedIn
+      isLoggedIn,
+      name
     });
   }
 
+  setLoggedOff = (state = true) => {
+    if (state) {
+      const cookie = Cookies.get('user');
+      if (cookie === undefined) {
+        return false;
+      }
+      try {
+        const loginStatus = JSON.parse(cookie).isLoggedIn;
+
+        if (loginStatus === 'true') {
+          return true;
+        } else {
+          this.setState({
+            isLoggedIn: 'false',
+          });
+          Cookies.remove('user');
+        }
+      } catch (error) {
+        this.setState({
+          isLoggedIn: 'false',
+        });
+        Cookies.remove('user');
+      }
+      return false;
+    }
+    this.setState({
+      isLoggedIn: 'false',
+      name: 'user'
+    });
+    Cookies.remove('user');
+  }
+
   componentDidMount() {
-    const status = Cookies.get('user');
-    if (status) {
+    let status = 'false';
+    if (this.setLoggedOff()) {
+      status = 'true';
+
       this.setState({
-        isLoggedIn: JSON.parse(Cookies.get('user')).isLoggedIn
+        isLoggedIn: status,
+        name: JSON.parse(Cookies.get('user')).name
       });
     }
   }
@@ -51,21 +88,48 @@ class App extends React.Component {
           <Navbar
             status={this.state}
             setLoggedIn={this.setLoggedIn}
+            setLoggedOff={this.setLoggedOff}
           />
           <Routes>
-            <Route path="/" element={<Landing />} />
-            <Route path="/dashboard" element={<Dashboard />} />
-            <Route path="/course" element={<Courses />} />
-            <Route path="/login" element={<Login setLoggedIn={this.setLoggedIn} />} />
-            <Route path="/register" element={<Register />} />
-            <Route path="/course-detail" element={<CourseDetail />} />
-            <Route path="/play" element={<Play />} />
-            <Route path="/course" element={<Courses />} />
-            <Route path="/add-course" element={<AddCourse />} />
-            <Route path="/blog" element={<Blog />} />
-            <Route path="/about" element={<About />} />
-            <Route path="/community" element={<Community />} />
-            <Route path="*" element={<Errorpage />} />
+
+            <Route path="/" element={<Landing
+              setLoggedOff={this.setLoggedOff}
+            />} />
+            <Route path="/dashboard" element={<Dashboard
+              setLoggedOff={this.setLoggedOff}
+            />} />
+            <Route path="/course" element={<Courses
+              setLoggedOff={this.setLoggedOff}
+            />} />
+            <Route path="/login" element={<Login
+              setLoggedIn={this.setLoggedIn}
+              setLoggedOff={this.setLoggedOff}
+            />} />
+            <Route path="/register" element={<Register
+              setLoggedOff={this.setLoggedOff}
+            />} />
+            <Route path="/course-detail" element={<CourseDetail
+              setLoggedOff={this.setLoggedOff}
+            />} />
+            <Route path="/play" element={<Play
+              setLoggedOff={this.setLoggedOff}
+            />} />
+            <Route path="/course" element={<Courses
+              setLoggedOff={this.setLoggedOff}
+            />} />
+            <Route path="/blog" element={<Blog
+              setLoggedOff={this.setLoggedOff}
+            />} />
+            <Route path="/about" element={<About
+              setLoggedOff={this.setLoggedOff}
+            />} />
+            <Route path="/community" element={<Community
+              setLoggedOff={this.setLoggedOff}
+            />} />
+            <Route path="*" element={<Errorpage
+              setLoggedOff={this.setLoggedOff}
+            />} />
+
           </Routes>
           <Footer />
         </BrowserRouter>

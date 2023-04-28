@@ -1,6 +1,7 @@
-import React from "react";
+import React, {useEffect} from "react";
 import { Link } from "react-router-dom";
 import Cookies from 'js-cookie'
+import axios from "axios";
 
 
 const Navbar = (props) => {
@@ -10,7 +11,25 @@ const Navbar = (props) => {
         item.classList.remove('show');
     }
 
-    const isLoggedIn = props.status.isLoggedIn;
+    const isLoggedIn = (props.status.isLoggedIn === 'true');
+
+    const check = async () => {
+        try {
+            const response = await axios.get('/checklogin');
+            if (response.data.loggedin === true) {
+                props.setLoggedIn(response.data.name);
+            }
+        } catch (error) {
+            const { data, request } = error.response;
+            if (data.msg === 'Unauthorized' || request.status === 401) {
+                props.setLoggedOff(false);
+            }
+        }
+    }
+
+    useEffect(() => {
+        check();
+    }, []);
 
     return (<>
         <nav className="navbar navbar-light navbar-expand-md py-3 fixed-top blur-background">
@@ -26,7 +45,7 @@ const Navbar = (props) => {
 
                         {isLoggedIn ?
                             <li className="nav-item custom-dropdown">
-                                <a className="dropdown-toggle nav-link" aria-expanded="true" data-bs-toggle="dropdown" href="#">Ashish</a>
+                                <a className="dropdown-toggle nav-link" aria-expanded="true" data-bs-toggle="dropdown" href="#">{props.status.name}</a>
                                 <div className="dropdown-menu" data-bs-popper="none">
                                     <a className="dropdown-item" href="#">
                                         <i className="fa-solid fa-gear me-2"></i>Account Setting</a>

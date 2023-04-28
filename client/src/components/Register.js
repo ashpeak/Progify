@@ -1,9 +1,10 @@
-import React, { useState } from 'react';
-import Google from '../img/Social-google.svg';
+import React, { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 
-const Register = () => {
+import Google from '../img/Social-google.svg';
+
+const Register = (props) => {
 
     const navigate = useNavigate();
 
@@ -41,6 +42,12 @@ const Register = () => {
         }
     }
 
+    useEffect(() => {
+        if(props.setLoggedOff()){
+            navigate('/dashboard');
+        }
+    });
+
     return (<>
         <section><div className="login-holder">
             <div className="login">
@@ -48,14 +55,16 @@ const Register = () => {
                 <div className='emailOrgoogle'>
                     <span className='emailOrgoogle-text'>Or continue with email</span>
                 </div>
-                <div>
-                    <div><input className='login-input form-control' type="text" onChange={handleInput} name='name' placeholder="Name" value={user.name} /></div>
-                    <div><input className='login-input form-control' type="text" onChange={handleInput} name='username' placeholder="Email" value={user.username} /></div>
-                    <div><input className='login-input form-control' type="password" onChange={handleInput} name='password' placeholder="password" value={user.password} autoComplete="true" /></div>
+                <form method='POST'>
                     <div>
-                        <button className="btn my-btn btn-lg-rg" onClick={formSubmit}>Sign Up</button>
+                        <div><input className='login-input form-control' type="text" onChange={handleInput} name='name' placeholder="Name" value={user.name} /></div>
+                        <div><input className='login-input form-control' type="text" onChange={handleInput} name='username' placeholder="Email" value={user.username} /></div>
+                        <div><input className='login-input form-control' type="password" onChange={handleInput} name='password' placeholder="password" value={user.password} autoComplete="true" /></div>
+                        <div>
+                            <button className="btn my-btn btn-lg-rg" onClick={formSubmit}>Sign Up</button>
+                        </div>
                     </div>
-                </div>
+                </form>
                 <div className='switch-holder'>
                     <span className='acc-switch'>
                         Have an Account?&nbsp;<strong><Link className="custom-link alter-lg-rg" to={"/login"}>Login</Link></strong>

@@ -5,14 +5,13 @@ import axios from "axios";
 import CardActive from "./components-sm/CardActive";
 import Recommended from "./components-sm/Recommended";
 
-const Dashboard = () => {
+const Dashboard = (props) => {
 
     const [userData, setUserData] = useState([]);
 
     const navigate = useNavigate();
 
     const fetchUserData = async () => {
-        console.log("fetchUserdata called");
 
         try {
             const res = await axios.get('/dashboard');
@@ -37,13 +36,17 @@ const Dashboard = () => {
                 })
             }
         } catch (error) {
-            // navigate("/login");
+            const { data, request } = error.response;
+            if (data.msg === 'Unauthorized' || request.status === 401) {
+                props.setLoggedOff(false);
+                navigate("/login");
+            }
         }
-
-
-
     }
     useEffect(() => {
+        if (props.setLoggedOff() === false) {
+            navigate("/login");
+        }
         fetchUserData();
     }, []);
 

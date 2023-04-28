@@ -1,6 +1,7 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
+
 import Google from '../img/Social-google.svg';
 
 const Login = (props) => {
@@ -9,7 +10,6 @@ const Login = (props) => {
         username: "",
         password: ""
     });
-
     const navigate = useNavigate();
 
     const handleChange = (e) => {
@@ -27,13 +27,21 @@ const Login = (props) => {
         try {
             const response = await axios.post('/login', user);
             if (response.status === 200) {
+                props.setLoggedIn(response.data.name);
                 navigate("/dashboard");
-                props.ontoggle();
             }
         } catch (error) {
             window.alert("Login Unsuccessful!");
         }
     }
+
+    useEffect(() => {
+        if(props.setLoggedOff()){
+            navigate("/dashboard");
+        } else {
+            props.setLoggedOff();
+        }
+    }, []);
 
     return (<>
         <section>
