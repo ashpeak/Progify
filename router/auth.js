@@ -20,8 +20,10 @@ router.get("/logout", (req, res) => {
 })
 
 router.get("/dashboard", isAuthorised, async (req, res) => {
-    const { courseEnrolled } = req.user;
-    console.log('hello: '+courseEnrolled);
+    let { courseEnrolled } = req.user;
+
+    courseEnrolled = courseEnrolled.map(course => course.courseId);
+
     try {
         const result = await Course.find({ _id: { $in: courseEnrolled } });
 
@@ -38,12 +40,13 @@ router.get("/checklogin", isAuthorised, async (req, res) => {
 router.post("/enroll", isAuthorised, async (req, res) => {
     const userId = req.user.id;
     const { courseId } = req.body;
+    const lastModule = "Yet to start";
 
     try {
         await User.findOneAndUpdate(
             { _id: userId },
-            { $push: { courseEnrolled: courseId } },
-            {upsert: true}
+            { $push: { courseEnrolled: { courseId, lastModule } } },
+            { upsert: true }
         );
         return res.status(200).json({ msg: "Enrolled successfully!" });
     } catch (error) {

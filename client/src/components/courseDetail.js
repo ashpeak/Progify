@@ -11,10 +11,10 @@ const CourseDetail = () => {
 
     const navigate = useNavigate();
 
-    const enrollCourse = async (courseID) => {
+    const enrollCourse = async (courseId) => {
 
         try {
-            const res = await axios.post('/enroll', { courseId: courseID });
+            const res = await axios.post('/enroll', { courseId });
 
             if (res.status === 200) {
                 window.alert("Course Enrolled!");
