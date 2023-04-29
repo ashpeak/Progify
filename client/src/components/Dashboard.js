@@ -21,15 +21,15 @@ const Dashboard = (props) => {
                 window.alert("unAuthorized access");
             } else {
                 Courses.forEach(course => {
-                    const { name, _id } = course;
-                    const [{ lessonName }] = course.lessons;
+                    const { name, _id, creator, course_pic } = course;
                     setUserData(prevValue => {
                         return [
                             ...prevValue,
                             {
                                 _id,
                                 name,
-                                lessonName
+                                creator,
+                                course_pic
                             }
                         ];
                     });
