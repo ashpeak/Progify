@@ -13,6 +13,7 @@ const userSchema = new mongoose.Schema({
     },
     courseEnrolled: [{
         id: String,
+        courseId: String,
         lastModule: String
     }],
     courseLoved: []
