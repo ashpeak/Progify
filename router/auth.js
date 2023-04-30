@@ -219,15 +219,30 @@ router.get("/recommend", async (req, res) => {
 });
 
 //Implement admin login system to allow course posting
-router.post("/new/course", isAuthorised, async (req, res) => {
-    const { _id, name, creator, rating, category, sub_category, language, course_pic, info, lessons } = req.body;
+router.post("/new/course", async (req, res) => {
+
+    const course_data = req.body.result;
+    const key = req.body.api_key;
+
+    const { name, creator, love, category, sub_category, course_pic, language, lessons } = course_data;
+    let { info } = course_data
     const isVisible = true;
 
-    if (!_id || !name || !creator || !category || !info || !sub_category || !language || !course_pic) {
+    if (key !== process.env.API_KEY) {
+        return res.status(401).json({ error: "Invalid api key!" });
+    }
+
+    if (!name || !creator || !category || !sub_category || !language || !course_pic) {
         return res.status(422).json({ error: "Empty input fields!" });
     }
 
+    if (!info) {
+        info = name;
+    }
+
     try {
+        let _id = await Course.countDocuments({}) + 1;
+
         const isExist = await Course.findById(_id);
         if (isExist) {
             return res.status(422).json({ error: "Course with same ID not allowed" });
@@ -237,13 +252,13 @@ router.post("/new/course", isAuthorised, async (req, res) => {
             _id,
             name,
             creator,
-            rating,
+            love,
+            isVisible,
             category,
             sub_category,
-            language,
-            course_pic,
             info,
-            isVisible,
+            course_pic,
+            language,
             lessons
         });
         await course.save();
