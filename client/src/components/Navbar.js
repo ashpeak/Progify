@@ -3,6 +3,8 @@ import { Link } from "react-router-dom";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
+import logo from "../img/coursely.png";
+
 
 const Navbar = (props) => {
 
@@ -45,8 +47,13 @@ const Navbar = (props) => {
 
     return (<>
         <nav className="navbar navbar-light navbar-expand-md py-3 fixed-top blur-background">
-            <div className="container-fluid"><Link className="navbar-brand d-flex align-items-center" to={"/"}><span className="coursely">&lt; Progify /&gt;</span></Link><button type="button" className="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navcol-2">
-                <i className="fa-solid fa-bars-staggered navbar-toggler-icon"></i></button>
+            <div className="container-fluid">
+                <Link className="navbar-brand d-flex align-items-center" to={"/"}>
+                    {/* <span className="coursely">&lt; Progify /&gt;</span> */}
+                    <img src={logo} alt="Coursely" />
+                </Link>
+                <button type="button" className="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navcol-2">
+                    <i className="fa-solid fa-bars-staggered navbar-toggler-icon"></i></button>
                 <div className="collapse navbar-collapse flex-row justify-content-center align-items-center navbar-menu"
                     id="navcol-2">
                     <ul className="navbar-nav ms-auto">
@@ -57,7 +64,7 @@ const Navbar = (props) => {
 
                         {isLoggedIn ?
                             <li className="nav-item custom-dropdown">
-                                <Link className="dropdown-toggle nav-link" aria-expanded="true" data-bs-toggle="dropdown">{(props.status.name).substring(0,15)}</Link>
+                                <Link className="dropdown-toggle nav-link" aria-expanded="true" data-bs-toggle="dropdown">{(props.status.name).substring(0, 15)}</Link>
                                 <div className="dropdown-menu" data-bs-popper="none">
                                     <Link className="dropdown-item" to={'/dashboard'}>
                                         <i class="fa-solid fa-user me-2"></i>Dashboard</Link>
