@@ -416,6 +416,18 @@ p {
   background-position: right;
 }
 
+.testimonial .card-title {
+  color: #7d828b;
+  font-size: 2rem;
+  font-family: Rubik,sans-serif;
+}
+.testimonial .card-text {
+  font-size: 1.12rem;
+  color: #7d828b;
+  line-height: 1.2;
+  font-family: Rubik,sans-serif;
+}
+
 .review-underline {
   height: 2px;
   background-color: #d1d7dc;

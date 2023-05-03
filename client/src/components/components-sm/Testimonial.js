@@ -24,140 +24,62 @@ const Testimonial = () => {
                     </svg></a></div>
             </div>
             <div className="review-underline"></div>
-            <div className="carousel slide" data-bs-ride="carousel" id="carousel-1">
+            <div className="carousel slide my-3" data-bs-ride="carousel" id="carousel-1">
                 <div className="carousel-inner">
                     <div className="carousel-item active" style={{ textAlign: "center" }}>
                         <div className="card d-inline-block" style={{ textAlign: "center", background: "rgba(255,255,255,0)" }}>
                             <div className="card-body">
-                                <h2 className="card-title">Name</h2>
-                                <p className="lead card-text">Nullam id dolor id nibh ultricies vehicula ut id elit. Cras
-                                    justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta
-                                    gravida at eget metus.</p>
+                                <h2 className="card-title">Rahul</h2>
+                                <p className="lead card-text">I've completed several courses from Coursely, and I'm impressed by the breadth of topics covered. From learning a new language to developing programming skills, the courses are well-structured and engaging. The instructors are friendly and knowledgeable, and I appreciate the effort they put into explaining every concept in detail. Thank you for providing such a valuable resource!</p>
                                 <div>
                                     <picture className="d-inline-block"><img className="img-testimonial"
                                         src={require("../../img/user.jpg")} alt='avatar' /></picture>
                                 </div>
-                                <div><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 -32 576 576" width="1em"
-                                    height="1em" fill="currentColor">
-
-                                    <path
-                                        d="M381.2 150.3L524.9 171.5C536.8 173.2 546.8 181.6 550.6 193.1C554.4 204.7 551.3 217.3 542.7 225.9L438.5 328.1L463.1 474.7C465.1 486.7 460.2 498.9 450.2 506C440.3 513.1 427.2 514 416.5 508.3L288.1 439.8L159.8 508.3C149 514 135.9 513.1 126 506C116.1 498.9 111.1 486.7 113.2 474.7L137.8 328.1L33.58 225.9C24.97 217.3 21.91 204.7 25.69 193.1C29.46 181.6 39.43 173.2 51.42 171.5L195 150.3L259.4 17.97C264.7 6.954 275.9-.0391 288.1-.0391C300.4-.0391 311.6 6.954 316.9 17.97L381.2 150.3z">
-                                    </path>
-                                </svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 -32 576 576" width="1em"
-                                    height="1em" fill="currentColor">
-
-                                        <path
-                                            d="M381.2 150.3L524.9 171.5C536.8 173.2 546.8 181.6 550.6 193.1C554.4 204.7 551.3 217.3 542.7 225.9L438.5 328.1L463.1 474.7C465.1 486.7 460.2 498.9 450.2 506C440.3 513.1 427.2 514 416.5 508.3L288.1 439.8L159.8 508.3C149 514 135.9 513.1 126 506C116.1 498.9 111.1 486.7 113.2 474.7L137.8 328.1L33.58 225.9C24.97 217.3 21.91 204.7 25.69 193.1C29.46 181.6 39.43 173.2 51.42 171.5L195 150.3L259.4 17.97C264.7 6.954 275.9-.0391 288.1-.0391C300.4-.0391 311.6 6.954 316.9 17.97L381.2 150.3z">
-                                        </path>
-                                    </svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 -32 576 576" width="1em"
-                                        height="1em" fill="currentColor">
-
-                                        <path
-                                            d="M381.2 150.3L524.9 171.5C536.8 173.2 546.8 181.6 550.6 193.1C554.4 204.7 551.3 217.3 542.7 225.9L438.5 328.1L463.1 474.7C465.1 486.7 460.2 498.9 450.2 506C440.3 513.1 427.2 514 416.5 508.3L288.1 439.8L159.8 508.3C149 514 135.9 513.1 126 506C116.1 498.9 111.1 486.7 113.2 474.7L137.8 328.1L33.58 225.9C24.97 217.3 21.91 204.7 25.69 193.1C29.46 181.6 39.43 173.2 51.42 171.5L195 150.3L259.4 17.97C264.7 6.954 275.9-.0391 288.1-.0391C300.4-.0391 311.6 6.954 316.9 17.97L381.2 150.3z">
-                                        </path>
-                                    </svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 -32 576 576" width="1em"
-                                        height="1em" fill="currentColor">
-
-                                        <path
-                                            d="M381.2 150.3L524.9 171.5C536.8 173.2 546.8 181.6 550.6 193.1C554.4 204.7 551.3 217.3 542.7 225.9L438.5 328.1L463.1 474.7C465.1 486.7 460.2 498.9 450.2 506C440.3 513.1 427.2 514 416.5 508.3L288.1 439.8L159.8 508.3C149 514 135.9 513.1 126 506C116.1 498.9 111.1 486.7 113.2 474.7L137.8 328.1L33.58 225.9C24.97 217.3 21.91 204.7 25.69 193.1C29.46 181.6 39.43 173.2 51.42 171.5L195 150.3L259.4 17.97C264.7 6.954 275.9-.0391 288.1-.0391C300.4-.0391 311.6 6.954 316.9 17.97L381.2 150.3z">
-                                        </path>
-                                    </svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 -32 576 576" width="1em"
-                                        height="1em" fill="currentColor">
-
-                                        <path
-                                            d="M288 439.8L159.8 508.3C149 514 135.9 513.1 126 506C116.1 498.9 111.1 486.7 113.2 474.7L137.8 328.1L33.58 225.9C24.97 217.3 21.91 204.7 25.69 193.1C29.46 181.6 39.43 173.2 51.42 171.5L195 150.3L259.4 17.97C264.7 6.995 275.8 .0131 287.1-.0391L288 439.8zM433.2 512C432.1 512.1 431 512.1 429.9 512H433.2z">
-                                        </path>
-                                    </svg></div>
+                                <div>
+                                    <i class="fa-solid fa-star" style={{ color: "#ff9e2a" }}></i>
+                                    <i class="fa-solid fa-star" style={{ color: "#ff9e2a" }}></i>
+                                    <i class="fa-solid fa-star" style={{ color: "#ff9e2a" }}></i>
+                                    <i class="fa-solid fa-star" style={{ color: "#ff9e2a" }}></i>
+                                    <i class="fa-solid fa-star" style={{ color: "#ff9e2a" }}></i>
+                                </div>
                             </div>
                         </div>
                     </div>
                     <div className="carousel-item" style={{ textAlign: "center" }}>
                         <div className="card d-inline-block" style={{ textAlign: "center", background: "rgba(255,255,255,0)" }}>
                             <div className="card-body">
-                                <h2 className="card-title">Name</h2>
-                                <p className="lead card-text">Nullam id dolor id nibh ultricies vehicula ut id elit. Cras
-                                    justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta
-                                    gravida at eget metus.</p>
+                                <h2 className="card-title">Saurabh</h2>
+                                <p className="lead card-text">I stumbled upon this website a few months ago, and I'm blown away by the quality of the courses. The instructors are knowledgeable and passionate about their subjects, and the lessons are easy to follow. I've learned so much, and it's all for free! I highly recommend this website to anyone looking to expand their knowledge.</p>
                                 <div>
                                     <picture className="d-inline-block"><img className="img-testimonial"
-                                        src={require("../../img/user.jpg")} /></picture>
+                                        src={require("../../img/user.jpg")} alt='' /></picture>
                                 </div>
-                                <div><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 -32 576 576" width="1em"
-                                    height="1em" fill="currentColor">
-
-                                    <path
-                                        d="M381.2 150.3L524.9 171.5C536.8 173.2 546.8 181.6 550.6 193.1C554.4 204.7 551.3 217.3 542.7 225.9L438.5 328.1L463.1 474.7C465.1 486.7 460.2 498.9 450.2 506C440.3 513.1 427.2 514 416.5 508.3L288.1 439.8L159.8 508.3C149 514 135.9 513.1 126 506C116.1 498.9 111.1 486.7 113.2 474.7L137.8 328.1L33.58 225.9C24.97 217.3 21.91 204.7 25.69 193.1C29.46 181.6 39.43 173.2 51.42 171.5L195 150.3L259.4 17.97C264.7 6.954 275.9-.0391 288.1-.0391C300.4-.0391 311.6 6.954 316.9 17.97L381.2 150.3z">
-                                    </path>
-                                </svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 -32 576 576" width="1em"
-                                    height="1em" fill="currentColor">
-
-                                        <path
-                                            d="M381.2 150.3L524.9 171.5C536.8 173.2 546.8 181.6 550.6 193.1C554.4 204.7 551.3 217.3 542.7 225.9L438.5 328.1L463.1 474.7C465.1 486.7 460.2 498.9 450.2 506C440.3 513.1 427.2 514 416.5 508.3L288.1 439.8L159.8 508.3C149 514 135.9 513.1 126 506C116.1 498.9 111.1 486.7 113.2 474.7L137.8 328.1L33.58 225.9C24.97 217.3 21.91 204.7 25.69 193.1C29.46 181.6 39.43 173.2 51.42 171.5L195 150.3L259.4 17.97C264.7 6.954 275.9-.0391 288.1-.0391C300.4-.0391 311.6 6.954 316.9 17.97L381.2 150.3z">
-                                        </path>
-                                    </svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 -32 576 576" width="1em"
-                                        height="1em" fill="currentColor">
-
-                                        <path
-                                            d="M381.2 150.3L524.9 171.5C536.8 173.2 546.8 181.6 550.6 193.1C554.4 204.7 551.3 217.3 542.7 225.9L438.5 328.1L463.1 474.7C465.1 486.7 460.2 498.9 450.2 506C440.3 513.1 427.2 514 416.5 508.3L288.1 439.8L159.8 508.3C149 514 135.9 513.1 126 506C116.1 498.9 111.1 486.7 113.2 474.7L137.8 328.1L33.58 225.9C24.97 217.3 21.91 204.7 25.69 193.1C29.46 181.6 39.43 173.2 51.42 171.5L195 150.3L259.4 17.97C264.7 6.954 275.9-.0391 288.1-.0391C300.4-.0391 311.6 6.954 316.9 17.97L381.2 150.3z">
-                                        </path>
-                                    </svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 -32 576 576" width="1em"
-                                        height="1em" fill="currentColor">
-
-                                        <path
-                                            d="M381.2 150.3L524.9 171.5C536.8 173.2 546.8 181.6 550.6 193.1C554.4 204.7 551.3 217.3 542.7 225.9L438.5 328.1L463.1 474.7C465.1 486.7 460.2 498.9 450.2 506C440.3 513.1 427.2 514 416.5 508.3L288.1 439.8L159.8 508.3C149 514 135.9 513.1 126 506C116.1 498.9 111.1 486.7 113.2 474.7L137.8 328.1L33.58 225.9C24.97 217.3 21.91 204.7 25.69 193.1C29.46 181.6 39.43 173.2 51.42 171.5L195 150.3L259.4 17.97C264.7 6.954 275.9-.0391 288.1-.0391C300.4-.0391 311.6 6.954 316.9 17.97L381.2 150.3z">
-                                        </path>
-                                    </svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 -32 576 576" width="1em"
-                                        height="1em" fill="currentColor">
-
-                                        <path
-                                            d="M288 439.8L159.8 508.3C149 514 135.9 513.1 126 506C116.1 498.9 111.1 486.7 113.2 474.7L137.8 328.1L33.58 225.9C24.97 217.3 21.91 204.7 25.69 193.1C29.46 181.6 39.43 173.2 51.42 171.5L195 150.3L259.4 17.97C264.7 6.995 275.8 .0131 287.1-.0391L288 439.8zM433.2 512C432.1 512.1 431 512.1 429.9 512H433.2z">
-                                        </path>
-                                    </svg></div>
+                                <div>
+                                    <i class="fa-solid fa-star" style={{ color: "#ff9e2a" }}></i>
+                                    <i class="fa-solid fa-star" style={{ color: "#ff9e2a" }}></i>
+                                    <i class="fa-solid fa-star" style={{ color: "#ff9e2a" }}></i>
+                                    <i class="fa-solid fa-star" style={{ color: "#ff9e2a" }}></i>
+                                    <i class="fa-solid fa-star" style={{ color: "#ff9e2a" }}></i>
+                                </div>
                             </div>
                         </div>
                     </div>
                     <div className="carousel-item" style={{ "textAlign": "center" }}>
                         <div className="card d-inline-block" style={{ "textAlign": "center", "background": "rgba(255,255,255,0)" }}>
                             <div className="card-body">
-                                <h2 className="card-title">Name</h2>
-                                <p className="lead card-text">Nullam id dolor id nibh ultricies vehicula ut id elit. Cras
-                                    justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta
-                                    gravida at eget metus.</p>
+                                <h2 className="card-title">Ashish</h2>
+                                <p className="lead card-text">This is an amazing website for anyone looking to learn new skills. The courses are free, informative, and comprehensive. The instructors are wonderful and teach from the basics, making it easy to follow along. I've learned so much from this website and have been able to apply it to my personal and professional life. I highly recommend this website to anyone looking to expand their knowledge and skills.</p>
                                 <div>
                                     <picture className="d-inline-block"><img className="img-testimonial"
-                                        src={require("../../img/user.jpg")} /></picture>
+                                        src={require("../../img/user.jpg")} alt='' /></picture>
                                 </div>
-                                <div><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 -32 576 576" width="1em"
-                                    height="1em" fill="currentColor">
-
-                                    <path
-                                        d="M381.2 150.3L524.9 171.5C536.8 173.2 546.8 181.6 550.6 193.1C554.4 204.7 551.3 217.3 542.7 225.9L438.5 328.1L463.1 474.7C465.1 486.7 460.2 498.9 450.2 506C440.3 513.1 427.2 514 416.5 508.3L288.1 439.8L159.8 508.3C149 514 135.9 513.1 126 506C116.1 498.9 111.1 486.7 113.2 474.7L137.8 328.1L33.58 225.9C24.97 217.3 21.91 204.7 25.69 193.1C29.46 181.6 39.43 173.2 51.42 171.5L195 150.3L259.4 17.97C264.7 6.954 275.9-.0391 288.1-.0391C300.4-.0391 311.6 6.954 316.9 17.97L381.2 150.3z">
-                                    </path>
-                                </svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 -32 576 576" width="1em"
-                                    height="1em" fill="currentColor">
-
-                                        <path
-                                            d="M381.2 150.3L524.9 171.5C536.8 173.2 546.8 181.6 550.6 193.1C554.4 204.7 551.3 217.3 542.7 225.9L438.5 328.1L463.1 474.7C465.1 486.7 460.2 498.9 450.2 506C440.3 513.1 427.2 514 416.5 508.3L288.1 439.8L159.8 508.3C149 514 135.9 513.1 126 506C116.1 498.9 111.1 486.7 113.2 474.7L137.8 328.1L33.58 225.9C24.97 217.3 21.91 204.7 25.69 193.1C29.46 181.6 39.43 173.2 51.42 171.5L195 150.3L259.4 17.97C264.7 6.954 275.9-.0391 288.1-.0391C300.4-.0391 311.6 6.954 316.9 17.97L381.2 150.3z">
-                                        </path>
-                                    </svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 -32 576 576" width="1em"
-                                        height="1em" fill="currentColor">
-
-                                        <path
-                                            d="M381.2 150.3L524.9 171.5C536.8 173.2 546.8 181.6 550.6 193.1C554.4 204.7 551.3 217.3 542.7 225.9L438.5 328.1L463.1 474.7C465.1 486.7 460.2 498.9 450.2 506C440.3 513.1 427.2 514 416.5 508.3L288.1 439.8L159.8 508.3C149 514 135.9 513.1 126 506C116.1 498.9 111.1 486.7 113.2 474.7L137.8 328.1L33.58 225.9C24.97 217.3 21.91 204.7 25.69 193.1C29.46 181.6 39.43 173.2 51.42 171.5L195 150.3L259.4 17.97C264.7 6.954 275.9-.0391 288.1-.0391C300.4-.0391 311.6 6.954 316.9 17.97L381.2 150.3z">
-                                        </path>
-                                    </svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 -32 576 576" width="1em"
-                                        height="1em" fill="currentColor">
-
-                                        <path
-                                            d="M381.2 150.3L524.9 171.5C536.8 173.2 546.8 181.6 550.6 193.1C554.4 204.7 551.3 217.3 542.7 225.9L438.5 328.1L463.1 474.7C465.1 486.7 460.2 498.9 450.2 506C440.3 513.1 427.2 514 416.5 508.3L288.1 439.8L159.8 508.3C149 514 135.9 513.1 126 506C116.1 498.9 111.1 486.7 113.2 474.7L137.8 328.1L33.58 225.9C24.97 217.3 21.91 204.7 25.69 193.1C29.46 181.6 39.43 173.2 51.42 171.5L195 150.3L259.4 17.97C264.7 6.954 275.9-.0391 288.1-.0391C300.4-.0391 311.6 6.954 316.9 17.97L381.2 150.3z">
-                                        </path>
-                                    </svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 -32 576 576" width="1em"
-                                        height="1em" fill="currentColor">
-
-                                        <path
-                                            d="M288 439.8L159.8 508.3C149 514 135.9 513.1 126 506C116.1 498.9 111.1 486.7 113.2 474.7L137.8 328.1L33.58 225.9C24.97 217.3 21.91 204.7 25.69 193.1C29.46 181.6 39.43 173.2 51.42 171.5L195 150.3L259.4 17.97C264.7 6.995 275.8 .0131 287.1-.0391L288 439.8zM433.2 512C432.1 512.1 431 512.1 429.9 512H433.2z">
-                                        </path>
-                                    </svg></div>
+                                <div>
+                                    <i class="fa-solid fa-star" style={{ color: "#ff9e2a" }}></i>
+                                    <i class="fa-solid fa-star" style={{ color: "#ff9e2a" }}></i>
+                                    <i class="fa-solid fa-star" style={{ color: "#ff9e2a" }}></i>
+                                    <i class="fa-solid fa-star" style={{ color: "#ff9e2a" }}></i>
+                                    <i class="fa-solid fa-star" style={{ color: "#ff9e2a" }}></i>
+                                </div>
                             </div>
                         </div>
                     </div>
