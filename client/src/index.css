@@ -137,6 +137,7 @@ p {
   .navbar {
     box-shadow: rgb(157 157 157 / 40%) 0px 4px 13px;
   }
+
   .navbar-expand-md .navbar-nav .dropdown-menu {
     margin-left: -5rem !important;
   }
@@ -353,7 +354,18 @@ p {
 .why-card {
   -webkit-box-shadow: 0 0px 25px rgba(0, 0, 0, 0.07);
   box-shadow: 0 0px 25px rgba(0, 0, 0, 0.07);
-  border-bottom: 5px solid var(--han-blue);
+  border-bottom: 5px solid #b1a3fe;
+}
+
+.choose-icon {
+  background-color: rgba(55, 19, 253, .39);
+  border-radius: 9999px;
+  height: 39px;
+  width: 39px;
+}
+
+.my-icon {
+  margin-top: 3px;
 }
 
 /* 5. Why Choose Us ends */
@@ -418,6 +430,10 @@ p {
   border-radius: 100%;
 }
 
+#carousel-1 .card {
+  --bs-card-border-width: 0
+}
+
 .testimonial-btn .btn {
   border-radius: 50px;
   width: 75px;
@@ -479,7 +495,8 @@ p {
   text-align: center;
 }
 
-.social-icon svg {
+.social-icon svg,
+.social-icon i {
   margin-top: 10px;
   margin-bottom: 10px;
 }
@@ -498,7 +515,7 @@ p {
 .facebook:hover svg,
 .youtube:hover svg,
 .instagram:hover svg,
-.community:hover svg {
+.community:hover i {
   transition: .3s ease;
   transform: translateY(5px);
 }
@@ -519,8 +536,19 @@ p {
   margin-bottom: 10px;
 }
 
-.my-card img {
-  height: 150px;
+.mycard-img {
+  display: flex;
+  justify-content: center;
+}
+
+.mycard-img img {
+  height: 175px;
+  max-width: 380px;
+}
+
+.item-center {
+  display: flex;
+  justify-content: center;
 }
 
 .card-p-h4 {
@@ -582,6 +610,7 @@ p {
   align-items: center;
   border: 1px solid #c0c5ca;
   background-color: #ffffffde;
+  max-width: 400px;
 }
 
 .course-active-card:hover {
@@ -833,6 +862,11 @@ p {
   padding-right: .5rem;
 }
 
+.note-download {
+  display: flex;
+  justify-content: space-between;
+}
+
 .note-top div {
   display: flex;
   align-items: center;
@@ -841,8 +875,7 @@ p {
 
 .input-field {
   width: 100%;
-  border: solid 1px #d1d7dc;
-  border-left: none;
+  background-color: var(--custom-black);
 }
 
 .name-field {
@@ -852,6 +885,7 @@ p {
   box-sizing: border-box;
   background: transparent;
   transition: .3s;
+  color: #fff;
 }
 
 .pallete {
@@ -917,6 +951,7 @@ p {
 .saved-note h6 {
   margin-bottom: 0;
   padding: .5rem 0;
+  color: #777c85;
 }
 
 .note-top .del-edit {
@@ -942,8 +977,8 @@ p {
 } */
 
 .show-note .note-top {
-  border-top: var(--border);
-  border-right: var(--border);
+  border: var(--border);
+  border-bottom: none;
 }
 
 .show-noteText {

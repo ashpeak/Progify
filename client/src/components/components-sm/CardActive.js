@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 const CardActive = (Props) => {
     const { course, creator, id, course_pic } = Props;
     return (<>
-        <div className="col-md-6" key={id}>
+        <div className="col-md-6 item-center" key={id}>
             <Link className="custom-link"
                 to={"/play"}
                 state={{ data: Props }}>

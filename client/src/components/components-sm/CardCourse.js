@@ -6,7 +6,10 @@ const CardCourse = (Props) => {
     return (<>
         <div className="my-card col-md-3">
             <Link className="custom-link" to={"/course-detail"} state={{ data: Props.id }}>
-                <div className="card"><img alt="courseImage" className="card-img-top w-100 d-block fit-cover" src={Props.course_pic} />
+                <div className="card">
+                    <div className='mycard-img'>
+                        <img alt="courseImage" className="card-img-top w-100 d-block fit-cover" src={Props.course_pic} />
+                    </div>
                     <div className="card-body">
                         <p className="module card-p-h4">{Props.name}</p>
                         <p className="card-p-h4 recommend">{Props.creator}</p>

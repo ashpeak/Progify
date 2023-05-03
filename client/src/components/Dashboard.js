@@ -53,8 +53,7 @@ const Dashboard = (props) => {
     return (<>
         <section className="py-3">
             <div className="container">
-                {!userData && <h2>Hey! Pick some course to continue</h2>}
-                <h2>My Courses</h2>
+                {userData.length ? <h2>My Courses</h2> : <h2>Hey! Pick some course to continue</h2>}
             </div>
             <div className="container">
 

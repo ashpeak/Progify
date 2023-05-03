@@ -14,8 +14,8 @@ const isAuthorised = (req, res, next) => {
 
 router.get("/logout", (req, res) => {
     req.logout((error) => {
-        if (!error) return res.send("Logged Out");
-        res.send("Error!");
+        if (!error) return res.status(200).json({msg: "Logged Out!"});
+        return res.status(400).json({msg: "Error!"});
     })
 })
 
@@ -218,7 +218,6 @@ router.get("/recommend", async (req, res) => {
     }
 });
 
-//Implement admin login system to allow course posting
 router.post("/new/course", async (req, res) => {
 
     const course_data = req.body.result;

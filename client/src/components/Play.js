@@ -28,7 +28,7 @@ const Play = () => {
     }
 
     const clickScroll = (id) => {
-        const element = document.querySelector('#'+id);
+        const element = document.querySelector('#' + id);
         if (element) {
             element.scrollIntoView({ behavior: 'smooth' });
         }
@@ -114,7 +114,7 @@ const Play = () => {
                 setEditingId(null);
             }
         } catch (error) {
-            window.alert("Failed to savessssssss!");
+            window.alert("Failed to save!");
         }
     }
     const deleteNote = async (id) => {
@@ -266,18 +266,20 @@ const Play = () => {
                                     <button onClick={isEditing ? () => editNote(editingId) : saveNote} className="btn save-btn">Save note</button>
                                 </div>
                             </div>
-                            <div className="mb-3">
+                            <div className="mb-3 note-download">
                                 <h5>{notes.length ? "Your Notes" : "Notes empty"}</h5>
+                                <div>
+                                    <h5 style={{fontSize: "1.5rem"}} className="btn btn-sm">
+                                        <i class="fa-solid fa-download" style={{color: "#4882e5"}}></i>
+                                    </h5>
+                                </div>
                             </div>
                             {notes && notes.map(note => {
                                 return <>
-                                    <div className="show-note">
+                                    <div className="show-note mb-2">
                                         <div className="note-top">
-                                            <div className="timestamp me-3">
-                                                <h6 style={{ color: "ghostwhite" }} className="saved-note">N</h6>
-                                            </div>
                                             <div className="saved-note">
-                                                <h6>{note.title}</h6>
+                                                <h6 className="ps-1">{note.title}</h6>
                                             </div>
                                             <div className="del-edit">
                                                 <div><button onClick={() => setEdit(note._id)} className="btn"><i class="fa-solid fa-pencil"></i></button></div>

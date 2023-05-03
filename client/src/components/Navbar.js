@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
-import Cookies from 'js-cookie'
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 
 const Navbar = (props) => {
@@ -12,6 +12,7 @@ const Navbar = (props) => {
     }
 
     const isLoggedIn = (props.status.isLoggedIn === 'true');
+    const navigate = useNavigate();
 
     const check = async () => {
         try {
@@ -24,6 +25,17 @@ const Navbar = (props) => {
             if (data.msg === 'Unauthorized' || request.status === 401) {
                 props.setLoggedOff(false);
             }
+        }
+    }
+    const logout = async () => {
+        try {
+            const response = await axios.get('/logout');
+            if (response.status === 200) {
+                props.setLoggedOff(false);
+                navigate('/');
+            }
+        } catch (error) {
+            window.alert("Failed to logout!");
         }
     }
 
@@ -45,7 +57,7 @@ const Navbar = (props) => {
 
                         {isLoggedIn ?
                             <li className="nav-item custom-dropdown">
-                                <a className="dropdown-toggle nav-link" aria-expanded="true" data-bs-toggle="dropdown" href="#">{props.status.name}</a>
+                                <Link className="dropdown-toggle nav-link" aria-expanded="true" data-bs-toggle="dropdown">{(props.status.name).substring(0,15)}</Link>
                                 <div className="dropdown-menu" data-bs-popper="none">
                                     <Link className="dropdown-item" to={'/dashboard'}>
                                         <i class="fa-solid fa-user me-2"></i>Dashboard</Link>
@@ -53,7 +65,7 @@ const Navbar = (props) => {
                                         <i class="fa-solid fa-gear me-2"></i>Account Setting</Link>
                                     <Link className="dropdown-item" to={''}><i className="fa-solid fa-wallet me-2"></i>
                                         <span style={{ color: "rgb(29, 215, 166)" }}>240 </span>C-Coins</Link>
-                                    <Link onClick={() => Cookies.remove('user')} className="dropdown-item" to={''}><i className="fa-solid fa-right-from-bracket me-2"></i>Logout</Link>
+                                    <Link onClick={() => logout()} className="dropdown-item" to={''}><i className="fa-solid fa-right-from-bracket me-2"></i>Logout</Link>
                                 </div>
                             </li> :
                             <div>

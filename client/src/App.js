@@ -62,11 +62,11 @@ class App extends React.Component {
       }
       return false;
     }
+    Cookies.remove('user');
     this.setState({
       isLoggedIn: 'false',
       name: 'user'
     });
-    Cookies.remove('user');
   }
 
   componentDidMount() {
