@@ -45,10 +45,12 @@ router.post("/user/course/loved", isAuthorised, async (req, res) => {
         );
 
         if (result.modifiedCount === 1) {
-            await Course.findByIdAndUpdate(
+            const newData = await Course.findByIdAndUpdate(
                 { _id: id },
-                { $inc: { love: 1 } }
+                { $inc: { love: 1 } },
+                { new: true }
             );
+            return res.status(200).json({ love: newData.love });
         }
 
         return res.status(200).json({ msg: "done!" });
@@ -69,10 +71,12 @@ router.post("/user/course/unloved", isAuthorised, async (req, res) => {
         );
 
         if (result.modifiedCount === 1) {
-            await Course.findByIdAndUpdate(
+            const newData = await Course.findByIdAndUpdate(
                 { _id: id },
-                { $inc: { love: -1 } }
+                { $inc: { love: -1 } },
+                { new: true }
             );
+            return res.status(200).json({ love: newData.love });
         }
 
         return res.status(200).json({ msg: "done!" });

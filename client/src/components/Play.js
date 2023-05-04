@@ -163,10 +163,9 @@ const Play = (props) => {
     const dolike = async () => {
         const likePrevstate = course.love;
 
-        console.log("course.love: "+course.love);
-        console.log("course: "+course);
-
         let link = '';
+        const tempLike = isLiked;
+
         if (isLiked) {
             setIsLiked(false);
             link = '/user/course/unloved';
@@ -178,14 +177,10 @@ const Play = (props) => {
         try {
             const res = await axios.post(link, { id: course._id });
 
-            if (res.status !== 200) {
-                setIsLiked(!isLiked);
-            }
-
-            if (isLiked) {
-                setTotalLikes(likePrevstate - 1);
+            if (res.status === 200) {
+                setTotalLikes(res.data.love);
             } else {
-                setTotalLikes(likePrevstate + 1);
+                setIsLiked(!isLiked);
             }
 
         } catch (error) {
