@@ -873,7 +873,7 @@ p {
 }
 
 .like-comp i:hover {
-  color: red !important;
+  color: #b8172e !important;
   -moz-transition: all .2s ease-in;
   -o-transition: all .2s ease-in;
   -webkit-transition: all .2s ease-in;

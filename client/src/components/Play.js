@@ -8,6 +8,7 @@ const Play = (props) => {
 
     const Location = useLocation();
     const data = Location.state?.data.id;
+    const likeStatus = Location.state.data.isLiked;
 
     const navigate = useNavigate();
 
@@ -17,7 +18,8 @@ const Play = (props) => {
     const [notes, setNotes] = useState([]);
     const [isEditing, setIsEditing] = useState(false);
     const [editingId, setEditingId] = useState(null);
-    const [isLiked, setIsLiked] = useState(false);
+    const [isLiked, setIsLiked] = useState(likeStatus);
+    const [totalLikes, setTotalLikes] = useState(0);
 
     const opts = {
         height: '100%',
@@ -45,6 +47,8 @@ const Play = (props) => {
             const res = await axios.get('/course/' + data);
 
             const courseData = res.data;
+            setTotalLikes(courseData.love);
+
             const { lesson, link, lessonName } = courseData.lessons[0];
             const defaultLink = {
                 lesson,
@@ -157,20 +161,31 @@ const Play = (props) => {
     }
 
     const dolike = async () => {
+        const likePrevstate = course.love;
+
+        console.log("course.love: "+course.love);
+        console.log("course: "+course);
+
         let link = '';
-        if(isLiked){
+        if (isLiked) {
+            setIsLiked(false);
             link = '/user/course/unloved';
         } else {
+            setIsLiked(true);
             link = '/user/course/loved'
         }
-
-        setIsLiked(!isLiked);
 
         try {
             const res = await axios.post(link, { id: course._id });
 
             if (res.status !== 200) {
                 setIsLiked(!isLiked);
+            }
+
+            if (isLiked) {
+                setTotalLikes(likePrevstate - 1);
+            } else {
+                setTotalLikes(likePrevstate + 1);
             }
 
         } catch (error) {
@@ -182,7 +197,7 @@ const Play = (props) => {
 
     useEffect(() => {
         if (props.setLoggedOff() === false) {
-            // navigate("/login");
+            navigate("/login");
         }
         if (!data) {
             return navigate("/dashboard");
@@ -227,29 +242,15 @@ const Play = (props) => {
                                 <p style={{ fontWeight: "500" }}>
                                     <img src={require("../img/wave.gif")} alt="playing" />
                                     &nbsp;&nbsp;Module {link.lesson}</p>
-                                <i onClick={dolike} class={isLiked ? "fa-solid fa-heart" : "fa-regular fa-heart"} style={{ color: (isLiked ? "#b8172e" : "#fff"), fontSize: "1.5em" }}></i>
+                                <div className="like-comp">
+                                    <i onClick={dolike} class={isLiked ? "fa-solid fa-heart" : "fa-regular fa-heart"} style={{ color: (isLiked ? "#ff0000" : "#fff"), fontSize: "1.5em" }}></i>
+                                    <span>{totalLikes}</span>
+                                </div>
                             </div>
                             <div>
                                 <p>{link.lessonName}</p>
                             </div>
                         </div>}
-
-                        {/* test work */}
-                        <div className="playing acrdn-shadow">
-                            <div className="creator-love mt-1 mb-2">
-                                <p style={{ fontWeight: "500" }}>
-                                    <img src={require("../img/wave.gif")} alt="playing" />
-                                    &nbsp;&nbsp;1</p>
-
-                                <div className="like-comp">
-                                    <i onClick={dolike} class={isLiked ? "fa-solid fa-heart" : "fa-regular fa-heart"} style={{ color: (isLiked ? "#b8172e" : "#fff"), fontSize: "1.5em" }}></i>
-                                    <span>4k</span>
-                                </div>
-                            </div>
-                            <div>
-                                <p>Module This is first lesson ✔✔</p>
-                            </div>
-                        </div>
 
                         <div id="tab-1" className="tab-pane active" role="tabpanel">
                             <div class="accordion acrdn-shadow" id="accordionPanelsStayOpenExample">

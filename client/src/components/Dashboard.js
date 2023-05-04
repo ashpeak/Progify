@@ -8,6 +8,7 @@ import Recommended from "./components-sm/Recommended";
 const Dashboard = (props) => {
 
     const [userData, setUserData] = useState([]);
+    const [likes, setLikes] = useState([]);
 
     const navigate = useNavigate();
 
@@ -17,6 +18,8 @@ const Dashboard = (props) => {
             const res = await axios.get('/dashboard');
 
             const Courses = res.data.result;
+            setLikes(res.data.courseLoved);
+
             if (res.status === 401) {
                 window.alert("unAuthorized access");
             } else {
@@ -58,19 +61,24 @@ const Dashboard = (props) => {
             <div className="container">
 
                 {userData && <div className="row">{userData.map(course => {
+
+                    let isLiked = false;
+                    const like = likes.find(Element => {
+                        return Element === course._id;
+                    });
+                    
+                    if (like) {
+                        isLiked = true;
+                    }
+
                     return <CardActive
                         id={course._id}
                         course={course.name}
                         creator={course.creator}
                         course_pic={course.course_pic}
+                        isLiked={isLiked}
                     />;
                 })}
-                    <CardActive
-                        id={6}
-                        course={"C Language Tutorials In Hindi by Code With Harry.."}
-                        creator={"coure.creator"}
-                        course_pic={"https://i.ytimg.com/vi/z9bZufPHFLU/hqdefault.jpg?sqp=-oaymwEXCNACELwBSFryq4qpAwkIARUAAIhCGAE=&rs=AOn4CLATcUN7NPjsdcKSq8bFSEeilhzrMA"}
-                    />
                 </div>}
             </div>
         </section>
