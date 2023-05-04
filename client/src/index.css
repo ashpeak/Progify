@@ -419,13 +419,14 @@ p {
 .testimonial .card-title {
   color: #7d828b;
   font-size: 2rem;
-  font-family: Rubik,sans-serif;
+  font-family: Rubik, sans-serif;
 }
+
 .testimonial .card-text {
   font-size: 1.12rem;
   color: #7d828b;
   line-height: 1.2;
-  font-family: Rubik,sans-serif;
+  font-family: Rubik, sans-serif;
 }
 
 .review-underline {
@@ -586,6 +587,11 @@ p {
   border-radius: 5px;
   line-height: 1.5;
   margin-top: .3125rem;
+}
+
+.creator-love {
+  display: flex;
+  justify-content: space-between;
 }
 
 .active-creator {
@@ -854,6 +860,24 @@ p {
   margin-bottom: 1.5rem;
   border-radius: 0.375rem;
   background-color: #e5efff4a;
+}
+
+.like-comp {
+  background-color: #202124;
+  width: 5rem;
+  border-radius: 9999px;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+}
+
+.like-comp i:hover {
+  color: red !important;
+  -moz-transition: all .2s ease-in;
+  -o-transition: all .2s ease-in;
+  -webkit-transition: all .2s ease-in;
+  transition: all .2s ease-in;
 }
 
 .playing p {

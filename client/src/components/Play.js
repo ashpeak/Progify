@@ -4,7 +4,7 @@ import { Link, useLocation, useNavigate } from 'react-router-dom';
 import axios from "axios";
 
 
-const Play = () => {
+const Play = (props) => {
 
     const Location = useLocation();
     const data = Location.state?.data.id;
@@ -17,6 +17,7 @@ const Play = () => {
     const [notes, setNotes] = useState([]);
     const [isEditing, setIsEditing] = useState(false);
     const [editingId, setEditingId] = useState(null);
+    const [isLiked, setIsLiked] = useState(false);
 
     const opts = {
         height: '100%',
@@ -155,9 +156,34 @@ const Play = () => {
         }
     }
 
+    const dolike = async () => {
+        let link = '';
+        if(isLiked){
+            link = '/user/course/unloved';
+        } else {
+            link = '/user/course/loved'
+        }
+
+        setIsLiked(!isLiked);
+
+        try {
+            const res = await axios.post(link, { id: course._id });
+
+            if (res.status !== 200) {
+                setIsLiked(!isLiked);
+            }
+
+        } catch (error) {
+            //
+        }
+    }
+
     const handleNote = e => setNoteMsg(e.target.value);
 
     useEffect(() => {
+        if (props.setLoggedOff() === false) {
+            // navigate("/login");
+        }
         if (!data) {
             return navigate("/dashboard");
         }
@@ -197,15 +223,33 @@ const Play = () => {
 
                     <div className="tab-content py-4">
                         {link && <div className="playing acrdn-shadow">
-                            <div>
+                            <div className="creator-love mt-1 mb-2">
                                 <p style={{ fontWeight: "500" }}>
                                     <img src={require("../img/wave.gif")} alt="playing" />
                                     &nbsp;&nbsp;Module {link.lesson}</p>
+                                <i onClick={dolike} class={isLiked ? "fa-solid fa-heart" : "fa-regular fa-heart"} style={{ color: (isLiked ? "#b8172e" : "#fff"), fontSize: "1.5em" }}></i>
                             </div>
                             <div>
                                 <p>{link.lessonName}</p>
                             </div>
                         </div>}
+
+                        {/* test work */}
+                        <div className="playing acrdn-shadow">
+                            <div className="creator-love mt-1 mb-2">
+                                <p style={{ fontWeight: "500" }}>
+                                    <img src={require("../img/wave.gif")} alt="playing" />
+                                    &nbsp;&nbsp;1</p>
+
+                                <div className="like-comp">
+                                    <i onClick={dolike} class={isLiked ? "fa-solid fa-heart" : "fa-regular fa-heart"} style={{ color: (isLiked ? "#b8172e" : "#fff"), fontSize: "1.5em" }}></i>
+                                    <span>4k</span>
+                                </div>
+                            </div>
+                            <div>
+                                <p>Module This is first lesson ✔✔</p>
+                            </div>
+                        </div>
 
                         <div id="tab-1" className="tab-pane active" role="tabpanel">
                             <div class="accordion acrdn-shadow" id="accordionPanelsStayOpenExample">
@@ -269,8 +313,8 @@ const Play = () => {
                             <div className="mb-3 note-download">
                                 <h5>{notes.length ? "Your Notes" : "Notes empty"}</h5>
                                 <div>
-                                    <h5 style={{fontSize: "1.5rem"}} className="btn btn-sm">
-                                        <i class="fa-solid fa-download" style={{color: "#4882e5"}}></i>
+                                    <h5 style={{ fontSize: "1.5rem" }} className="btn btn-sm">
+                                        <i class="fa-solid fa-download" style={{ color: "#4882e5" }}></i>
                                     </h5>
                                 </div>
                             </div>

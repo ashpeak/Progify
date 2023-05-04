@@ -16,7 +16,7 @@ const Dashboard = (props) => {
         try {
             const res = await axios.get('/dashboard');
 
-            const Courses = res.data;
+            const Courses = res.data.result;
             if (res.status === 401) {
                 window.alert("unAuthorized access");
             } else {
@@ -45,7 +45,7 @@ const Dashboard = (props) => {
     }
     useEffect(() => {
         if (props.setLoggedOff() === false) {
-            navigate("/login");
+            // navigate("/login");
         }
         fetchUserData();
     }, []);
@@ -64,7 +64,14 @@ const Dashboard = (props) => {
                         creator={course.creator}
                         course_pic={course.course_pic}
                     />;
-                })}</div>}
+                })}
+                    <CardActive
+                        id={6}
+                        course={"C Language Tutorials In Hindi by Code With Harry.."}
+                        creator={"coure.creator"}
+                        course_pic={"https://i.ytimg.com/vi/z9bZufPHFLU/hqdefault.jpg?sqp=-oaymwEXCNACELwBSFryq4qpAwkIARUAAIhCGAE=&rs=AOn4CLATcUN7NPjsdcKSq8bFSEeilhzrMA"}
+                    />
+                </div>}
             </div>
         </section>
         {userData && <Recommended />}

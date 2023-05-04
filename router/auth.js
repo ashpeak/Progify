@@ -14,22 +14,70 @@ const isAuthorised = (req, res, next) => {
 
 router.get("/logout", (req, res) => {
     req.logout((error) => {
-        if (!error) return res.status(200).json({msg: "Logged Out!"});
-        return res.status(400).json({msg: "Error!"});
+        if (!error) return res.status(200).json({ msg: "Logged Out!" });
+        return res.status(400).json({ msg: "Error!" });
     })
 })
 
 router.get("/dashboard", isAuthorised, async (req, res) => {
     let { courseEnrolled } = req.user;
+    const { courseLoved } = req.user;
 
     courseEnrolled = courseEnrolled.map(course => course.courseId);
 
     try {
         const result = await Course.find({ _id: { $in: courseEnrolled } });
 
-        return res.status(200).json(result);
+        return res.status(200).json({ result, courseLoved });
     } catch (error) {
         return res.status(400).json({ msg: "Not Found, don't exists or might removed" });
+    }
+})
+
+router.post("/user/course/loved", isAuthorised, async (req, res) => {
+    const id = req.body.id;
+    const user_id = req.user.id;
+
+    try {
+        const result = await User.updateOne(
+            { _id: user_id },
+            { $addToSet: { courseLoved: id } }
+        );
+
+        if (result.modifiedCount === 1) {
+            await Course.findByIdAndUpdate(
+                { _id: id },
+                { $inc: { love: 1 } }
+            );
+        }
+
+        return res.status(200).json({ msg: "done!" });
+    } catch (error) {
+        console.log(error);
+        return res.status(400).json({ msg: "Failed!" });
+    }
+})
+
+router.post("/user/course/unloved", isAuthorised, async (req, res) => {
+    const id = req.body.id;
+    const user_id = req.user.id;
+
+    try {
+        const result = await User.updateOne(
+            { _id: user_id },
+            { $pull: { courseLoved: id } }
+        );
+
+        if (result.modifiedCount === 1) {
+            await Course.findByIdAndUpdate(
+                { _id: id },
+                { $inc: { love: -1 } }
+            );
+        }
+
+        return res.status(200).json({ msg: "done!" });
+    } catch (error) {
+        return res.status(400).json({ msg: "Failed!" });
     }
 })
 
