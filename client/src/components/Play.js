@@ -8,7 +8,7 @@ const Play = (props) => {
 
     const Location = useLocation();
     const data = Location.state?.data.id;
-    const likeStatus = Location.state.data.isLiked;
+    const likeStatus = Location.state?.data.isLiked;
 
     const navigate = useNavigate();
 
@@ -161,16 +161,15 @@ const Play = (props) => {
     }
 
     const dolike = async () => {
-        const likePrevstate = course.love;
-
         let link = '';
-        const tempLike = isLiked;
 
         if (isLiked) {
             setIsLiked(false);
+            setTotalLikes(course.love - 1);
             link = '/user/course/unloved';
         } else {
             setIsLiked(true);
+            setTotalLikes(course.love + 1);
             link = '/user/course/loved'
         }
 
@@ -289,7 +288,7 @@ const Play = (props) => {
                                             placeholder="Title" value="Untitled" />
                                     </div>
                                 </div>
-                                <div style={{ display: "flex" }}>
+                                {/* <div style={{ display: "flex" }}>
                                     <div className="timestamp">
                                         <i className="fa-solid fa-palette" style={{ color: "#fff" }}></i>
                                     </div>
@@ -298,7 +297,7 @@ const Play = (props) => {
                                         <div className="italic ps-2 pe-2"><em>I</em></div>
                                         <div className="color ps-2 pe-2">A</div>
                                     </div>
-                                </div>
+                                </div> */}
                                 <div className="note-box">
                                     <textarea value={noteMsg} onChange={handleNote} className="note-content" placeholder="Write note here..." rows="4" />
                                 </div>
