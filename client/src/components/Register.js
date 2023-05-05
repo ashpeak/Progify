@@ -20,22 +20,21 @@ const Register = (props) => {
     }
 
     const formSubmit = async (e) => {
-        e.preventDefault();
+
+        if(!user.name || !user.username || !user.password){
+            return;
+        }
 
         try {
             const res = await axios.post('/register', user);
 
-            const data = res.data.msg;
-            console.log(data);
             if (res.status === 201) {
                 window.alert("Registration sucessfull!");
-                console.log(data);
                 return navigate("/login");
             }
         } catch (error) {
             const { status, data } = error.response;
             window.alert(data.error)
-            console.log(error.response);
             if (status === 400 && data.error === "User already exists!") {
                 return navigate("/login");
             }
@@ -43,36 +42,40 @@ const Register = (props) => {
     }
 
     useEffect(() => {
-        if(props.setLoggedOff()){
+        if (props.setLoggedOff()) {
             navigate('/dashboard');
         }
     });
 
     return (<>
-        <section><div className="login-holder">
-            <div className="login">
-                <h4>Sign up for Coursely</h4><button className="google-btn btn" href="#"><img src={Google} alt='google' />&nbsp;Continue with Google</button>
-                <div className='emailOrgoogle'>
-                    <span className='emailOrgoogle-text'>Or continue with email</span>
-                </div>
-                <form method='POST'>
-                    <div>
-                        <div><input className='login-input form-control' type="text" onChange={handleInput} name='name' placeholder="Name" value={user.name} /></div>
-                        <div><input className='login-input form-control' type="text" onChange={handleInput} name='username' placeholder="Email" value={user.username} /></div>
-                        <div><input className='login-input form-control' type="password" onChange={handleInput} name='password' placeholder="password" value={user.password} autoComplete="true" /></div>
-                        <div>
-                            <button className="btn my-btn btn-lg-rg" onClick={formSubmit}>Sign Up</button>
-                        </div>
+        <section>
+            <div className="login-holder">
+                <div className="login">
+                    <h4>Sign up for Coursely</h4><button className="google-btn btn" href="#"><img src={Google} alt='google' />&nbsp;Continue with Google</button>
+                    <div className='emailOrgoogle'>
+                        <span className='emailOrgoogle-text'>Or continue with email</span>
                     </div>
-                </form>
-                <div className='switch-holder'>
-                    <span className='acc-switch'>
-                        Have an Account?&nbsp;<strong><Link className="custom-link alter-lg-rg" to={"/login"}>Login</Link></strong>
-                    </span>
+                    <form method='POST'>
+                        <div>
+                            <div><input className='login-input form-control' type="text" maxLength={20} minLength={5} onChange={handleInput} name='name' placeholder="Name" value={user.name} required /></div>
+                            <div><input className='login-input form-control' type="email" onChange={handleInput} name='username' placeholder="Email" value={user.email} required /></div>
+                            <div>
+                                <input id="password" className='login-input form-control' type="password"
+                                    style={{ marginBottom: "0" }} maxLength={15} minLength={8} onChange={handleInput} name='password' autoComplete='true' placeholder="password" value={user.password} required />
+                                <label for="password" class="form-label" style={{color: "#656d77", fontSize: "0.79rem"}}>*Minimum 8 characters</label></div>
+                            <div>
+                                <button type='button' className="btn my-btn btn-lg-rg" onClick={formSubmit}>Sign Up</button>
+                            </div>
+                        </div>
+                    </form>
+                    <div className='switch-holder'>
+                        <span className='acc-switch'>
+                            Have an Account?&nbsp;<strong><Link className="custom-link alter-lg-rg" to={"/login"}>Login</Link></strong>
+                        </span>
+                    </div>
                 </div>
-            </div>
-        </div>
-        </section>
+            </div >
+        </section >
     </>);
 }
 

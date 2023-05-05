@@ -13,9 +13,7 @@ const Login = (props) => {
     const navigate = useNavigate();
 
     const handleChange = (e) => {
-        const name = e.target.name;
-        const value = e.target.value;
-
+        const { name, value } = e.target;
         setUser(
             { ...user, [name]: value }
         );
@@ -23,6 +21,10 @@ const Login = (props) => {
 
     const formSubmit = async (e) => {
         e.preventDefault();
+
+        if(!user.username || !user.password){
+            return;
+        }
 
         try {
             const response = await axios.post('/login', user);
@@ -61,15 +63,15 @@ const Login = (props) => {
                         <div>
                             <div>
                                 <input className='form-control login-input' type="email" onChange={handleChange} autoComplete="off"
-                                    placeholder="Email" name='username' value={user.email} />
+                                    placeholder="Email" name='username' required value={user.email} />
                             </div>
                             <div>
                                 <input className='form-control login-input' type="password" onChange={handleChange} autoComplete="off"
-                                    placeholder="password" name='password' value={user.password} />
+                                    placeholder="password" name='password' required value={user.password} />
 
                             </div>
                             <div>
-                                <button className="btn my-btn btn-lg-rg" onClick={formSubmit}>Login</button>
+                                <button className="btn my-btn btn-lg-rg" onClick={(e) => formSubmit(e)}>Login</button>
                             </div>
                         </div>
                     </form>

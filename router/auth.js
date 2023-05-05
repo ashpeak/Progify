@@ -111,6 +111,11 @@ router.post("/register", async (req, res) => {
     if (user) {
         return res.status(400).json({ error: "User already exists!" });
     }
+
+    const {name, password} = req.body;
+    if(name.length > 20 || name.length < 5 || password.length < 8){
+        return res.status(400).json({ error: "Invalid Input!" });
+    }
     try {
         await User.create(req.body);
         res.status(201).json({ msg: "Registration sucessfull!" });
