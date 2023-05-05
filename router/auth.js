@@ -164,8 +164,8 @@ router.post("/note/new", isAuthorised, async (req, res) => {
         return res.status(422).json({ error: "Empty input fields!" });
     }
 
-    title = title.substring(0, 6);
-    content = content.substring(0, 100);
+    title = title.substring(0, 15);
+    content = content.substring(0, 500);
 
     try {
         const note = new Note({

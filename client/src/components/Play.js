@@ -15,6 +15,7 @@ const Play = (props) => {
     const [course, setCourse] = useState(null);
     const [link, setLink] = useState(null);
     const [noteMsg, setNoteMsg] = useState(null);
+    const [noteTitle, setNoteTitle] = useState("Untitled");
     const [notes, setNotes] = useState([]);
     const [isEditing, setIsEditing] = useState(false);
     const [editingId, setEditingId] = useState(null);
@@ -64,14 +65,15 @@ const Play = (props) => {
         }
     }
 
-    const saveNote = async () => {
+    const saveNote = async (e) => {
+        e.preventDefault();
         if (!noteMsg) {
             return;
         }
         const note = {
             courseId: course._id,
             lessonId: link.lesson,
-            title: "Untitled",
+            title: noteTitle,
             content: noteMsg
         }
         try {
@@ -79,6 +81,7 @@ const Play = (props) => {
 
             if (res.status === 201) {
                 setNoteMsg("");
+                setNoteTitle("Untitled");
                 fetchNotes();
             }
         } catch (error) {
@@ -98,8 +101,8 @@ const Play = (props) => {
         }
     }
 
-    const editNote = async (id) => {
-
+    const editNote = async (e, id) => {
+        e.preventDefault();
         if (!noteMsg) {
             return;
         }
@@ -114,6 +117,7 @@ const Play = (props) => {
 
             if (res.status === 201) {
                 setNoteMsg("");
+                setNoteTitle("Untitled");
                 fetchNotes();
                 setIsEditing(false);
                 setEditingId(null);
@@ -188,6 +192,7 @@ const Play = (props) => {
     }
 
     const handleNote = e => setNoteMsg(e.target.value);
+    const handleNoteTitle = e => setNoteTitle(e.target.value);
 
     useEffect(() => {
         if (props.setLoggedOff() === false) {
@@ -279,31 +284,33 @@ const Play = (props) => {
                         </div>
                         <div id="tab-3" className="tab-pane" role="tabpanel">
                             <div id="notes-sec" className="note mb-5">
-                                <div className="note-top">
-                                    <div className="timestamp">
-                                        <h6 style={{ marginBottom: "0" }}>N</h6>
+                                <form>
+                                    <div className="note-top">
+                                        <div className="timestamp">
+                                            <h6 style={{ marginBottom: "0" }}>N</h6>
+                                        </div>
+                                        <div className="input-field">
+                                            <input type="text" className="name-field" onFocus={(event) => event.target.select()} name="title"
+                                                placeholder="Title" required onChange={handleNoteTitle} value={noteTitle} maxLength={15} />
+                                        </div>
                                     </div>
-                                    <div className="input-field">
-                                        <input type="text" className="name-field" onFocus={(event) => event.target.select()} name="title"
-                                            placeholder="Title" value="Untitled" />
+                                    {/* <div style={{ display: "flex" }}>
+                                        <div className="timestamp">
+                                            <i className="fa-solid fa-palette" style={{ color: "#fff" }}></i>
+                                        </div>
+                                        <div className="pallete">
+                                            <div className="bold ms-2 ps-2 pe-2"><strong>B</strong></div>
+                                            <div className="italic ps-2 pe-2"><em>I</em></div>
+                                            <div className="color ps-2 pe-2">A</div>
+                                        </div>
+                                    </div> */}
+                                    <div className="note-box">
+                                        <textarea value={noteMsg} required maxLength={500} onChange={handleNote} className="note-content" placeholder="Write note here..." rows="4" />
                                     </div>
-                                </div>
-                                {/* <div style={{ display: "flex" }}>
-                                    <div className="timestamp">
-                                        <i className="fa-solid fa-palette" style={{ color: "#fff" }}></i>
+                                    <div className="note-bottom">
+                                        <button onClick={isEditing ? (e) => editNote(e, editingId) : (e) => saveNote(e)} className="btn save-btn">Save note</button>
                                     </div>
-                                    <div className="pallete">
-                                        <div className="bold ms-2 ps-2 pe-2"><strong>B</strong></div>
-                                        <div className="italic ps-2 pe-2"><em>I</em></div>
-                                        <div className="color ps-2 pe-2">A</div>
-                                    </div>
-                                </div> */}
-                                <div className="note-box">
-                                    <textarea value={noteMsg} onChange={handleNote} className="note-content" placeholder="Write note here..." rows="4" />
-                                </div>
-                                <div className="note-bottom">
-                                    <button onClick={isEditing ? () => editNote(editingId) : saveNote} className="btn save-btn">Save note</button>
-                                </div>
+                                </form>
                             </div>
                             <div className="mb-3 note-download">
                                 <h5>{notes.length ? "Your Notes" : "Notes empty"}</h5>
