@@ -11,7 +11,8 @@ const Register = (props) => {
     const [user, setUser] = useState({
         name: "",
         username: "",
-        password: ""
+        password: "",
+        confirmPassword: ""
     })
 
     const handleInput = (e) => {
@@ -21,7 +22,16 @@ const Register = (props) => {
 
     const formSubmit = async (e) => {
 
-        if(!user.name || !user.username || !user.password){
+        if (!user.name || !user.username || !user.password || !user.confirmPassword) {
+            return;
+        }
+
+        if (user.password !== user.confirmPassword) {
+            window.alert("Password & Confirm Password should be same!");
+            return;
+        }
+        if(user.name.length > 20 || user.name.length < 5 || user.password.length < 8 || user.password.length > 15){
+            window.alert("Invalid inputs!");
             return;
         }
 
@@ -62,7 +72,10 @@ const Register = (props) => {
                             <div>
                                 <input id="password" className='login-input form-control' type="password"
                                     style={{ marginBottom: "0" }} maxLength={15} minLength={8} onChange={handleInput} name='password' autoComplete='true' placeholder="password" value={user.password} required />
-                                <label for="password" class="form-label" style={{color: "#656d77", fontSize: "0.79rem"}}>*Minimum 8 characters</label></div>
+                                <input id="password" className='login-input form-control' type="password"
+                                    style={{ marginBottom: "0" }} maxLength={15} minLength={8} onChange={handleInput} name='confirmPassword' autoComplete='true' placeholder="Confirm Password" value={user.confirmPassword} required />
+                                <label for="password" class="form-label" style={{ color: "#656d77", fontSize: "0.79rem" }}>*Minimum 8 characters</label>
+                            </div>
                             <div>
                                 <button type='button' className="btn my-btn btn-lg-rg" onClick={formSubmit}>Sign Up</button>
                             </div>

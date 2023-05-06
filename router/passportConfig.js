@@ -6,7 +6,6 @@ function initializingPassport(passport) {
     passport.use(
         new LocalStrategy(async (username, password, done) => {
             try {
-                // const user = await User.findOne({ username });
                 const user = await User.findOne({ username });
 
                 if (!user) return done(null, false);
@@ -14,7 +13,6 @@ function initializingPassport(passport) {
 
                 done(null, user);
             } catch (error) {
-                console.log("passport error: "+error);
                 return done(error, false);
             }
         })
