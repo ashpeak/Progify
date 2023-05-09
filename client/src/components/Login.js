@@ -51,9 +51,11 @@ const Login = (props) => {
                 <div className="login">
                     <h4>Log in to Coursely</h4>
                     <div>
-                        <button className="google-btn btn">
+                    <button className="google-btn btn">
+                        <Link className='custom-link' to={"/auth/google"}>
                             <img src={Google} alt='google' />&nbsp;Continue with Google
-                        </button>
+                        </Link>
+                    </button>
                     </div>
                     <div className='emailOrgoogle'>
                         <span className='emailOrgoogle-text'>Or continue with email</span>

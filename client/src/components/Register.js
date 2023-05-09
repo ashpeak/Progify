@@ -30,7 +30,7 @@ const Register = (props) => {
             window.alert("Password & Confirm Password should be same!");
             return;
         }
-        if(user.name.length > 20 || user.name.length < 5 || user.password.length < 8 || user.password.length > 15){
+        if (user.name.length > 20 || user.name.length < 5 || user.password.length < 8 || user.password.length > 30) {
             window.alert("Invalid inputs!");
             return;
         }
@@ -61,7 +61,12 @@ const Register = (props) => {
         <section>
             <div className="login-holder">
                 <div className="login">
-                    <h4>Sign up for Coursely</h4><button className="google-btn btn" href="#"><img src={Google} alt='google' />&nbsp;Continue with Google</button>
+                    <h4>Sign up for Coursely</h4>
+                    <button className="google-btn btn">
+                        <Link className='custom-link' to={"/auth/google"}>
+                            <img src={Google} alt='google' />&nbsp;Continue with Google
+                        </Link>
+                    </button>
                     <div className='emailOrgoogle'>
                         <span className='emailOrgoogle-text'>Or continue with email</span>
                     </div>

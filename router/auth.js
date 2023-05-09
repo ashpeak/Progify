@@ -112,8 +112,8 @@ router.post("/register", async (req, res) => {
         return res.status(400).json({ error: "User already exists!" });
     }
 
-    const {name, password} = req.body;
-    if(name.length > 20 || name.length < 5 || password.length < 8){
+    const { name, password } = req.body;
+    if (name.length > 20 || name.length < 5 || password.length < 8) {
         return res.status(400).json({ error: "Invalid Input!" });
     }
     try {

@@ -4,8 +4,8 @@ const passport = require("passport");
 const initializingPassport = require("./router/passportConfig");
 const expressSession = require("express-session");
 const cors = require("cors");
-const PORT = process.env.PORT;
 const path = require("path");
+const PORT = process.env.PORT;
 
 const app = express();
 require("./DB/conn");

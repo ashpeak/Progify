@@ -19,7 +19,10 @@ const userSchema = new mongoose.Schema({
         courseId: String,
         lastModule: String
     }],
-    courseLoved: []
+    courseLoved: [],
+    email: String,
+    googleId: String,
+    secret: String
 });
 
 const User = mongoose.model("User", userSchema);
