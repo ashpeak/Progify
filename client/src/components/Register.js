@@ -62,13 +62,15 @@ const Register = (props) => {
             <div className="login-holder">
                 <div className="login">
                     <h4>Sign up for Coursely</h4>
-                    <button className="google-btn btn">
-                        <Link className='custom-link' to={"/auth/google"}>
-                            <img src={Google} alt='google' />&nbsp;Continue with Google
-                        </Link>
-                    </button>
+                    {/* <div>
+                        <button className="google-btn btn">
+                            <Link className='custom-link' to={"/auth/google"}>
+                                <img src={Google} alt='google' />&nbsp;Continue with Google
+                            </Link>
+                        </button>
+                    </div> */}
                     <div className='emailOrgoogle'>
-                        <span className='emailOrgoogle-text'>Or continue with email</span>
+                        <span className='emailOrgoogle-text'>Continue with email</span>
                     </div>
                     <form method='POST'>
                         <div>

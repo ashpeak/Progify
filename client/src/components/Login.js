@@ -22,7 +22,7 @@ const Login = (props) => {
     const formSubmit = async (e) => {
         e.preventDefault();
 
-        if(!user.username || !user.password){
+        if (!user.username || !user.password) {
             return;
         }
 
@@ -38,7 +38,7 @@ const Login = (props) => {
     }
 
     useEffect(() => {
-        if(props.setLoggedOff()){
+        if (props.setLoggedOff()) {
             navigate("/dashboard");
         } else {
             props.setLoggedOff();
@@ -50,15 +50,15 @@ const Login = (props) => {
             <div className="login-holder">
                 <div className="login">
                     <h4>Log in to Coursely</h4>
-                    <div>
-                    <button className="google-btn btn">
-                        <Link className='custom-link' to={"/auth/google"}>
-                            <img src={Google} alt='google' />&nbsp;Continue with Google
-                        </Link>
-                    </button>
-                    </div>
+                    {/* <div>
+                        <button className="google-btn btn">
+                            <Link className='custom-link' to={"/auth/google"}>
+                                <img src={Google} alt='google' />&nbsp;Continue with Google
+                            </Link>
+                        </button>
+                    </div> */}
                     <div className='emailOrgoogle'>
-                        <span className='emailOrgoogle-text'>Or continue with email</span>
+                        <span className='emailOrgoogle-text'>Continue with email</span>
                     </div>
 
                     <form method='POST'>
