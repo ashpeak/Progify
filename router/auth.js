@@ -5,6 +5,7 @@ const Note = require("../model/userNoteSchema");
 const Course = require("../model/courseSchema");
 const User = require("../model/userSchema");
 const passport = require("passport");
+const sendEmail = require("../utils/sendEmail");
 
 
 const isAuthorised = (req, res, next) => {
@@ -117,7 +118,9 @@ router.post("/register", async (req, res) => {
         return res.status(400).json({ error: "Invalid Input!" });
     }
     try {
-        await User.create(req.body);
+        const userInfo = await User.create(req.body);
+        
+        sendEmail(userInfo.username, "Confirm account", "Account registration code is: 34567");
         res.status(201).json({ msg: "Registration sucessfull!" });
     } catch (err) {
         console.log(err);
