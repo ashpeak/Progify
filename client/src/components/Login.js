@@ -25,6 +25,7 @@ const Login = (props) => {
     const formSubmit = async (e) => {
         e.preventDefault();
         setShow(false);
+        setData("");
 
         if (!user.username || !user.password) {
             return;
