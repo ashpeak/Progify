@@ -8,14 +8,11 @@ const EmailVerify = () => {
     const params = useParams();
 
     const verifyEmailUrl = async () => {
-        const BASE_URL = process.env.BASE_URL || "http://localhost:3000";
         try {
-            const url = `${BASE_URL}/api/users/${params.id}/verify/${params.token}`;
+            const url = `/api/users/${params.id}/verify/${params.token}`;
 
-            const res = await axios.get(url);
+            await axios.get(url);
             setValidUrl(true);
-
-            console.log(res.data);
         } catch (error) {
             console.log(error);
             setValidUrl(false);

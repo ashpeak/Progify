@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/static/css/main.84377695.css",
-    "main.js": "/static/js/main.7874d089.js",
+    "main.js": "/static/js/main.8f3694ee.js",
     "static/media/juicy-man-programmer-writing-code-and-make-web-design-on-a-pc.gif": "/static/media/juicy-man-programmer-writing-code-and-make-web-design-on-a-pc.3199706307423b9609e2.gif",
     "static/media/hero-banner.png": "/static/media/hero-banner.2afacd558e4aa5c1277a.png",
     "static/media/download.png": "/static/media/download.4f0eaee856a4d1a1ccd6.png",
@@ -13,6 +13,6 @@
   },
   "entrypoints": [
     "static/css/main.84377695.css",
-    "static/js/main.7874d089.js"
+    "static/js/main.8f3694ee.js"
   ]
 }
