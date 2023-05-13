@@ -6,6 +6,8 @@ const expressSession = require("express-session");
 const cors = require("cors");
 const path = require("path");
 const PORT = process.env.PORT;
+const User = require("./model/userSchema");
+const Token = require("./model/tokenSchema");
 
 const app = express();
 require("./DB/conn");

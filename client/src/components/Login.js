@@ -1,8 +1,8 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 
-import Google from '../img/Social-google.svg';
+// import Google from '../img/Social-google.svg';
 
 const Login = (props) => {
 
@@ -10,6 +10,9 @@ const Login = (props) => {
         username: "",
         password: ""
     });
+    const [data, setData] = useState("");
+    const [show, setShow] = useState(false);
+
     const navigate = useNavigate();
 
     const handleChange = (e) => {
@@ -21,6 +24,7 @@ const Login = (props) => {
 
     const formSubmit = async (e) => {
         e.preventDefault();
+        setShow(false);
 
         if (!user.username || !user.password) {
             return;
@@ -33,7 +37,16 @@ const Login = (props) => {
                 navigate("/dashboard");
             }
         } catch (error) {
-            window.alert("Login Unsuccessful!");
+            const { status, data } = error.response;
+            if (status === 400) {
+                setUser({
+                    ...user,
+                    password: ""
+                });
+                setData(data.msg);
+            }
+
+            if (data.msg === "Account not verified, please verify!") setShow(true);
         }
     }
 
@@ -72,6 +85,24 @@ const Login = (props) => {
                                     placeholder="password" name='password' required value={user.password} />
 
                             </div>
+                            {data && <><div className='login-input verify' style={{ backgroundColor: "#dc5a5a" }}>
+                                <span>{data}</span>
+                            </div>
+                                {show && <><span style={{ color: "#656d77", fontSize: "0.79rem" }} data-bs-toggle="modal" data-bs-target="#notreceived">
+                                    Can't find Email?
+                                </span>
+                                <div className="modal fade" id="notreceived" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                    <div className="modal-dialog modal-sm">
+                                        <div className="modal-content">
+                                            <div className="modal-header">
+                                                <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                            </div>
+                                            <div className="modal-body">
+                                                If you can't find email in inbox, kindly check spam folder and rest other folders too.
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div></>}</>}
                             <div>
                                 <button className="btn my-btn btn-lg-rg" onClick={(e) => formSubmit(e)}>Login</button>
                             </div>
@@ -84,8 +115,8 @@ const Login = (props) => {
                         <span className='acc-switch'>Don't have an Account?&nbsp;<strong><Link className="custom-link alter-lg-rg" to={"/register"}>Sign up</Link></strong></span>
                     </div>
                 </div>
-            </div>
-        </section>
+            </div >
+        </section >
     </>);
 }
 

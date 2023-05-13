@@ -1,7 +1,8 @@
 require("dotenv").config({ path: "../config.env" });
 const nodemailer = require("nodemailer");
+const EmailTemplate = require('./EmailMsgTemplate');
 
-module.exports = async (email, subject, msg) => {
+module.exports = async (email, subject, url) => {
     try {
         const transporter = nodemailer.createTransport({
             host: process.env.SMTP_HOST,
@@ -14,16 +15,12 @@ module.exports = async (email, subject, msg) => {
             }
         });
 
-        const value = 4567;
-        const ht = `<b><h1>hEY User! your api key is api?=${value}</h1><br>${msg}</b>`;
-
         // send mail with defined transport object
         let info = await transporter.sendMail({
-            from: '"Fred Foo 👻" <cs1.coursely@gmail.com>', // sender address
+            from: '"Ashish Singh 👻" <cs1.coursely@gmail.com>', // sender address
             to: email, // list of receivers
             subject: subject, // Subject line
-            text: msg, // plain text body
-            html: ht, // html body
+            html: EmailTemplate(url, subject), // html body
         });
 
     } catch (error) {

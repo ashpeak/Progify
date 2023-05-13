@@ -15,6 +15,7 @@ import Courses from "./components/components-sm/Courses";
 import Blog from "./components/Blog";
 import About from "./components/About";
 import Community from "./components/Community";
+import EmailVerify from "./components/EmailVerify";
 
 class App extends React.Component {
 
@@ -126,6 +127,7 @@ class App extends React.Component {
             <Route path="/community" element={<Community
               setLoggedOff={this.setLoggedOff}
             />} />
+            <Route path="/users/:id/verify/:token" element={<EmailVerify />} />
             <Route path="*" element={<Errorpage
               setLoggedOff={this.setLoggedOff}
             />} />

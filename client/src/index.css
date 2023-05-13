@@ -1094,6 +1094,20 @@ p {
   border: 1px solid var(--han-blue);
 }
 
+.verify {
+  font-size: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  margin-bottom: 0;
+}
+
+.verify:active,
+.verify:focus {
+  border: 1px solid #d1d7dc;
+}
+
 .alter-lg-rg {
   font-weight: 500;
   font-size: .875rem;

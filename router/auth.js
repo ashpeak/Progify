@@ -1,10 +1,13 @@
+require("dotenv").config({ path: "../config.env" });
 const express = require("express");
 const router = express.Router();
 require("../DB/conn");
-const Note = require("../model/userNoteSchema");
-const Course = require("../model/courseSchema");
-const User = require("../model/userSchema");
+const crypto = require("crypto");
 const passport = require("passport");
+const Course = require("../model/courseSchema");
+const Note = require("../model/userNoteSchema");
+const User = require("../model/userSchema");
+const Token = require("../model/tokenSchema");
 const sendEmail = require("../utils/sendEmail");
 
 
@@ -108,36 +111,89 @@ router.post("/enroll", isAuthorised, async (req, res) => {
 })
 
 router.post("/register", async (req, res) => {
-    const user = await User.findOne({ username: req.body.username });
+    let user = await User.findOne({ username: req.body.username });
     if (user) {
-        return res.status(400).json({ error: "User already exists!" });
+        return res.status(400).json({ msg: "User already exists!" });
     }
 
     const { name, password } = req.body;
-    if (name.length > 20 || name.length < 5 || password.length < 8) {
-        return res.status(400).json({ error: "Invalid Input!" });
+    if (name.length > 20 || name.length < 5 || password.length < 8 || password.length > 30) {
+        return res.status(400).json({ msg: "Invalid Input!" });
     }
     try {
-        const userInfo = await User.create(req.body);
-        
-        sendEmail(userInfo.username, "Confirm account", "Account registration code is: 34567");
-        res.status(201).json({ msg: "Registration sucessfull!" });
+        user = await User.create(req.body);
+
+        const token = new Token({
+            userId: user._id,
+            token: crypto.randomBytes(32).toString("hex")
+        });
+
+        token.save();
+
+        const url = `${process.env.BASE_URL}/users/${user._id}/verify/${token.token}`;
+        await sendEmail(user.username, "Confirm account", url);
+
+        res.status(201).json({ msg: "An Email sent to your account please verify" });
     } catch (err) {
         console.log(err);
     }
 });
 
+router.get("/api/users/:id/verify/:token", async (req, res) => {
+    try {
+        const user = await User.findOne({ _id: req.params.id });
+
+        if (!user) return res.status(400).json({ msg: "Invalid link!" });
+
+        const token = await Token.findOne({
+            userId: user.id,
+            token: req.params.token
+        });
+
+        if (!token) return res.status(400).json({ msg: "Invalid link!" });
+
+        await User.updateOne(
+            { _id: user.id },
+            { $set: { verified: true } }
+        );
+
+        await token.remove();
+
+        return res.status(200).json({ msg: "Email verified successfully!" });
+    } catch (error) {
+        return res.status(500).json({ msg: "Internal server error!" });
+    }
+});
+
 router.post('/login', (req, res) => {
     passport.authenticate('local',
-        (err, user, info) => {
+        async (err, user, info) => {
 
             if (err || !user) {
-                return res.status(401).json({ msg: "login Unsuccessful" });
+                return res.status(400).json({ msg: "login Unsuccessful" });
+            }
+
+            if (!user.verified) {
+                let token = await Token.findOne({ userId: user.id });
+
+                if (!token) {
+                    token = new Token({
+                        userId: user._id,
+                        token: crypto.randomBytes(32).toString("hex")
+                    });
+
+                    token.save();
+
+                    const url = `${process.env.BASE_URL}/users/${user._id}/verify/${token.token}`;
+                    await sendEmail(user.username, "Confirm account", url);
+                }
+
+                return res.status(400).json({ msg: "Account not verified, please verify!" });
             }
 
             req.logIn(user, function (err) {
                 if (err) {
-                    return res.status(401).json({ msg: "login Unsuccessful" });
+                    return res.status(400).json({ msg: "login Unsuccessful" });
                 }
                 return res.status(200).json({ name: user.name });
             });

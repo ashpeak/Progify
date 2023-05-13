@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 
-import Google from '../img/Social-google.svg';
+// import Google from '../img/Social-google.svg';
 
 const Register = (props) => {
 
@@ -13,7 +13,12 @@ const Register = (props) => {
         username: "",
         password: "",
         confirmPassword: ""
-    })
+    });
+    const [data, setData] = useState({
+        color: "",
+        msg: ""
+    });
+    const [show, setShow] = useState(false);
 
     const handleInput = (e) => {
         const { name, value } = e.target;
@@ -22,6 +27,7 @@ const Register = (props) => {
 
     const formSubmit = async (e) => {
 
+        setShow(false);
         if (!user.name || !user.username || !user.password || !user.confirmPassword) {
             return;
         }
@@ -31,7 +37,10 @@ const Register = (props) => {
             return;
         }
         if (user.name.length > 20 || user.name.length < 5 || user.password.length < 8 || user.password.length > 30) {
-            window.alert("Invalid inputs!");
+            setData({
+                color: "#dc5a5a",
+                msg: "Invalid inputs!"
+            });
             return;
         }
 
@@ -39,14 +48,32 @@ const Register = (props) => {
             const res = await axios.post('/register', user);
 
             if (res.status === 201) {
-                window.alert("Registration sucessfull!");
-                return navigate("/login");
+                setUser({
+                    name: "",
+                    username: "",
+                    password: "",
+                    confirmPassword: ""
+                });
+                setData({
+                    color: "#5cdc5a",
+                    msg: res.data.msg
+                });
+
+                setShow(true);
             }
+
         } catch (error) {
             const { status, data } = error.response;
-            window.alert(data.error)
-            if (status === 400 && data.error === "User already exists!") {
-                return navigate("/login");
+            if (status === 400) {
+                setUser({
+                    ...user,
+                    password: "",
+                    confirmPassword: ""
+                });
+                setData({
+                    color: "#dc5a5a",
+                    msg: data.msg
+                });
             }
         }
     }
@@ -75,13 +102,33 @@ const Register = (props) => {
                     <form method='POST'>
                         <div>
                             <div><input className='login-input form-control' type="text" maxLength={20} minLength={5} onChange={handleInput} name='name' placeholder="Name" value={user.name} required /></div>
-                            <div><input className='login-input form-control' type="email" onChange={handleInput} name='username' placeholder="Email" value={user.email} required /></div>
+                            <div><input className='login-input form-control' type="email" onChange={handleInput} name='username' placeholder="Email" value={user.username} required /></div>
                             <div>
+                                <input className='login-input form-control' type="password"
+                                    style={{ marginBottom: "0" }} maxLength={30} minLength={8} onChange={handleInput} name='password' autoComplete='true' placeholder="password" value={user.password} required />
                                 <input id="password" className='login-input form-control' type="password"
-                                    style={{ marginBottom: "0" }} maxLength={15} minLength={8} onChange={handleInput} name='password' autoComplete='true' placeholder="password" value={user.password} required />
-                                <input id="password" className='login-input form-control' type="password"
-                                    style={{ marginBottom: "0" }} maxLength={15} minLength={8} onChange={handleInput} name='confirmPassword' autoComplete='true' placeholder="Confirm Password" value={user.confirmPassword} required />
-                                <label for="password" class="form-label" style={{ color: "#656d77", fontSize: "0.79rem" }}>*Minimum 8 characters</label>
+                                    style={{ marginBottom: "0" }} maxLength={30} minLength={8} onChange={handleInput} name='confirmPassword' autoComplete='true' placeholder="Confirm Password" value={user.confirmPassword} required />
+                                <label for="password" className="form-label" style={{ color: "#656d77", fontSize: "0.79rem" }}>*Minimum 8 characters</label>
+
+                                {data.msg && <><div className='login-input verify' style={{ backgroundColor: data.color }}>
+                                    <span>{data.msg}</span>
+                                </div>
+                                    {show && <><span style={{ color: "#656d77", fontSize: "0.79rem" }} data-bs-toggle="modal" data-bs-target="#notreceived">
+                                        Can't find Email?
+                                    </span>
+                                        <div className="modal fade" id="notreceived" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                            <div className="modal-dialog modal-sm">
+                                                <div className="modal-content">
+                                                    <div className="modal-header">
+                                                        <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                    </div>
+                                                    <div className="modal-body">
+                                                        If you can't find email in inbox, kindly check spam folder and rest other folders too.
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div></>}</>}
+
                             </div>
                             <div>
                                 <button type='button' className="btn my-btn btn-lg-rg" onClick={formSubmit}>Sign Up</button>
