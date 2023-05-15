@@ -108,7 +108,7 @@ const Register = (props) => {
                                     style={{ marginBottom: "0" }} maxLength={30} minLength={8} onChange={handleInput} name='password' autoComplete='true' placeholder="password" value={user.password} required />
                                 <input id="password" className='login-input form-control' type="password"
                                     style={{ marginBottom: "0" }} maxLength={30} minLength={8} onChange={handleInput} name='confirmPassword' autoComplete='true' placeholder="Confirm Password" value={user.confirmPassword} required />
-                                <label for="password" className="form-label" style={{ color: "#656d77", fontSize: "0.79rem" }}>*Minimum 8 characters</label>
+                                <label htmlFor="password" className="form-label" style={{ color: "#656d77", fontSize: "0.79rem" }}>*Minimum 8 characters</label>
 
                                 {data.msg && <><div className='login-input verify' style={{ backgroundColor: data.color }}>
                                     <span>{data.msg}</span>

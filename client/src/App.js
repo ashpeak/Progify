@@ -16,6 +16,8 @@ import Blog from "./components/Blog";
 import About from "./components/About";
 import Community from "./components/Community";
 import EmailVerify from "./components/EmailVerify";
+import PasswordReset from "./components/PasswordReset";
+import PassResetForm from "./components/PassResetForm";
 
 class App extends React.Component {
 
@@ -128,6 +130,8 @@ class App extends React.Component {
               setLoggedOff={this.setLoggedOff}
             />} />
             <Route path="/users/:id/verify/:token" element={<EmailVerify />} />
+            <Route path="/users/:id/reset/:token" element={<PasswordReset />} />
+            <Route path="/users/reset/" element={<PassResetForm />} />
             <Route path="*" element={<Errorpage
               setLoggedOff={this.setLoggedOff}
             />} />

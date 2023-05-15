@@ -42,7 +42,7 @@ const Join = () => {
                                 </a></div>
                             <div className="col-6 col-md-3 community">
                                 <a className="custom-link" href="https://www.linkedin.com/in/ashish-singh-b258a2201/" target="_blank" rel='noreferrer'>
-                                    <i class="fa-brands fa-linkedin fa-3x zoom" style={{ color: "#7d75fc" }}></i>
+                                    <i className="fa-brands fa-linkedin fa-3x zoom" style={{ color: "#7d75fc" }}></i>
                                 </a>
                                 <a className="custom-link" href="https://www.linkedin.com/in/ashish-singh-b258a2201/" target="_blank" rel='noreferrer'>
                                     <p style={{ fontWeight: "700", color: "#7d75fc", fontSize: "x-large" }}>Linkedin</p>

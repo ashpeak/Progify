@@ -36,11 +36,11 @@ const Testimonial = () => {
                                         src={require("../../img/user.jpg")} alt='avatar' /></picture>
                                 </div>
                                 <div>
-                                    <i class="fa-solid fa-star" style={{ color: "#ff9e2a" }}></i>
-                                    <i class="fa-solid fa-star" style={{ color: "#ff9e2a" }}></i>
-                                    <i class="fa-solid fa-star" style={{ color: "#ff9e2a" }}></i>
-                                    <i class="fa-solid fa-star" style={{ color: "#ff9e2a" }}></i>
-                                    <i class="fa-solid fa-star" style={{ color: "#ff9e2a" }}></i>
+                                    <i className="fa-solid fa-star" style={{ color: "#ff9e2a" }}></i>
+                                    <i className="fa-solid fa-star" style={{ color: "#ff9e2a" }}></i>
+                                    <i className="fa-solid fa-star" style={{ color: "#ff9e2a" }}></i>
+                                    <i className="fa-solid fa-star" style={{ color: "#ff9e2a" }}></i>
+                                    <i className="fa-solid fa-star" style={{ color: "#ff9e2a" }}></i>
                                 </div>
                             </div>
                         </div>
@@ -55,11 +55,11 @@ const Testimonial = () => {
                                         src={require("../../img/user.jpg")} alt='' /></picture>
                                 </div>
                                 <div>
-                                    <i class="fa-solid fa-star" style={{ color: "#ff9e2a" }}></i>
-                                    <i class="fa-solid fa-star" style={{ color: "#ff9e2a" }}></i>
-                                    <i class="fa-solid fa-star" style={{ color: "#ff9e2a" }}></i>
-                                    <i class="fa-solid fa-star" style={{ color: "#ff9e2a" }}></i>
-                                    <i class="fa-solid fa-star" style={{ color: "#ff9e2a" }}></i>
+                                    <i className="fa-solid fa-star" style={{ color: "#ff9e2a" }}></i>
+                                    <i className="fa-solid fa-star" style={{ color: "#ff9e2a" }}></i>
+                                    <i className="fa-solid fa-star" style={{ color: "#ff9e2a" }}></i>
+                                    <i className="fa-solid fa-star" style={{ color: "#ff9e2a" }}></i>
+                                    <i className="fa-solid fa-star" style={{ color: "#ff9e2a" }}></i>
                                 </div>
                             </div>
                         </div>
@@ -74,11 +74,11 @@ const Testimonial = () => {
                                         src={require("../../img/user.jpg")} alt='' /></picture>
                                 </div>
                                 <div>
-                                    <i class="fa-solid fa-star" style={{ color: "#ff9e2a" }}></i>
-                                    <i class="fa-solid fa-star" style={{ color: "#ff9e2a" }}></i>
-                                    <i class="fa-solid fa-star" style={{ color: "#ff9e2a" }}></i>
-                                    <i class="fa-solid fa-star" style={{ color: "#ff9e2a" }}></i>
-                                    <i class="fa-solid fa-star" style={{ color: "#ff9e2a" }}></i>
+                                    <i className="fa-solid fa-star" style={{ color: "#ff9e2a" }}></i>
+                                    <i className="fa-solid fa-star" style={{ color: "#ff9e2a" }}></i>
+                                    <i className="fa-solid fa-star" style={{ color: "#ff9e2a" }}></i>
+                                    <i className="fa-solid fa-star" style={{ color: "#ff9e2a" }}></i>
+                                    <i className="fa-solid fa-star" style={{ color: "#ff9e2a" }}></i>
                                 </div>
                             </div>
                         </div>

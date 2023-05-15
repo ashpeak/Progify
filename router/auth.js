@@ -130,7 +130,7 @@ router.post("/register", async (req, res) => {
 
         token.save();
 
-        const url = `${process.env.BASE_URL}/users/${user._id}/verify/${token.token}`;
+        const url = `${process.env.BASE_URL}/users/${user.id}/verify/${token.token}`;
         await sendEmail(user.username, "Confirm account", url);
 
         res.status(201).json({ msg: "An Email sent to your account please verify" });
@@ -165,6 +165,63 @@ router.get("/api/users/:id/verify/:token", async (req, res) => {
     }
 });
 
+router.get("/api/users/:email/reset/", async (req, res) => {
+    try {
+        const user = await User.findOne({ username: req.params.email });
+
+        if (!user) return res.status(400).json({ msg: "Account not found!" });
+
+        let token = await Token.findOne({ userId: user.id });
+
+        if (!token) {
+            token = new Token({
+                userId: user._id,
+                token: crypto.randomBytes(32).toString("hex")
+            });
+
+            token.save();
+        }
+
+        const url = `${process.env.BASE_URL}/users/${user.id}/reset/${token.token}`;
+        await sendEmail(user.username, "Password Reset", url);
+
+        return res.status(200).json({ msg: "Password reset link sent" });
+    } catch (error) {
+        console.log(error);
+        return res.status(500).json({ msg: "Internal server error!" });
+    }
+});
+
+router.get("/api/users/:id/reset/:token/pass/:pass", async (req, res) => {
+    try {
+        const user = await User.findOne({ _id: req.params.id });
+
+        if (!user) return res.status(400).json({ msg: "Link invalid or expired!" });
+
+        const token = await Token.findOne({
+            userId: user.id,
+            token: req.params.token
+        });
+
+        if (!token) return res.status(400).json({ msg: "Link invalid or expired!" });
+
+        if (req.params.pass === "0") return res.status(200).json({ msg: "Valid link!" });
+
+        if (req.params.pass.length < 8 || req.params.pass.length > 30) return res.status(400).json({ msg: "Invalid inputs!" });
+
+        await User.updateOne(
+            { _id: user.id },
+            { $set: { password: req.params.pass } }
+        );
+
+        await token.remove();
+
+        return res.status(200).json({ msg: "Password changed successfully!" });
+    } catch (error) {
+        return res.status(500).json({ msg: "Internal server error!" });
+    }
+});
+
 router.post('/login', (req, res) => {
     passport.authenticate('local',
         async (err, user, info) => {
@@ -177,14 +234,14 @@ router.post('/login', (req, res) => {
                 let token = await Token.findOne({ userId: user.id });
 
                 if (!token) {
-                    token = new Token({
+                    const token = new Token({
                         userId: user._id,
                         token: crypto.randomBytes(32).toString("hex")
                     });
 
                     token.save();
 
-                    const url = `${process.env.BASE_URL}/users/${user._id}/verify/${token.token}`;
+                    const url = `${process.env.BASE_URL}/users/${user.id}/verify/${token.token}`;
                     await sendEmail(user.username, "Confirm account", url);
                 }
 

@@ -41,6 +41,13 @@ body {
   padding-top: 71px;
 }
 
+.login-loader {
+  display: flex;
+  justify-content: center;
+  padding: 6px 0;
+  margin: 10px 0;
+}
+
 /* Css for scroll bar */
 
 ::-webkit-scrollbar {
