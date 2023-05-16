@@ -8,9 +8,7 @@ const PassResetForm = () => {
     const [user, setUser] = useState("");
     const [data, setData] = useState("");
     const [color, setColor] = useState("#dc5a5a");
-
-    //loader
-    let [loading, setLoading] = useState(false);
+    const [loading, setLoading] = useState(false);
 
     const handleChange = (e) => setUser(e.target.value);
 
@@ -32,7 +30,6 @@ const PassResetForm = () => {
                 setLoading(false);
             }
         } catch (error) {
-            console.log(error);
             const { data } = error.response;
             setData(data.msg);
             setColor("#dc5a5a");

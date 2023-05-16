@@ -20,6 +20,7 @@
 14. Login Page
 15. Course Page
 16. AboutUs Page
+17. Password reset page
 --------------------- */
 
 /* 1. General */
@@ -1305,3 +1306,14 @@ p {
 }
 
 /* 16. AboutUs Page end */
+
+/* 17. Password reset page */
+
+.load-msg {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+/* 17. Password reset end */

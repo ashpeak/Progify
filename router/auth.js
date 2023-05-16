@@ -194,6 +194,7 @@ router.get("/api/users/:email/reset/", async (req, res) => {
 
 router.get("/api/users/:id/reset/:token/pass/:pass", async (req, res) => {
     try {
+
         const user = await User.findOne({ _id: req.params.id });
 
         if (!user) return res.status(400).json({ msg: "Link invalid or expired!" });
