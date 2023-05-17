@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 
+import MoonLoader from "react-spinners/MoonLoader";
 // import Google from '../img/Social-google.svg';
 
 const Register = (props) => {
@@ -19,14 +20,23 @@ const Register = (props) => {
         msg: ""
     });
     const [show, setShow] = useState(false);
+    const [loader, setLoader] = useState(false);
 
     const handleInput = (e) => {
         const { name, value } = e.target;
         setUser({ ...user, [name]: value })
+        setData({
+            color: "",
+            msg: ""
+        });
     }
 
     const formSubmit = async (e) => {
 
+        setData({
+            color: "",
+            msg: ""
+        });
         setShow(false);
         if (!user.name || !user.username || !user.password || !user.confirmPassword) {
             return;
@@ -44,6 +54,8 @@ const Register = (props) => {
             return;
         }
 
+        setLoader(true);
+
         try {
             const res = await axios.post('/register', user);
 
@@ -60,9 +72,12 @@ const Register = (props) => {
                 });
 
                 setShow(true);
+                setLoader(false);
             }
 
         } catch (error) {
+            setLoader(false);
+
             const { status, data } = error.response;
             if (status === 400) {
                 setUser({
@@ -131,7 +146,15 @@ const Register = (props) => {
 
                             </div>
                             <div>
-                                <button type='button' className="btn my-btn btn-lg-rg" onClick={formSubmit}>Sign Up</button>
+                                {loader ?
+                                    <div className='login-loader'>
+                                        <MoonLoader
+                                            color={"#0102ff"}
+                                            size={22}
+                                            aria-label="Processing"
+                                            data-testid="loader"
+                                        />
+                                    </div> : <button type='button' className="btn my-btn btn-lg-rg" onClick={formSubmit}>Sign Up</button>}
                             </div>
                         </div>
                     </form>
