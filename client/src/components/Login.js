@@ -2,6 +2,7 @@ import React, { useEffect, useState, } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 
+import MoonLoader from "react-spinners/MoonLoader";
 // import Google from '../img/Social-google.svg';
 
 const Login = (props) => {
@@ -12,6 +13,7 @@ const Login = (props) => {
     });
     const [data, setData] = useState("");
     const [show, setShow] = useState(false);
+    const [loader, setLoader] = useState(false);
 
     const navigate = useNavigate();
 
@@ -32,14 +34,21 @@ const Login = (props) => {
             return;
         }
 
+        setLoader(true);
+
         try {
             const response = await axios.post('/login', user);
+
+            setLoader(false);
             if (response.status === 200) {
                 props.setLoggedIn(response.data.name);
                 navigate("/dashboard");
             }
+
         } catch (error) {
             const { status, data } = error.response;
+            setLoader(false);
+
             if (status === 400) {
                 setUser({
                     ...user,
@@ -106,7 +115,15 @@ const Login = (props) => {
                                         </div>
                                     </div></>}</>}
                             <div>
-                                <button className="btn my-btn btn-lg-rg" onClick={(e) => formSubmit(e)}>Login</button>
+                                {loader ?
+                                    <div className='login-loader'>
+                                        <MoonLoader
+                                            color={"#0102ff"}
+                                            size={22}
+                                            aria-label="Processing"
+                                            data-testid="loader"
+                                        />
+                                    </div> : <button type='button' className="btn my-btn btn-lg-rg" onClick={formSubmit}>Login</button>}
                             </div>
                         </div>
                     </form>
