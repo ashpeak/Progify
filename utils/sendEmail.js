@@ -2,7 +2,7 @@ require("dotenv").config({ path: "../config.env" });
 const nodemailer = require("nodemailer");
 const EmailTemplate = require('./EmailMsgTemplate');
 
-module.exports = async (email, subject, url) => {
+module.exports = async (email, subject, url, mode) => {
     try {
         const transporter = nodemailer.createTransport({
             host: process.env.SMTP_HOST,
@@ -20,7 +20,7 @@ module.exports = async (email, subject, url) => {
             from: '"Ashish Singh 👻" <cs1.coursely@gmail.com>', // sender address
             to: email, // list of receivers
             subject: subject, // Subject line
-            html: EmailTemplate(url, subject), // html body
+            html: EmailTemplate(url, subject, mode), // html body
         });
 
     } catch (error) {

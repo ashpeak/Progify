@@ -17,7 +17,7 @@ const PassResetForm = () => {
         setData("");
         setLoading(true);
 
-        if (!user) {
+        if (!user || user === "") {
             return;
         }
 

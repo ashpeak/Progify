@@ -1,4 +1,21 @@
-module.exports = (url, subject) => {
+module.exports = (url, subject, mode) => {
+
+    let mainHeading = "";
+    let info = "";
+    let footer = "";
+
+    if(mode === "VERIFY"){
+        mainHeading = "Verify your email to sign up for ";
+        info = "To complete the signup process";
+        footer = "If you didn't attempt to sign up ";
+    }
+
+    if(mode === "RESET") {
+        mainHeading = "Password reset request received on ";
+        info = "To reset your account password";
+        footer = "If you didn't initiated password reset ";
+    }
+
     return (`<!DOCTYPE html>
 <html lang='en'>
 
@@ -33,7 +50,7 @@ module.exports = (url, subject) => {
                                                                 data-bit="iit"></div>
                                                         <h1
                                                             style="color:#000;font-family:-apple-system,BlinkMacSystemFont,&quot;Segoe UI&quot;,&quot;Roboto&quot;,&quot;Oxygen&quot;,&quot;Ubuntu&quot;,&quot;Cantarell&quot;,&quot;Fira Sans&quot;,&quot;Droid Sans&quot;,&quot;Helvetica Neue&quot;,sans-serif;font-size:24px;font-weight:normal;margin:30px 0;padding:0">
-                                                            Verify your email to sign up for <b><span style="color: #5766c7;">Coursely</span></b></h1>
+                                                            ${mainHeading}<b><span style="color: #5766c7;">Coursely</span></b></h1>
                                                     </td>
                                                 </tr>
                                             </tbody>
@@ -41,7 +58,7 @@ module.exports = (url, subject) => {
 
                                         <p
                                             style="color:#000;font-family:-apple-system,BlinkMacSystemFont,&quot;Segoe UI&quot;,&quot;Roboto&quot;,&quot;Oxygen&quot;,&quot;Ubuntu&quot;,&quot;Cantarell&quot;,&quot;Fira Sans&quot;,&quot;Droid Sans&quot;,&quot;Helvetica Neue&quot;,sans-serif;font-size:14px;line-height:24px">
-                                            To complete the signup process, please click on the button below.
+                                            ${info}, please click on the button below.
                                             <br>
                                             This link will expire in 20 minutes.
                                         </p>
@@ -56,7 +73,7 @@ module.exports = (url, subject) => {
 
                                                             <a href="${url}"
                                                                 style="background-color:#5766c7;border-radius:5px;color:#fff;display:inline-block;font-family:-apple-system,BlinkMacSystemFont,&quot;Segoe UI&quot;,&quot;Roboto&quot;,&quot;Oxygen&quot;,&quot;Ubuntu&quot;,&quot;Cantarell&quot;,&quot;Fira Sans&quot;,&quot;Droid Sans&quot;,&quot;Helvetica Neue&quot;,sans-serif;font-size:14px;font-weight:500;line-height:50px;text-align:center;text-decoration:none;width:200px"
-                                                                target="_blank">VERIFY</a>
+                                                                target="_blank">${mode}</a>
 
                                                         </div>
                                                     </td>
@@ -82,7 +99,7 @@ module.exports = (url, subject) => {
                                         <hr style="border:none;border-top:1px solid #eaeaea;margin:26px 0;width:100%">
                                         <p
                                             style="color:#666666;font-family:-apple-system,BlinkMacSystemFont,&quot;Segoe UI&quot;,&quot;Roboto&quot;,&quot;Oxygen&quot;,&quot;Ubuntu&quot;,&quot;Cantarell&quot;,&quot;Fira Sans&quot;,&quot;Droid Sans&quot;,&quot;Helvetica Neue&quot;,sans-serif;font-size:12px;line-height:24px">
-                                            If you didn't attempt to sign up but received this email, please ignore this email. If you are concerned about your account's safety, please reply
+                                            ${footer}but received this email, please ignore this email. If you are concerned about your account's safety, please reply
                                             to this email to get in touch with us.</p>
                                     </div>
                                 </td>

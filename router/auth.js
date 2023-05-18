@@ -131,7 +131,7 @@ router.post("/register", async (req, res) => {
         token.save();
 
         const url = `${process.env.BASE_URL}/users/${user.id}/verify/${token.token}`;
-        await sendEmail(user.username, "Confirm account", url);
+        await sendEmail(user.username, "Confirm account", url, "VERIFY");
 
         res.status(201).json({ msg: "An Email sent to your account please verify" });
     } catch (err) {
@@ -183,7 +183,7 @@ router.get("/api/users/:email/reset/", async (req, res) => {
         }
 
         const url = `${process.env.BASE_URL}/users/${user.id}/reset/${token.token}`;
-        await sendEmail(user.username, "Password Reset", url);
+        await sendEmail(user.username, "Password Reset", url, "RESET");
 
         return res.status(200).json({ msg: "Password reset link sent" });
     } catch (error) {
@@ -243,7 +243,7 @@ router.post('/login', (req, res) => {
                     token.save();
 
                     const url = `${process.env.BASE_URL}/users/${user.id}/verify/${token.token}`;
-                    await sendEmail(user.username, "Confirm account", url);
+                    await sendEmail(user.username, "Confirm account", url, "VERIFY");
                 }
 
                 return res.status(400).json({ msg: "Account not verified, please verify!" });
