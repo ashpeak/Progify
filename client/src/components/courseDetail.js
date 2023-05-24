@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from 'react';
-import { Link, useLocation, useNavigate } from 'react-router-dom';
+import { Link, useNavigate, useParams } from 'react-router-dom';
 import axios from 'axios';
 
 const CourseDetail = () => {
 
-    const Location = useLocation();
-    const data = Location.state?.data;
+    const params = useParams();
+    const id = params.id;
 
     const [courseData, setCoursedata] = useState(null);
 
@@ -28,7 +28,7 @@ const CourseDetail = () => {
 
     const getCourse = async (courseID) => {
         try {
-            const res = await axios.get('/course/' + courseID);
+            const res = await axios.get('/api/course/detail/' + courseID);
 
             if (res.status === 200) {
                 setCoursedata(res.data);
@@ -39,10 +39,10 @@ const CourseDetail = () => {
     }
 
     useEffect(() => {
-        if (!data) {
+        if (!id) {
             return navigate("/course");
         }
-        getCourse(data);
+        getCourse(id);
     }, []);
 
 

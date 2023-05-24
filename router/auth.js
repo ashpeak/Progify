@@ -349,7 +349,7 @@ router.get("/course", async (req, res) => {
     return res.status(200).json(courses);
 })
 
-router.get("/course/:_id", async (req, res) => {
+router.get("/api/course/detail/:_id", async (req, res) => {
     const courseId = req.params._id;
     const response = await Course.findById(courseId);
     if (!response) {

@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 const searchCourseCard = (course) => {
     return (<>
         <div className="col-md-12 course-card">
-            <Link className="custom-link" to={"/course-detail"} state={{ data: course._id }}>
+            <Link className="custom-link" to={`/course/${course._id}/detail`}>
                 <div className="card">
                     <img className="fit-cover course-image" width="260" height="145" alt='course pic' src={course.course_pic} />
                     <div className="card-body">
