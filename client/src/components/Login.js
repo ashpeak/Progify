@@ -1,11 +1,14 @@
 import React, { useEffect, useState, } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useNavigate, useLocation } from 'react-router-dom';
 import axios from 'axios';
 
 import MoonLoader from "react-spinners/MoonLoader";
 // import Google from '../img/Social-google.svg';
 
 const Login = (props) => {
+
+    const Location = useLocation();
+    const redirect = Location.state?.data;
 
     const [user, setUser] = useState({
         username: "",
@@ -42,7 +45,10 @@ const Login = (props) => {
             setLoader(false);
             if (response.status === 200) {
                 props.setLoggedIn(response.data.name);
-                navigate("/dashboard");
+
+                if(!redirect) return navigate("/dashboard");
+
+                return navigate(`/course/id/${redirect}/detail`);
             }
 
         } catch (error) {

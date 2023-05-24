@@ -5,7 +5,7 @@ const CardCourse = (Props) => {
 
     return (<>
         <div className="my-card col-md-3">
-            <Link className="custom-link" to={"/course-detail"} state={{ data: Props.id }}>
+            <Link className="custom-link" to={`/course/id/${Props.id}/detail`}>
                 <div className="card">
                     <div className='mycard-img'>
                         <img alt="courseImage" className="card-img-top w-100 d-block fit-cover" src={Props.course_pic} />

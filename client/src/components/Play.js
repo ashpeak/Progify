@@ -45,7 +45,7 @@ const Play = (props) => {
 
     const fetchCourseData = async (data) => {
         try {
-            const res = await axios.get('/course/' + data);
+            const res = await axios.get(`/api/course/detail/${data}`);
 
             const courseData = res.data;
             setTotalLikes(courseData.love);

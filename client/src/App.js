@@ -111,7 +111,7 @@ class App extends React.Component {
             <Route path="/register" element={<Register
               setLoggedOff={this.setLoggedOff}
             />} />
-            <Route path="/course/:id/detail" element={<CourseDetail
+            <Route path="/course/id/:id/detail" element={<CourseDetail
               setLoggedOff={this.setLoggedOff}
             />} />
             <Route path="/play" element={<Play
