@@ -11,7 +11,7 @@ const Courses = () => {
 
 
     const fetchCourse = async () => {
-        const res = await axios.get("/course");
+        const res = await axios.get("/api/course");
         if (res) {
             setCourses(res.data);
         }
@@ -27,7 +27,7 @@ const Courses = () => {
 
         setCourses(null);
         try {
-            const res = await axios.post("/search", { searchText });
+            const res = await axios.post("/api/search/course", { searchText });
             if (res) {
                 setCourses(res.data);
             }

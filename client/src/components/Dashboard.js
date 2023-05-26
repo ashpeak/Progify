@@ -15,7 +15,7 @@ const Dashboard = (props) => {
     const fetchUserData = async () => {
 
         try {
-            const res = await axios.get('/dashboard');
+            const res = await axios.get('/api/users/dashboard');
 
             const Courses = res.data.result;
             setLikes(res.data.courseLoved);

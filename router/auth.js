@@ -23,7 +23,7 @@ router.get("/logout", (req, res) => {
     })
 })
 
-router.get("/dashboard", isAuthorised, async (req, res) => {
+router.get("/api/users/dashboard", isAuthorised, async (req, res) => {
     let { courseEnrolled } = req.user;
     const { courseLoved } = req.user;
 
@@ -341,7 +341,7 @@ router.post("/note/delete", isAuthorised, async (req, res) => {
     }
 });
 
-router.get("/course", async (req, res) => {
+router.get("/api/course", async (req, res) => {
     const courses = await Course.find();
     if (!courses.length) {
         return res.status(400).json({ error: "Can't find any courses" });
@@ -359,7 +359,7 @@ router.get("/api/course/detail/:_id", async (req, res) => {
     }
 });
 
-router.post("/search", async (req, res) => {
+router.post("/api/search/course", async (req, res) => {
     const { searchText } = req.body;
 
     const response = await Course.find(
