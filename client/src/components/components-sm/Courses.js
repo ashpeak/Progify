@@ -2,6 +2,10 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
 import SearchCourseCard from './SearchCourseCard';
+import "react-loading-skeleton/dist/skeleton.css";
+
+import LoadingSkeleton from './LoadingSkeleton';
+
 
 const Courses = () => {
 
@@ -152,6 +156,7 @@ const Courses = () => {
                     </div>
                     <div className='col-lg-9'>
                         {courses ? <div className='row'>
+
                             {courses.map(course => {
                                 return <SearchCourseCard
                                     _id={course._id}
@@ -160,7 +165,13 @@ const Courses = () => {
                                     creator={course.creator}
                                 />
                             })}
-                        </div> : <i class="fa-solid fa-3x fa-circle-notch fa-spin" style={{ color: "#df3b69" }}></i>}
+                        </div> : <>
+                            <LoadingSkeleton />
+                            <LoadingSkeleton />
+                            <LoadingSkeleton />
+                            <LoadingSkeleton />
+                            <LoadingSkeleton />
+                        </>}
                     </div>
                 </div>
             </div>

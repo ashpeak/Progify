@@ -1224,8 +1224,8 @@ p {
   }
 
   .course-image {
-    height: 64px;
-    width: 64px;
+    height: 64px !important;
+    width: 64px !important;
   }
 }
 
