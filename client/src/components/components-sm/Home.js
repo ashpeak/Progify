@@ -1,8 +1,28 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+import Cookies from 'js-cookie'
 import { Link } from 'react-router-dom';
 import Typewriter from 'typewriter-effect';
 
 const Home = () => {
+
+    const [loggedBtn, setLoggedBtn] = useState(false);
+
+    const changeButton = () => {
+        const cookie = Cookies.get('user');
+        if (cookie === undefined) {
+            return setLoggedBtn(false);
+        }
+
+        const loginStatus = JSON.parse(cookie).isLoggedIn;
+        if (loginStatus === 'true') {
+            return setLoggedBtn(true);
+        }
+    }
+
+    useEffect(() => {
+        changeButton();
+    });
+
     return (<>
         <section id="home" className="banner-wrapper">
             <div className="container">
@@ -35,7 +55,7 @@ const Home = () => {
                         />
                         </h1>
                         <h4>Join Now And Start Learning<br />From Leading Teachers In Industry.</h4>
-                        <Link className="btn my-btn-outline" to={"/register"}>Sign Up</Link>
+                        {loggedBtn ? <Link className="btn my-btn-outline" style={{width: "6.2rem"}} to={"/dashboard"}>Dashboard</Link> : <Link className="btn my-btn-outline" to={"/register"}>Sign Up</Link>}
                         <Link className="btn my-btn" to={"/course"}>Courses</Link>
                     </div>
                     <div className="col-md-5 order-md-2 order-1 banner-img" style={{ textAlign: "center" }}><img className="img-fluid"

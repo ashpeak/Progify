@@ -64,7 +64,7 @@ const Navbar = (props) => {
 
                         {isLoggedIn ?
                             <li className="nav-item custom-dropdown">
-                                <Link className="dropdown-toggle nav-link" aria-expanded="true" data-bs-toggle="dropdown">{(props.status.name).substring(0, 15)}</Link>
+                                <Link className="dropdown-toggle nav-link" aria-expanded="true" data-bs-toggle="dropdown">{(props.status.name)?.substring(0, 15)}</Link>
                                 <div className="dropdown-menu" data-bs-popper="none">
                                     <Link className="dropdown-item" to={'/dashboard'}>
                                         <i class="fa-solid fa-user me-2"></i>Dashboard</Link>

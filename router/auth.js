@@ -378,7 +378,7 @@ router.post("/api/search/course", async (req, res) => {
     }
 });
 
-router.get("/recommend", async (req, res) => {
+router.get("/api/recommended/course", async (req, res) => {
     const response = await Course.aggregate([{ $sample: { size: 4 } }]);
 
 

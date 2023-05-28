@@ -8,7 +8,7 @@ const Recommended = () => {
 
     const fetchCourse = async () => {
         try {
-            const res = await axios.get("/recommend");
+            const res = await axios.get("/api/recommended/course");
             if (res.status === 200) {
                 setCourses(res.data);
             }
