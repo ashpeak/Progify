@@ -18,6 +18,8 @@ import Community from "./components/Community";
 import EmailVerify from "./components/EmailVerify";
 import PasswordReset from "./components/PasswordReset";
 import PassResetForm from "./components/PassResetForm";
+import CourseRequest from "./components/CourseRequest";
+import RequestList from "./components/RequestList";
 
 class App extends React.Component {
 
@@ -120,10 +122,19 @@ class App extends React.Component {
             <Route path="/course" element={<Courses
               setLoggedOff={this.setLoggedOff}
             />} />
-            <Route path="/blog" element={<Blog
+            {/* <Route path="/blog" element={<Blog
+              setLoggedOff={this.setLoggedOff}
+            />} /> */}
+            <Route path="/course/request" element={<CourseRequest
               setLoggedOff={this.setLoggedOff}
             />} />
             <Route path="/about" element={<About
+              setLoggedOff={this.setLoggedOff}
+            />} />
+            <Route path="/about" element={<About
+              setLoggedOff={this.setLoggedOff}
+            />} />
+            <Route path="/request/list" element={<RequestList
               setLoggedOff={this.setLoggedOff}
             />} />
             <Route path="/community" element={<Community

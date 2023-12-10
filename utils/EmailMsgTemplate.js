@@ -45,7 +45,7 @@ module.exports = (url, subject, mode) => {
                                                 <tr>
                                                     <td align="center">
                                                         <div><img
-                                                                src="https://ci5.googleusercontent.com/proxy/_Xjz8lbogB2EaT5ihUmo119J4weltNtLVoTEs1MgZ1EF47f3QG769wswJrIYWc8Nk0yZjHUq3mlQg8Ityw=s0-d-e1-ft#https://assets.vercel.com/email/vercel.png"
+                                                                src="https://lh3.googleusercontent.com/a/AAcHTtfq65fiu7DgnyhczMzvFgaa1hvAoKF3vEvPuIyE=s96-c-rg-br100"
                                                                 width="40" height="37" alt="Vercel" class="CToWUd"
                                                                 data-bit="iit"></div>
                                                         <h1

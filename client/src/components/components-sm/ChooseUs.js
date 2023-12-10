@@ -10,11 +10,11 @@ const ChooseUs = () => {
             </div>
             <div className="row gy-4 row-cols-1 row-cols-md-2 row-cols-xl-3">
                 <div className="col">
-                    <div className="card why-card">
+                    <div className="card why-card" style={{ borderBottom: "5px solid #b1a3fe" }}>
                         <div className="card-body text-center p-4">
-                            <div className="bs-icon-md bs-icon-circle bs-icon-primary-light d-inline-block justify-content-center align-items-center d-inline-block mb-3 bs-icon choose-icon">
+                            <div className="bs-icon-md bs-icon-circle bs-icon-primary-light d-inline-block justify-content-center align-items-center d-inline-block mb-3 bs-icon choose-icon" style={{ backgroundColor: "#e0e7ff" }}>
                                 <div className="my-icon">
-                                    <i className="fa-regular fa-circle-check fa-2x" style={{ color: "#3713fda1" }}></i>
+                                    <i className="fa-regular fa-circle-check fa-2x" style={{ color: "#6366f1" }}></i>
                                 </div>
                             </div>
                             <h4 className="card-title">Course</h4>
@@ -23,11 +23,11 @@ const ChooseUs = () => {
                     </div>
                 </div>
                 <div className="col">
-                    <div className="card why-card">
+                    <div className="card why-card" style={{ borderBottom: "5px solid #ec4899" }}>
                         <div className="card-body text-center p-4">
-                            <div className="bs-icon-md bs-icon-circle bs-icon-primary-light d-inline-block justify-content-center align-items-center d-inline-block mb-3 bs-icon choose-icon">
+                            <div className="bs-icon-md bs-icon-circle bs-icon-primary-light d-inline-block justify-content-center align-items-center d-inline-block mb-3 bs-icon choose-icon" style={{ backgroundColor: "#fce7f3" }}>
                                 <div className="my-icon">
-                                    <i className="fa-regular fa-circle-check fa-2x" style={{ color: "#3713fda1" }}></i>
+                                    <i className="fa-regular fa-circle-check fa-2x" style={{ color: "#ec4899" }}></i>
                                 </div>
                             </div>
                             <h4 className="card-title">Compilers</h4>
@@ -36,11 +36,11 @@ const ChooseUs = () => {
                     </div>
                 </div>
                 <div className="col">
-                    <div className="card why-card">
+                    <div className="card why-card" style={{ borderBottom: "5px solid #22c55e" }}>
                         <div className="card-body text-center p-4">
-                            <div className="bs-icon-md bs-icon-circle bs-icon-primary-light d-inline-block justify-content-center align-items-center d-inline-block mb-3 bs-icon choose-icon">
+                            <div className="bs-icon-md bs-icon-circle bs-icon-primary-light d-inline-block justify-content-center align-items-center d-inline-block mb-3 bs-icon choose-icon" style={{ backgroundColor: "#dcfce7" }}>
                                 <div className="my-icon">
-                                    <i className="fa-regular fa-circle-check fa-2x" style={{ color: "#3713fda1" }}></i>
+                                    <i className="fa-regular fa-circle-check fa-2x" style={{ color: "#22c55e" }}></i>
                                 </div>
                             </div>
                             <h4 className="card-title">Online test</h4>
@@ -49,11 +49,11 @@ const ChooseUs = () => {
                     </div>
                 </div>
                 <div className="col">
-                    <div className="card why-card">
+                    <div className="card why-card" style={{ borderBottom: "5px solid #a855f7" }}>
                         <div className="card-body text-center p-4">
-                            <div className="bs-icon-md bs-icon-circle bs-icon-primary-light d-inline-block justify-content-center align-items-center d-inline-block mb-3 bs-icon choose-icon">
+                            <div className="bs-icon-md bs-icon-circle bs-icon-primary-light d-inline-block justify-content-center align-items-center d-inline-block mb-3 bs-icon choose-icon" style={{ backgroundColor: "#f3e8ff" }}>
                                 <div className="my-icon">
-                                    <i className="fa-regular fa-circle-check fa-2x" style={{ color: "#3713fda1" }}></i>
+                                    <i className="fa-regular fa-circle-check fa-2x" style={{ color: "#a855f7" }}></i>
                                 </div>
                             </div>
                             <h4 className="card-title">Certification</h4>
@@ -62,11 +62,11 @@ const ChooseUs = () => {
                     </div>
                 </div>
                 <div className="col">
-                    <div className="card why-card">
+                    <div className="card why-card" style={{ borderBottom: "5px solid #f59e0b" }}>
                         <div className="card-body text-center p-4">
-                            <div className="bs-icon-md bs-icon-circle bs-icon-primary-light d-inline-block justify-content-center align-items-center d-inline-block mb-3 bs-icon choose-icon">
+                            <div className="bs-icon-md bs-icon-circle bs-icon-primary-light d-inline-block justify-content-center align-items-center d-inline-block mb-3 bs-icon choose-icon" style={{ backgroundColor: "#fef3c7" }}>
                                 <div className="my-icon">
-                                    <i className="fa-regular fa-circle-check fa-2x" style={{ color: "#3713fda1" }}></i>
+                                    <i className="fa-regular fa-circle-check fa-2x" style={{ color: "#f59e0b" }}></i>
                                 </div>
                             </div>
                             <h4 className="card-title">Notes</h4>
@@ -75,11 +75,11 @@ const ChooseUs = () => {
                     </div>
                 </div>
                 <div className="col">
-                    <div className="card why-card">
+                    <div className="card why-card" style={{ borderBottom: "5px solid #14b8a6" }}>
                         <div className="card-body text-center p-4">
-                            <div className="bs-icon-md bs-icon-circle bs-icon-primary-light d-inline-block justify-content-center align-items-center d-inline-block mb-3 bs-icon choose-icon">
+                            <div className="bs-icon-md bs-icon-circle bs-icon-primary-light d-inline-block justify-content-center align-items-center d-inline-block mb-3 bs-icon choose-icon" style={{ backgroundColor: "#ccfbf1" }}>
                                 <div className="my-icon">
-                                    <i className="fa-regular fa-circle-check fa-2x" style={{ color: "#3713fda1" }}></i>
+                                    <i className="fa-regular fa-circle-check fa-2x" style={{ color: "#14b8a6" }}></i>
                                 </div>
                             </div>
                             <h4 className="card-title">Educator</h4>

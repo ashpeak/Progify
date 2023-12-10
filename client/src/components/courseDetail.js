@@ -18,10 +18,11 @@ const CourseDetail = () => {
 
             if (res.status === 200) {
                 window.alert("Course Enrolled!");
-                return navigate("/dashboard");
+                // return navigate("/dashboard");
+                return navigatePlay();
             }
         } catch (error) {
-            if(error.response.status === 401) {
+            if (error.response.status === 401) {
                 navigate("/login", {
                     state: {
                         data: id
@@ -41,6 +42,20 @@ const CourseDetail = () => {
         } catch (error) {
             window.alert("Check your network connection!");
         }
+    }
+
+    const navigatePlay = () => {
+        const data = {
+            id: courseData._id,
+            course: courseData.name,
+            creator: courseData.creator,
+            course_pic: courseData.course_pic,
+            isLiked: false
+        }
+
+        navigate("/play", {
+            state: data
+        })
     }
 
     useEffect(() => {

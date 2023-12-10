@@ -9,6 +9,7 @@ const Note = require("../model/userNoteSchema");
 const User = require("../model/userSchema");
 const Token = require("../model/tokenSchema");
 const sendEmail = require("../utils/sendEmail");
+const newCourse = require("../model/newCourseReq");
 
 
 const isAuthorised = (req, res, next) => {
@@ -442,5 +443,48 @@ router.post("/new/course", async (req, res) => {
         res.status(500).json("An error occured")
     }
 });
+
+router.post("/course/request", isAuthorised, async (req, res) => {
+    const { name, email, playlist, message } = req.body;
+
+    if (!name || !email || !playlist) {
+        return res.status(422).json({ error: "Empty input fields!" });
+    }
+
+    try {
+        const course = new newCourse({
+            name,
+            email,
+            playlist,
+            message
+        });
+        await course.save();
+        res.status(201).json({ message: "Request added!" });
+
+    } catch (err) {
+        console.log(err);
+        res.status(500).json("An error occured")
+    }
+});
+
+
+router.post("/request/list", isAuthorised, async (req, res) => {
+
+    try {
+        const list = await newCourse.find({});
+
+        if (!list.length) {
+            return res.status(400).json({ error: "Can't find any requests" });
+        }
+        return res.status(200).json(list);
+
+    } catch (err) {
+        console.log(err);
+        res.status(500).json("An error occured")
+    }
+});
+
+
+
 
 module.exports = router;

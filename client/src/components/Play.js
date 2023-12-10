@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import YouTube from 'react-youtube';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import axios from "axios";
@@ -7,10 +7,11 @@ import axios from "axios";
 const Play = (props) => {
 
     const Location = useLocation();
-    const data = Location.state?.data.id;
-    const likeStatus = Location.state?.data.isLiked;
+    const data = Location.state?.id;
+    const likeStatus = Location.state?.isLiked;
 
     const navigate = useNavigate();
+    const pdfRef = useRef();
 
     const [course, setCourse] = useState(null);
     const [link, setLink] = useState(null);
@@ -315,14 +316,14 @@ const Play = (props) => {
                             <div className="mb-3 note-download">
                                 <h5>{notes.length ? "Your Notes" : "Notes empty"}</h5>
                                 <div>
-                                    <h5 style={{ fontSize: "1.5rem" }} className="btn btn-sm">
+                                    {/* <h5 style={{ fontSize: "1.5rem" }} className="btn btn-sm">
                                         <i class="fa-solid fa-download" style={{ color: "#4882e5" }}></i>
-                                    </h5>
+                                    </h5> */}
                                 </div>
                             </div>
                             {notes && notes.map(note => {
                                 return <>
-                                    <div className="show-note mb-2">
+                                    <div ref={pdfRef} className="show-note mb-2" style={{ width: '100%' }}>
                                         <div className="note-top">
                                             <div className="saved-note">
                                                 <h6 className="ps-1">{note.title}</h6>

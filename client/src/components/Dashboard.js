@@ -20,10 +20,7 @@ const Dashboard = (props) => {
             const Courses = res.data.result;
             setLikes(res.data.courseLoved);
 
-            if (res.status === 401) {
-                window.alert("unAuthorized access");
-            } else {
-                Courses.forEach(course => {
+            Courses.forEach(course => {
                     const { name, _id, creator, course_pic } = course;
                     setUserData(prevValue => {
                         return [
@@ -37,7 +34,6 @@ const Dashboard = (props) => {
                         ];
                     });
                 })
-            }
         } catch (error) {
             const { data, request } = error.response;
             if (data.msg === 'Unauthorized' || request.status === 401) {
@@ -48,9 +44,9 @@ const Dashboard = (props) => {
     }
     useEffect(() => {
         if (props.setLoggedOff() === false) {
-            // navigate("/login");
+            navigate("/login");  //<--------------------------------------------------
         }
-        fetchUserData();
+        fetchUserData();         //<--------------------------------------------------
     }, []);
 
     return (<>

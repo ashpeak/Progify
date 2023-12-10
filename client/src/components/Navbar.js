@@ -59,7 +59,7 @@ const Navbar = (props) => {
                     <ul className="navbar-nav ms-auto">
                         <li className="nav-item"><Link onClick={collapse} className="nav-link" to={"/about"}>ABOUT US</Link></li>
                         <li className="nav-item"><Link onClick={collapse} className="nav-link" to={"/course"}>Courses</Link></li>
-                        <li className="nav-item"><Link onClick={collapse} className="nav-link" to={"/blog"}>BLOG</Link></li>
+                        {/* <li className="nav-item"><Link onClick={collapse} className="nav-link" to={"/blog"}>BLOG</Link></li> */}
                         <li className="nav-item"><a onClick={collapse} className="nav-link" href="/community">Community</a></li>
 
                         {isLoggedIn ?
@@ -70,8 +70,10 @@ const Navbar = (props) => {
                                         <i class="fa-solid fa-user me-2"></i>Dashboard</Link>
                                     <Link className="dropdown-item" to={''}>
                                         <i class="fa-solid fa-gear me-2"></i>Account Setting</Link>
-                                    <Link className="dropdown-item" to={''}><i className="fa-solid fa-wallet me-2"></i>
-                                        <span style={{ color: "rgb(29, 215, 166)" }}>240 </span>C-Coins</Link>
+                                    <Link className="dropdown-item" to={'/course/request'}>
+                                        <i class="fa-solid fa-hand me-2"></i>Request Course</Link>
+                                    {/* <Link className="dropdown-item" to={''}><i className="fa-solid fa-wallet me-2"></i>
+                                        <span style={{ color: "rgb(29, 215, 166)" }}>240 </span>C-Coins</Link> */}
                                     <Link onClick={() => logout()} className="dropdown-item" to={''}><i className="fa-solid fa-right-from-bracket me-2"></i>Logout</Link>
                                 </div>
                             </li> :
