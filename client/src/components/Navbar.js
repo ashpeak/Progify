@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
-import logo from "../img/coursely.png";
+// import logo from "../img/coursely.png";
 
 
 const Navbar = (props) => {
@@ -50,7 +50,7 @@ const Navbar = (props) => {
             <div className="container-fluid">
                 <Link className="navbar-brand d-flex align-items-center" to={"/"}>
                     {/* <span className="coursely">&lt; Progify /&gt;</span> */}
-                    <img src={logo} alt="Coursely" />
+                    <img src={"/image/braintube.png"} alt="Coursely" style={{height: '2.8125rem'}} />
                 </Link>
                 <button type="button" className="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navcol-2">
                     <i className="fa-solid fa-bars-staggered navbar-toggler-icon"></i></button>
