@@ -1,4 +1,3 @@
-const dotenv = require("dotenv").config({path: "./config.env"});
 const express = require("express");
 const passport = require("passport");
 const initializingPassport = require("./router/passportConfig");
