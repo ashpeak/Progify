@@ -343,7 +343,7 @@ router.post("/note/delete", isAuthorised, async (req, res) => {
 });
 
 router.get("/api/course", async (req, res) => {
-    const courses = await Course.find();
+    const courses = await Course.find({});
     if (!courses.length) {
         return res.status(400).json({ error: "Can't find any courses" });
     }
@@ -483,8 +483,6 @@ router.post("/request/list", isAuthorised, async (req, res) => {
         res.status(500).json("An error occured")
     }
 });
-
-
 
 
 module.exports = router;

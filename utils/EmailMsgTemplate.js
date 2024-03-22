@@ -50,7 +50,7 @@ module.exports = (url, subject, mode) => {
                                                                 data-bit="iit"></div>
                                                         <h1
                                                             style="color:#000;font-family:-apple-system,BlinkMacSystemFont,&quot;Segoe UI&quot;,&quot;Roboto&quot;,&quot;Oxygen&quot;,&quot;Ubuntu&quot;,&quot;Cantarell&quot;,&quot;Fira Sans&quot;,&quot;Droid Sans&quot;,&quot;Helvetica Neue&quot;,sans-serif;font-size:24px;font-weight:normal;margin:30px 0;padding:0">
-                                                            ${mainHeading}<b><span style="color: #5766c7;">Coursely</span></b></h1>
+                                                            ${mainHeading}<b><span style="color: #5766c7;">Braintube</span></b></h1>
                                                     </td>
                                                 </tr>
                                             </tbody>
@@ -93,7 +93,7 @@ module.exports = (url, subject, mode) => {
                                         <br>
                                         <p>
                                             <b>
-                                                - Coursely Team
+                                                - Braintube Team
                                             </b>
                                         </p>
                                         <hr style="border:none;border-top:1px solid #eaeaea;margin:26px 0;width:100%">
