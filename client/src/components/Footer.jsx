@@ -36,13 +36,13 @@ const Footer = () => {
                     </div>
                     <div className="col-md-3 text-center text-md-start mt-4 mt-md-0">
                         <h5 className="mb-1 mb-md-3">CONNECT WITH US</h5>
-                        <a rel='noopener noreferrer' target="_blank" href="https://www.facebook.com/">
+                        <a rel='noopener noreferrer' target="_blank" href="https://www.facebook.com/profile.php?id=61557530494249">
                             <p>Facebook</p>
                         </a>
                         <a rel='noopener noreferrer' target="_blank" href="https://www.youtube.com/@kubasoftware">
                             <p>Youtube</p>
                         </a>
-                        <a rel='noopener noreferrer' target="_blank" href="https://www.instagram.com/">
+                        <a rel='noopener noreferrer' target="_blank" href="https://www.instagram.com/braintube_ind/">
                             <p>Instagram</p>
                         </a>
                         <a rel='noopener noreferrer' target="_blank" href="https://t.me/braintube">

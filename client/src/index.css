@@ -1382,3 +1382,28 @@ p {
 }
 
 /* 18. Course Request end */
+
+/* 19. Terms of Service Page */
+
+
+.container-terms {
+  padding: 4rem 0;  /* Adjust padding as needed */
+}
+.section-title {
+  margin-bottom: 1.5rem;
+}
+.additional-info {
+  margin-top: 2rem;
+}
+
+.margin-ts {
+  margin: 0 6rem;
+}
+
+@media (max-width: 767px) {
+  .margin-ts {
+    margin: 0 1.5rem;
+  }  
+}
+
+/* 19. Terms of Service Page end */

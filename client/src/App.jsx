@@ -12,7 +12,7 @@ import Register from "./components/Register";
 import Errorpage from "./components/Errorpage";
 import CourseDetail from "./components/courseDetail";
 import Courses from "./components/components-sm/Courses";
-import Blog from "./components/Blog";
+// import Blog from "./components/Blog";
 import About from "./components/About";
 import Community from "./components/Community";
 import EmailVerify from "./components/EmailVerify";
@@ -20,6 +20,8 @@ import PasswordReset from "./components/PasswordReset";
 import PassResetForm from "./components/PassResetForm";
 import CourseRequest from "./components/CourseRequest";
 import RequestList from "./components/RequestList";
+import TermsOfService from "./components/TermsOfService";
+import PrivacyPolicy from "./components/PrivacyPolicy";
 
 class App extends React.Component {
 
@@ -143,6 +145,8 @@ class App extends React.Component {
             <Route path="/users/:id/verify/:token" element={<EmailVerify />} />
             <Route path="/users/:id/reset/:token" element={<PasswordReset />} />
             <Route path="/users/reset/" element={<PassResetForm />} />
+            <Route path="/terms-of-service" element={<TermsOfService />} />
+            <Route path="/privacy-policy" element={<PrivacyPolicy />} />
             <Route path="*" element={<Errorpage
               setLoggedOff={this.setLoggedOff}
             />} />

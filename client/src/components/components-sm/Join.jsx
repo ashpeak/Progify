@@ -12,7 +12,7 @@ const Join = () => {
                     <div className="pt-3">
                         <div className="row social-icon mb-2">
                             <div className="col-6 col-md-3 facebook">
-                                <a className="custom-link" href="#">
+                                <a className="custom-link" href="https://www.facebook.com/profile.php?id=61557530494249">
                                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="1em" height="1em"
                                         fill="currentColor" className="fa-3x zoom" style={{ "color": "#0d6efd" }}>
                                         <path
@@ -36,7 +36,7 @@ const Join = () => {
                                 </a>
                             </div>
                             <div className="col-6 col-md-3 instagram">
-                                <a className="custom-link" href="#">
+                                <a className="custom-link" href="https://www.instagram.com/braintube_ind/">
                                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="-32 0 512 512" width="1em" height="1em"
                                         fill="currentColor" className="fa-3x zoom" style={{ "color": "#e91e63" }}>
                                         <path
