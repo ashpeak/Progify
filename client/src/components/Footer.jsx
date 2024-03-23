@@ -13,7 +13,9 @@ const Footer = () => {
             <div className="container pt-4 pt-lg-5">
                 <div className="row">
                     <div className="col-md-3 text-center text-md-start">
-                        <img src="/image/braintube.png" height={45} width={167.56} alt="logo" />
+                        <Link to="/">
+                            <img src="/image/braintube.png" height={45} width={167.56} alt="logo" />
+                        </Link>
                         <p style={{ color: "#f3f4f6", fontSize: "1rem" }} className='mt-2'>Never Stop Learning!<br />Join Us Now</p>
                     </div>
                     <div className="col-md-3 text-center text-md-start mt-4 mt-md-0">
@@ -71,7 +73,7 @@ const Footer = () => {
 
                     <div className="col-md-12 text-center mt-2">
                         <p className='ashish'>
-                            Made with ❤️ by <a className='ashish-in' rel='noopener noreferrer' target="_blank" href="https://www.linkedin.com/in/ashishsingh09dev/"><CiLinkedin style={{marginTop: "-0.25rem"}} /> Ashish Singh</a>
+                            Made with ❤️ by <a className='ashish-in' rel='noopener noreferrer' target="_blank" href="https://www.linkedin.com/in/ashishsingh09dev/"><CiLinkedin style={{ marginTop: "-0.25rem" }} /> Ashish Singh</a>
                         </p>
                     </div>
                 </div>

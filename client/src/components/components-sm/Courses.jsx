@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import { Link } from 'react-router-dom';
 import SearchCourseCard from './SearchCourseCard';
 import "react-loading-skeleton/dist/skeleton.css";
+import { FaSearch } from "react-icons/fa";
+import { FaFilter } from "react-icons/fa6";
 
 import LoadingSkeleton from './LoadingSkeleton';
 
@@ -64,7 +65,7 @@ const Courses = () => {
                     <div className='search-box'>
                         <input className='form-control search-input' value={searchText} onChange={e => setSearchText(e.target.value)} placeholder='Search for anything' />
                         <button type='submit' onClick={searchCourse} className='search-btn'>
-                            <i className='fa fa-search search-icon'></i>
+                            <FaSearch className='search-icon' />
                         </button>
                     </div>
                 </form>
@@ -73,7 +74,7 @@ const Courses = () => {
                     <div className='col-lg-3 course-filter'>
 
                         <h4>
-                            <a className="btn btn-outline-secondary" data-bs-toggle="collapse" href="#idfilter" role="button" aria-expanded="true" aria-controls="idfilter"><i className="fa-solid fa-filter"></i> Filter by</a>
+                            <a className="btn btn-outline-secondary" data-bs-toggle="collapse" href="#idfilter" role="button" aria-expanded="true" aria-controls="idfilter"><FaFilter /> Filter by</a>
                         </h4>
                         <div id="idfilter" className='collapse show'>
                             <div className="accordion" id="accordionExample">

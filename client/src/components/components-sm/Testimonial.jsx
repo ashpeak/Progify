@@ -1,4 +1,5 @@
 import React from 'react';
+import { FaStar } from "react-icons/fa";
 
 const Testimonial = () => {
     return (<><section className="testimonial">
@@ -36,11 +37,11 @@ const Testimonial = () => {
                                         src={"/image/user.jpg"} alt='avatar' /></picture>
                                 </div>
                                 <div>
-                                    <i className="fa-solid fa-star" style={{ color: "#ff9e2a" }}></i>
-                                    <i className="fa-solid fa-star" style={{ color: "#ff9e2a" }}></i>
-                                    <i className="fa-solid fa-star" style={{ color: "#ff9e2a" }}></i>
-                                    <i className="fa-solid fa-star" style={{ color: "#ff9e2a" }}></i>
-                                    <i className="fa-solid fa-star" style={{ color: "#ff9e2a" }}></i>
+                                    <FaStar style={{ color: "#ff9e2a" }} />
+                                    <FaStar style={{ color: "#ff9e2a" }} />
+                                    <FaStar style={{ color: "#ff9e2a" }} />
+                                    <FaStar style={{ color: "#ff9e2a" }} />
+                                    <FaStar style={{ color: "#ff9e2a" }} />
                                 </div>
                             </div>
                         </div>
@@ -55,11 +56,11 @@ const Testimonial = () => {
                                         src={"/image/user.jpg"} alt='' /></picture>
                                 </div>
                                 <div>
-                                    <i className="fa-solid fa-star" style={{ color: "#ff9e2a" }}></i>
-                                    <i className="fa-solid fa-star" style={{ color: "#ff9e2a" }}></i>
-                                    <i className="fa-solid fa-star" style={{ color: "#ff9e2a" }}></i>
-                                    <i className="fa-solid fa-star" style={{ color: "#ff9e2a" }}></i>
-                                    <i className="fa-solid fa-star" style={{ color: "#ff9e2a" }}></i>
+                                    <FaStar style={{ color: "#ff9e2a" }} />
+                                    <FaStar style={{ color: "#ff9e2a" }} />
+                                    <FaStar style={{ color: "#ff9e2a" }} />
+                                    <FaStar style={{ color: "#ff9e2a" }} />
+                                    <FaStar style={{ color: "#ff9e2a" }} />
                                 </div>
                             </div>
                         </div>
@@ -74,11 +75,11 @@ const Testimonial = () => {
                                         src={"/image/user.jpg"} alt='' /></picture>
                                 </div>
                                 <div>
-                                    <i className="fa-solid fa-star" style={{ color: "#ff9e2a" }}></i>
-                                    <i className="fa-solid fa-star" style={{ color: "#ff9e2a" }}></i>
-                                    <i className="fa-solid fa-star" style={{ color: "#ff9e2a" }}></i>
-                                    <i className="fa-solid fa-star" style={{ color: "#ff9e2a" }}></i>
-                                    <i className="fa-solid fa-star" style={{ color: "#ff9e2a" }}></i>
+                                    <FaStar style={{ color: "#ff9e2a" }} />
+                                    <FaStar style={{ color: "#ff9e2a" }} />
+                                    <FaStar style={{ color: "#ff9e2a" }} />
+                                    <FaStar style={{ color: "#ff9e2a" }} />
+                                    <FaStar style={{ color: "#ff9e2a" }} />
                                 </div>
                             </div>
                         </div>

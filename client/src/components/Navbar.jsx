@@ -2,6 +2,9 @@ import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import { FaBarsStaggered } from "react-icons/fa6";
+import { FaUser } from "react-icons/fa";
+import { FaHand, FaGear, FaRightFromBracket } from "react-icons/fa6";
 
 // import logo from "../img/Braintube.png";
 
@@ -53,7 +56,7 @@ const Navbar = (props) => {
                     <img src={"/image/braintube.png"} alt="Braintube" style={{height: '2.8125rem'}} />
                 </Link>
                 <button type="button" className="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navcol-2">
-                    <i className="fa-solid fa-bars-staggered navbar-toggler-icon"></i></button>
+                    <FaBarsStaggered /></button>
                 <div className="collapse navbar-collapse flex-row justify-content-center align-items-center navbar-menu"
                     id="navcol-2">
                     <ul className="navbar-nav ms-auto">
@@ -67,14 +70,14 @@ const Navbar = (props) => {
                                 <Link className="dropdown-toggle nav-link" aria-expanded="true" data-bs-toggle="dropdown">{(props.status.name)?.substring(0, 15)}</Link>
                                 <div className="dropdown-menu" data-bs-popper="none">
                                     <Link className="dropdown-item" to={'/dashboard'}>
-                                        <i className="fa-solid fa-user me-2"></i>Dashboard</Link>
+                                        <FaUser className="me-2" />Dashboard</Link>
                                     <Link className="dropdown-item" to={''}>
-                                        <i className="fa-solid fa-gear me-2"></i>Account Setting</Link>
+                                        <FaGear className="me-2" />Account Setting</Link>
                                     <Link className="dropdown-item" to={'/course/request'}>
-                                        <i className="fa-solid fa-hand me-2"></i>Request Course</Link>
+                                        <FaHand className="me-2" />Request Course</Link>
                                     {/* <Link className="dropdown-item" to={''}><i className="fa-solid fa-wallet me-2"></i>
                                         <span style={{ color: "rgb(29, 215, 166)" }}>240 </span>C-Coins</Link> */}
-                                    <Link onClick={() => logout()} className="dropdown-item" to={''}><i className="fa-solid fa-right-from-bracket me-2"></i>Logout</Link>
+                                    <Link onClick={() => logout()} className="dropdown-item" to={''}><FaRightFromBracket className="me-2" />Logout</Link>
                                 </div>
                             </li> :
                             <div>

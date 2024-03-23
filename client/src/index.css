@@ -240,11 +240,6 @@ p {
   border: none;
 }
 
-.navbar-toggler-icon {
-  --bs-navbar-toggler-icon-bg: none;
-  display: inline;
-}
-
 .navbar .my-btn {
   background-color: var(--han-blue-hover);
 }

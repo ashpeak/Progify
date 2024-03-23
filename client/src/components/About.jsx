@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 const About = () => {
     return (<>
         <section>
-            <div className='about-banner' style={{ backgroundImage: `url(/image/hero-banner.png)` }}>
+            <div className='about-banner' style={{ backgroundImage: `url(https://res.cloudinary.com/dhfuu5omv/image/upload/v1711199536/braintube/bc8olmxzkvidopbzqfw6.png)` }}>
                 <div className="container h-100">
                     <div className="row h-100 mb-4">
                         <div className="py-5 col-md-6 text-center text-md-start d-flex d-sm-flex d-md-flex justify-content-center align-items-center justify-content-md-start align-items-md-center justify-content-xl-center">

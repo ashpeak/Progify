@@ -6,7 +6,7 @@ const AboutMe = () => {
     <div className="container">
         <div className="row">
             <div className="col-md-6 about-content">
-                <picture><img className="img-fluid" alt='' src={"/image/hello-user.png"} /></picture>
+                <picture><img className="img-fluid" alt='' src={"https://res.cloudinary.com/dhfuu5omv/image/upload/v1711199535/braintube/dx1ffkfuao720qffprdj.png"} /></picture>
             </div>
             <div className="col-md-6 about-content">
                 <div>

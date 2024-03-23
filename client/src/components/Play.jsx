@@ -5,6 +5,9 @@ import axios from "axios";
 import { IoChatboxOutline } from "react-icons/io5";
 import { FaRegNoteSticky, FaLink, FaLinkSlash } from "react-icons/fa6";
 import { VscBook } from "react-icons/vsc";
+import { FaHeart, FaRegHeart, FaVideo } from "react-icons/fa";
+import { FaRegFolderOpen } from "react-icons/fa6";
+import { FaPencilAlt, FaTrash } from "react-icons/fa";
 
 
 const Play = (props) => {
@@ -246,7 +249,7 @@ const Play = (props) => {
                                     <img src={"/image/wave.gif"} alt="playing" />
                                     &nbsp;&nbsp;Module {link.lesson}</p>
                                 <div className="like-comp">
-                                    <i onClick={dolike} className={isLiked ? "fa-solid fa-heart" : "fa-regular fa-heart"} style={{ color: (isLiked ? "#ff0000" : "#fff"), fontSize: "1.5em" }}></i>
+                                    {isLiked ? <FaHeart onClick={dolike} style={{ color: "#ff0000", fontSize: "1.5em" }} /> : <FaRegHeart onClick={dolike} style={{ color: "#fff", fontSize: "1.5em" }} />}
                                     <span>{totalLikes}</span>
                                 </div>
                             </div>
@@ -271,7 +274,7 @@ const Play = (props) => {
                                                     return <li className='list-group-item'>
                                                         <Link onClick={() => nextLesson({ lesson, link, lessonName })}>
                                                             <div>
-                                                                <i className="fa-solid fa-video"></i>
+                                                                <FaVideo />
                                                                 <p className="module-name">{lessonName}</p>
                                                             </div>
                                                         </Link>
@@ -284,7 +287,7 @@ const Play = (props) => {
                             </div>
                         </div>
                         <div id="tab-2" className="tab-pane" role="tabpanel">
-                            <h5>It's empty!<i className="fa-regular fa-folder-open ms-3"></i></h5>
+                            <h5>It's empty!<FaRegFolderOpen className="ms-3" /></h5>
                         </div>
                         <div id="tab-3" className="tab-pane" role="tabpanel">
                             <div id="notes-sec" className="note mb-5">
@@ -332,8 +335,8 @@ const Play = (props) => {
                                                 <h6 className="ps-1">{note.title}</h6>
                                             </div>
                                             <div className="del-edit">
-                                                <div><button onClick={() => setEdit(note._id)} className="btn"><i className="fa-solid fa-pencil"></i></button></div>
-                                                <div><button onClick={() => deleteNote(note._id)} className="btn"><i className="fa-solid fa-trash"></i></button></div>
+                                                <div><button onClick={() => setEdit(note._id)} className="btn"><FaPencilAlt /></button></div>
+                                                <div><button onClick={() => deleteNote(note._id)} className="btn"><FaTrash /></button></div>
                                             </div>
                                         </div>
                                         <div className="show-noteText">

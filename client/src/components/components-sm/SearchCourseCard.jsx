@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { FaStar } from "react-icons/fa";
 
 const searchCourseCard = (course) => {
     return (<>
@@ -12,10 +13,7 @@ const searchCourseCard = (course) => {
                         <p className="card-text card-p-h4">{course.creator}</p>
 
                         <div style={{ "color": "var(--han-blue)" }}>
-                            <i className="fa-solid fa-star"></i>
-                            <i className="fa-solid fa-star"></i>
-                            <i className="fa-solid fa-star"></i>
-                            <i className="fa-solid fa-star"></i>
+                            <FaStar />
                             <p className="card-text">&nbsp;(56,667)</p>
                         </div>
                         <p className="fw-bold price card-p-h4">Free</p>
