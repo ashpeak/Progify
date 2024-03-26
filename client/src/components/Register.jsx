@@ -32,6 +32,7 @@ const Register = (props) => {
     }
 
     const formSubmit = async (e) => {
+        e.preventDefault();
 
         setData({
             color: "",
@@ -114,7 +115,7 @@ const Register = (props) => {
                     <div className='emailOrgoogle'>
                         <span className='emailOrgoogle-text'>Continue with email</span>
                     </div>
-                    <form method='POST'>
+                    <form method='POST' onSubmit={formSubmit}>
                         <div>
                             <div><input className='login-input form-control' type="text" maxLength={20} minLength={5} onChange={handleInput} name='name' placeholder="Name" value={user.name} required /></div>
                             <div><input className='login-input form-control' type="email" onChange={handleInput} name='username' placeholder="Email" value={user.username} required /></div>
@@ -154,7 +155,7 @@ const Register = (props) => {
                                             aria-label="Processing"
                                             data-testid="loader"
                                         />
-                                    </div> : <button type='button' className="btn my-btn btn-lg-rg" onClick={formSubmit}>Sign Up</button>}
+                                    </div> : <button type='submit' className="btn my-btn btn-lg-rg">Sign Up</button>}
                             </div>
                         </div>
                     </form>

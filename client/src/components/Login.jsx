@@ -91,7 +91,7 @@ const Login = (props) => {
                         <span className='emailOrgoogle-text'>Continue with email</span>
                     </div>
 
-                    <form method='POST'>
+                    <form method='POST' onSubmit={formSubmit}>
                         <div>
                             <div>
                                 <input className='form-control login-input' type="email" onChange={handleChange} autoComplete="off"
@@ -129,7 +129,7 @@ const Login = (props) => {
                                             aria-label="Processing"
                                             data-testid="loader"
                                         />
-                                    </div> : <button type='button' className="btn my-btn btn-lg-rg" onClick={formSubmit}>Login</button>}
+                                    </div> : <button type='submit' className="btn my-btn btn-lg-rg">Login</button>}
                             </div>
                         </div>
                     </form>

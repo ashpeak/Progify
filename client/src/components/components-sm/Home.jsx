@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState } from 'react';
 import Cookies from 'js-cookie'
 import { Link } from 'react-router-dom';
 import Typewriter from 'typewriter-effect';
@@ -7,7 +7,7 @@ const Home = () => {
 
     const [loggedBtn, setLoggedBtn] = useState(false);
 
-    const changeButton = () => {
+    useEffect(() => {
         const cookie = Cookies.get('user');
         if (cookie === undefined) {
             return setLoggedBtn(false);
@@ -15,13 +15,9 @@ const Home = () => {
 
         const loginStatus = JSON.parse(cookie).isLoggedIn;
         if (loginStatus === 'true') {
-            return setLoggedBtn(true);
+            setLoggedBtn(true);
         }
-    }
-
-    useEffect(() => {
-        changeButton();
-    });
+    }, []);
 
     return (<>
         <section id="home" className="banner-wrapper">
@@ -59,7 +55,7 @@ const Home = () => {
                         <Link className="btn my-btn" to={"/course"}>Courses</Link>
                     </div>
                     <div className="col-md-5 order-md-2 order-1 banner-img" style={{ textAlign: "center" }}>
-                        <video autoPlay loop muted playsInline disablePictureInPicture style={{ paddingBottom: "0px", paddingTop: "0px", marginTop: "-20px" }}>
+                        <video className='banner-video' autoPlay loop muted playsInline disablePictureInPicture style={{ paddingBottom: "0px", paddingTop: "0px", marginTop: "-20px" }}>
                             <source src="https://res.cloudinary.com/dhfuu5omv/video/upload/v1711208222/braintube/vizmmlzfsbsbopewkfg8.mp4" type="video/mp4" />
                         </video>
                     </div>

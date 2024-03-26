@@ -119,6 +119,10 @@ p {
   font-weight: 400;
 }
 
+input {
+  box-shadow: none !important;
+}
+
 .sub-red {
   color: #df3b69;
 }
@@ -287,6 +291,16 @@ p {
   .banner-content,
   .banner-img {
     text-align: center;
+  }
+}
+
+.banner-img {
+  overflow-x: hidden;
+}
+
+@media (max-width: 767px) {
+  .banner-video {
+    width: 21rem;
   }
 }
 
@@ -1196,7 +1210,7 @@ p {
 .emailOrgoogle:before {
   content: "";
   position: absolute;
-  top: 50%;
+  top: 70%;
   left: 0;
   right: 0;
   height: 1px;
@@ -1309,7 +1323,7 @@ p {
 }
 
 .search-icon {
-  font-size: 1.4rem;
+  font-size: 2.3rem;
   margin-left: .9rem;
   border-radius: 20px;
   border: 1px solid #b8bdc2cc;
@@ -1341,11 +1355,16 @@ p {
 /* 16. AboutUs Page start */
 
 .about-banner {
-  /* background-image: url("/image/hero-banner.png"); */
   background-position: left;
   background-size: cover;
   color: #fff !important;
   background-repeat: no-repeat;
+}
+
+@media (max-width: 767px) {
+  .about-banner {
+    background-position: center;
+  }  
 }
 
 /* 16. AboutUs Page end */

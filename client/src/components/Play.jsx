@@ -259,7 +259,7 @@ const Play = (props) => {
                         </div>}
 
                         <div id="tab-1" className="tab-pane active" role="tabpanel">
-                            <div className="accordion acrdn-shadow" id="accordionPanelsStayOpenExample">
+                            <div className="accordion acrdn-shadow" style={{ '--bs-accordion-btn-focus-box-shadow': 'none' }} id="accordionPanelsStayOpenExample">
                                 <div className="accordion-item">
                                     <h2 className="accordion-header" id="panelsStayOpen-headingOne">
                                         <button className="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseOne" aria-expanded="true" aria-controls="panelsStayOpen-collapseOne">

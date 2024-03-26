@@ -1,5 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { LazyLoadImage } from 'react-lazy-load-image-component';
+import 'react-lazy-load-image-component/src/effects/blur.css';
 
 const CardCourse = (Props) => {
 
@@ -8,7 +10,12 @@ const CardCourse = (Props) => {
             <Link className="custom-link" to={`/course/id/${Props.id}/detail`}>
                 <div className="card">
                     <div className='mycard-img'>
-                        <img alt="courseImage" className="card-img-top w-100 d-block fit-cover" src={Props.course_pic} />
+                        <LazyLoadImage
+                            alt={"courseImage"}
+                            effect="blur"
+                            className="card-img-top w-100 d-block fit-cover"
+                            src={Props.course_pic} />
+                        {/* <img alt="courseImage" className="card-img-top w-100 d-block fit-cover" src={Props.course_pic} /> */}
                     </div>
                     <div className="card-body">
                         <p className="module card-p-h4">{Props.name}</p>
