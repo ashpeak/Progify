@@ -21,7 +21,7 @@ const Navbar = (props) => {
 
     const check = async () => {
         try {
-            const response = await axios.get('/checklogin');
+            const response = await axios.get('/api/checklogin');
             if (response.data.loggedin === true) {
                 props.setLoggedIn(response.data.name);
             }
@@ -34,7 +34,7 @@ const Navbar = (props) => {
     }
     const logout = async () => {
         try {
-            const response = await axios.get('/logout');
+            const response = await axios.get('/api/logout');
             if (response.status === 200) {
                 props.setLoggedOff(false);
                 navigate('/');

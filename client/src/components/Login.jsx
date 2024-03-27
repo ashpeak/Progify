@@ -40,7 +40,7 @@ const Login = (props) => {
         setLoader(true);
 
         try {
-            const response = await axios.post('/login', user);
+            const response = await axios.post('/api/login', user);
 
             setLoader(false);
             if (response.status === 200) {

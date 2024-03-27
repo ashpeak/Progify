@@ -9,7 +9,7 @@ export default function RequestList(props) {
 
     const getRequests = async () => {
         try {
-            const response = await axios.post('/request/list');
+            const response = await axios.post('/api/request/list');
             setData(response.data);
             console.log(response.data);
         } catch (error) {

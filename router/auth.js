@@ -17,7 +17,7 @@ const isAuthorised = (req, res, next) => {
     return res.status(401).json({ msg: "Unauthorized" });
 }
 
-router.get("/logout", (req, res) => {
+router.get("/api/logout", (req, res) => {
     req.logout((error) => {
         if (!error) return res.status(200).json({ msg: "Logged Out!" });
         return res.status(400).json({ msg: "Error!" });
@@ -39,7 +39,7 @@ router.get("/api/users/dashboard", isAuthorised, async (req, res) => {
     }
 })
 
-router.post("/user/course/loved", isAuthorised, async (req, res) => {
+router.post("/api/user/course/loved", isAuthorised, async (req, res) => {
     const id = req.body.id;
     const user_id = req.user.id;
 
@@ -65,7 +65,7 @@ router.post("/user/course/loved", isAuthorised, async (req, res) => {
     }
 })
 
-router.post("/user/course/unloved", isAuthorised, async (req, res) => {
+router.post("/api/user/course/unloved", isAuthorised, async (req, res) => {
     const id = req.body.id;
     const user_id = req.user.id;
 
@@ -90,11 +90,11 @@ router.post("/user/course/unloved", isAuthorised, async (req, res) => {
     }
 })
 
-router.get("/checklogin", isAuthorised, async (req, res) => {
+router.get("/api/checklogin", isAuthorised, async (req, res) => {
     return res.status(200).json({ loggedin: true, name: req.user.name });
 })
 
-router.post("/enroll", isAuthorised, async (req, res) => {
+router.post("/api/enroll", isAuthorised, async (req, res) => {
     const userId = req.user.id;
     const { courseId } = req.body;
     const lastModule = "Yet to start";
@@ -111,7 +111,7 @@ router.post("/enroll", isAuthorised, async (req, res) => {
     }
 })
 
-router.post("/register", async (req, res) => {
+router.post("/api/register", async (req, res) => {
     let user = await User.findOne({ username: req.body.username });
     if (user) {
         return res.status(400).json({ msg: "User already exists!" });
@@ -224,7 +224,7 @@ router.get("/api/users/:id/reset/:token/pass/:pass", async (req, res) => {
     }
 });
 
-router.post('/login', (req, res) => {
+router.post('/api/login', (req, res) => {
     passport.authenticate('local',
         async (err, user, info) => {
 
@@ -260,7 +260,7 @@ router.post('/login', (req, res) => {
         })(req, res);
 });
 
-router.post("/note", isAuthorised, async (req, res) => {
+router.post("/api/note", isAuthorised, async (req, res) => {
     const userId = req.user.id;
     const { lessonId, courseId } = req.body;
     const customId = courseId + lessonId + userId;
@@ -275,7 +275,7 @@ router.post("/note", isAuthorised, async (req, res) => {
     }
 });
 
-router.post("/note/new", isAuthorised, async (req, res) => {
+router.post("/api/note/new", isAuthorised, async (req, res) => {
     let { courseId, lessonId, title, content } = req.body;
     const userId = req.user.id;
     const customId = courseId + lessonId + userId;
@@ -306,7 +306,7 @@ router.post("/note/new", isAuthorised, async (req, res) => {
     }
 });
 
-router.post("/note/edit", isAuthorised, async (req, res) => {
+router.post("/api/note/edit", isAuthorised, async (req, res) => {
     const userId = req.user.id;
     const { lessonId, courseId, noteId, content } = req.body;
     const customid = courseId + lessonId + userId;
@@ -325,7 +325,7 @@ router.post("/note/edit", isAuthorised, async (req, res) => {
     }
 });
 
-router.post("/note/delete", isAuthorised, async (req, res) => {
+router.post("/api/note/delete", isAuthorised, async (req, res) => {
     const userId = req.user.id;
     const { lessonId, courseId, noteId } = req.body;
     const customid = courseId + lessonId + userId;
@@ -393,7 +393,38 @@ router.get("/api/recommended/course", async (req, res) => {
     }
 });
 
-router.post("/new/course", async (req, res) => {
+router.put('/api/lesson/complete/:userId', isAuthorised, async (req, res) => {
+    const { courseId, lessonId } = req.body;
+    const userId = req.cookies.user_id;
+
+    try {
+        // Find the user
+        const user = await User.findById(req.params.userId);
+
+        // Check if the lessonId already exists in the completed array for the given courseId
+        const course = user.courseEnrolled.find(course => course.courseId === courseId);
+
+        if (course && course.completed.includes(lessonId)) {
+            // If the lessonId exists, remove it
+            await User.updateOne(
+                { _id: req.params.userId, 'courseEnrolled.courseId': courseId },
+                { $pull: { 'courseEnrolled.$.completed': lessonId } }
+            );
+        } else {
+            // If the lessonId does not exist, add it
+            await User.updateOne(
+                { _id: req.params.userId, 'courseEnrolled.courseId': courseId },
+                { $addToSet: { 'courseEnrolled.$.completed': lessonId } }
+            );
+        }
+
+        res.status(200).send('Updated successfully');
+    } catch (err) {
+        res.status(500).send('Server error');
+    }
+});
+
+router.post("/api/new/course", async (req, res) => {
 
     const course_data = req.body.result;
     const key = req.body.api_key;
@@ -444,7 +475,7 @@ router.post("/new/course", async (req, res) => {
     }
 });
 
-router.post("/course/request", isAuthorised, async (req, res) => {
+router.post("/api/course/request", isAuthorised, async (req, res) => {
     const { name, email, playlist, message } = req.body;
 
     if (!name || !email || !playlist) {
@@ -467,8 +498,7 @@ router.post("/course/request", isAuthorised, async (req, res) => {
     }
 });
 
-
-router.post("/request/list", isAuthorised, async (req, res) => {
+router.post("/api/request/list", isAuthorised, async (req, res) => {
 
     try {
         const list = await newCourse.find({});

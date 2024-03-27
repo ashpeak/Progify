@@ -15,7 +15,7 @@ const CourseDetail = () => {
     const enrollCourse = async (courseId) => {
 
         try {
-            const res = await axios.post('/enroll', { courseId });
+            const res = await axios.post('/api/enroll', { courseId });
 
             if (res.status === 200) {
                 window.alert("Course Enrolled!");

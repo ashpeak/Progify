@@ -37,7 +37,7 @@ export default function CourseRequest(props) {
         }
 
         try {
-            const response = await axios.post('/course/request', data);
+            const response = await axios.post('/api/course/request', data);
             if (response.status === 201) {
                 setAlert({
                     status: true,

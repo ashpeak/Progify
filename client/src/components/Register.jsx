@@ -58,7 +58,7 @@ const Register = (props) => {
         setLoader(true);
 
         try {
-            const res = await axios.post('/register', user);
+            const res = await axios.post('/api/register', user);
 
             if (res.status === 201) {
                 setUser({

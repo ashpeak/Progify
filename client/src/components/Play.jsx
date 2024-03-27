@@ -84,7 +84,7 @@ const Play = (props) => {
             content: noteMsg
         }
         try {
-            const res = await axios.post('/note/new', note);
+            const res = await axios.post('/api/note/new', note);
 
             if (res.status === 201) {
                 setNoteMsg("");
@@ -120,7 +120,7 @@ const Play = (props) => {
             noteId: id
         }
         try {
-            const res = await axios.post('/note/edit', note);
+            const res = await axios.post('/api/note/edit', note);
 
             if (res.status === 201) {
                 setNoteMsg("");
@@ -146,7 +146,7 @@ const Play = (props) => {
         }
 
         try {
-            const res = await axios.post('/note/delete', note);
+            const res = await axios.post('/api/note/delete', note);
 
             if (res.status === 200 && res.data.msg === 1) {
                 fetchNotes();
@@ -158,7 +158,7 @@ const Play = (props) => {
 
     const fetchNotes = async () => {
         try {
-            const notes = await axios.post('/note', { lessonId: link.lesson, courseId: course._id });
+            const notes = await axios.post('/api/note', { lessonId: link.lesson, courseId: course._id });
 
             if (notes.status === 200) {
                 setNotes(notes.data);
@@ -177,11 +177,11 @@ const Play = (props) => {
         if (isLiked) {
             setIsLiked(false);
             setTotalLikes(course.love - 1);
-            link = '/user/course/unloved';
+            link = '/api/user/course/unloved';
         } else {
             setIsLiked(true);
             setTotalLikes(course.love + 1);
-            link = '/user/course/loved'
+            link = '/api/user/course/loved'
         }
 
         try {
@@ -201,16 +201,16 @@ const Play = (props) => {
     const handleNote = e => setNoteMsg(e.target.value);
     const handleNoteTitle = e => setNoteTitle(e.target.value);
 
-    useEffect(() => {
-        if (props.setLoggedOff() === false) {
-            navigate("/login");
-        }
-        if (!data) {
-            return navigate("/dashboard");
-        }
+    // useEffect(() => {
+    //     if (props.setLoggedOff() === false) {
+    //         navigate("/login");
+    //     }
+    //     if (!data) {
+    //         return navigate("/dashboard");
+    //     }
 
-        fetchCourseData(data);
-    }, []);
+    //     fetchCourseData(data);
+    // }, []);
 
 
     return (<>
@@ -232,14 +232,22 @@ const Play = (props) => {
             <div className="container">
                 <div>
                     <ul className="nav nav-tabs" role="tablist">
-                        <li className="nav-item" role="presentation"><a className="nav-link active" role="tab" data-bs-toggle="tab"
-                            href="#tab-1"><VscBook className="me-2" size={"1.2rem"} />Chapters</a></li>
-                        <li className="nav-item" role="presentation"><a className="nav-link" role="tab" data-bs-toggle="tab"
-                            href="#tab-2"><IoChatboxOutline className="me-2" size={"1.2rem"} />Discussion</a></li>
-                        <li onClick={fetchNotes} className="nav-item" role="presentation"><a className="nav-link" role="tab" data-bs-toggle="tab"
-                            href="#tab-3"><FaRegNoteSticky className="me-2" size={"1.1rem"} />Notes</a></li>
-                        <li className="nav-item" role="presentation"><a className="nav-link" role="tab" data-bs-toggle="tab"
-                            href="#tab-4"><FaLink className="me-2" size={"1.2rem"} />Resources</a></li>
+                        <li className="nav-item" role="presentation">
+                            <a className="nav-link active" role="tab" data-bs-toggle="tab"
+                                href="#tab-1"><VscBook className="me-2" size={"1.2rem"} />Chapters</a>
+                        </li>
+                        <li className="nav-item" role="presentation">
+                            <a className="nav-link" role="tab" data-bs-toggle="tab"
+                                href="#tab-2"><IoChatboxOutline className="me-2" size={"1.2rem"} />Discussion</a>
+                        </li>
+                        <li onClick={fetchNotes} className="nav-item" role="presentation">
+                            <a className="nav-link" role="tab" data-bs-toggle="tab"
+                                href="#tab-3"><FaRegNoteSticky className="me-2" size={"1.1rem"} />Notes</a>
+                        </li>
+                        <li className="nav-item" role="presentation">
+                            <a className="nav-link" role="tab" data-bs-toggle="tab"
+                                href="#tab-4"><FaLink className="me-2" size={"1.2rem"} />Resources</a>
+                        </li>
                     </ul>
 
                     <div className="tab-content py-4">
@@ -253,10 +261,34 @@ const Play = (props) => {
                                     <span>{totalLikes}</span>
                                 </div>
                             </div>
-                            <div>
-                                <p>{link.lessonName}</p>
+                            <div className="d-flex justify-content-between">
+                                <p style={{marginRight: "1rem"}}>{link.lessonName}</p>
+                                <div className="round d-flex align-items-baseline mt-3">
+                                    <input type="checkbox" id="checkbox" />
+                                    <label htmlFor="checkbox"></label>
+                                    <p style={{marginLeft: "1.5rem", color: "#298f2d"}}>Complete</p>
+                                </div>
                             </div>
                         </div>}
+                        {/* {<div className="playing acrdn-shadow">
+                            <div className="creator-love mt-1 mb-2">
+                                <p style={{ fontWeight: "500" }}>
+                                    <img src={"/image/wave.gif"} alt="playing" />
+                                    &nbsp;&nbsp;Module 25</p>
+                                <div className="like-comp">
+                                    <FaHeart onClick={dolike} style={{ color: "#ff0000", fontSize: "1.5em" }} />
+                                    <span>24</span>
+                                </div>
+                            </div>
+                            <div className="d-flex justify-content-between">
+                                <p style={{marginRight: "1rem"}}>This is a new lesson</p>
+                                <div className="round d-flex align-items-baseline mt-3">
+                                    <input type="checkbox" id="checkbox" />
+                                    <label htmlFor="checkbox"></label>
+                                    <p style={{marginLeft: "1.5rem", color: "#298f2d"}}>Complete</p>
+                                </div>
+                            </div>
+                        </div>} */}
 
                         <div id="tab-1" className="tab-pane active" role="tabpanel">
                             <div className="accordion acrdn-shadow" style={{ '--bs-accordion-btn-focus-box-shadow': 'none' }} id="accordionPanelsStayOpenExample">
