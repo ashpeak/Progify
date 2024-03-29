@@ -21,7 +21,8 @@ const Play = (props) => {
 
     const [course, setCourse] = useState(null);
     const [link, setLink] = useState(null);
-    const [noteMsg, setNoteMsg] = useState(null);
+    const [completed, setCompleted] = useState([]);
+    const [noteMsg, setNoteMsg] = useState("");
     const [noteTitle, setNoteTitle] = useState("Untitled");
     const [notes, setNotes] = useState([]);
     const [isEditing, setIsEditing] = useState(false);
@@ -53,22 +54,29 @@ const Play = (props) => {
     const fetchCourseData = async (data) => {
         try {
             const res = await axios.get(`/api/course/detail/${data}`);
+            const completed = await axios.get(`/api/lesson/completed/${data}`);
 
             const courseData = res.data;
             setTotalLikes(courseData.love);
 
-            const { lesson, link, lessonName } = courseData.lessons[0];
-            const defaultLink = {
-                lesson,
-                link,
-                lessonName
+            if (completed.status === 200) {
+                setCompleted(completed.data);
             }
 
-            setLink(defaultLink);
+            if (!link) {
+                const { lesson, link, lessonName } = courseData.lessons[0];
+                const defaultLink = {
+                    lesson,
+                    link,
+                    lessonName
+                }
+
+                setLink(defaultLink);
+            }
             setCourse(courseData);
 
         } catch (error) {
-            console.log(error.response.data);
+            console.log(error);
         }
     }
 
@@ -198,19 +206,50 @@ const Play = (props) => {
         }
     }
 
+    const lessonCompleted = async () => {
+        const checkbox = document.getElementById("checkbox");
+        // disable checkbox
+        checkbox.disabled = true;
+
+        try {
+            const res = await axios.put('/api/lesson/complete', { courseId: course._id, lessonId: link.lesson });
+
+            if (res.status === 200) {
+                setCompleted(res.data);
+            } else {
+                console.log("Failed to update");
+            }
+
+        } catch (error) {
+            console.log("Failed to update");
+        }
+
+        checkbox.disabled = false;
+    }
+
+    const checkCompleted = () => {
+        if (!completed || completed.length === 0) {
+            return false;
+        } else if (completed.includes(link?.lesson)) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
     const handleNote = e => setNoteMsg(e.target.value);
     const handleNoteTitle = e => setNoteTitle(e.target.value);
 
-    // useEffect(() => {
-    //     if (props.setLoggedOff() === false) {
-    //         navigate("/login");
-    //     }
-    //     if (!data) {
-    //         return navigate("/dashboard");
-    //     }
+    useEffect(() => {
+        if (props.setLoggedOff() === false) {
+            navigate("/login");
+        }
+        if (!data) {
+            return navigate("/dashboard");
+        }
 
-    //     fetchCourseData(data);
-    // }, []);
+        fetchCourseData(data);
+    }, []);
 
 
     return (<>
@@ -262,11 +301,11 @@ const Play = (props) => {
                                 </div>
                             </div>
                             <div className="d-flex justify-content-between">
-                                <p style={{marginRight: "1rem"}}>{link.lessonName}</p>
+                                <p style={{ marginRight: "1rem" }}>{link.lessonName}</p>
                                 <div className="round d-flex align-items-baseline mt-3">
-                                    <input type="checkbox" id="checkbox" />
+                                    <input type="checkbox" onChange={lessonCompleted} checked={checkCompleted()} id="checkbox" />
                                     <label htmlFor="checkbox"></label>
-                                    <p style={{marginLeft: "1.5rem", color: "#298f2d"}}>Complete</p>
+                                    <p style={{ marginLeft: "1.5rem", color: "#298f2d" }}>Complete</p>
                                 </div>
                             </div>
                         </div>}
@@ -281,11 +320,11 @@ const Play = (props) => {
                                 </div>
                             </div>
                             <div className="d-flex justify-content-between">
-                                <p style={{marginRight: "1rem"}}>This is a new lesson</p>
+                                <p style={{ marginRight: "1rem" }}>This is a new lesson</p>
                                 <div className="round d-flex align-items-baseline mt-3">
-                                    <input type="checkbox" id="checkbox" />
+                                    <input type="checkbox" onChange={lessonCompleted} checked={checkCompleted()} id="checkbox" />
                                     <label htmlFor="checkbox"></label>
-                                    <p style={{marginLeft: "1.5rem", color: "#298f2d"}}>Complete</p>
+                                    <p style={{ marginLeft: "1.5rem", color: "#298f2d" }}>Complete</p>
                                 </div>
                             </div>
                         </div>} */}

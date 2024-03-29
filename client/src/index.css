@@ -1405,6 +1405,7 @@ input {
 .about-banner {
   background-position: left;
   background-size: cover;
+  background-color: #5766c7;
   color: #fff !important;
   background-repeat: no-repeat;
 }

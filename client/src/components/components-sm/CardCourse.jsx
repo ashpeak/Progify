@@ -15,7 +15,6 @@ const CardCourse = (Props) => {
                             effect="blur"
                             className="card-img-top w-100 d-block fit-cover"
                             src={Props.course_pic} />
-                        {/* <img alt="courseImage" className="card-img-top w-100 d-block fit-cover" src={Props.course_pic} /> */}
                     </div>
                     <div className="card-body">
                         <p className="module card-p-h4">{Props.name}</p>

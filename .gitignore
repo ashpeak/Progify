@@ -4,6 +4,9 @@
 .env
 config.env
 
+/client/dist/assets
+/client/dist/assets/*
+
 # Logs
 logs
 *.log

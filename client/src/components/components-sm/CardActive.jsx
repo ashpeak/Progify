@@ -1,7 +1,8 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { FaPlayCircle } from "react-icons/fa";
-import { FaHeart, FaRegHeart } from 'react-icons/fa6';
+import { FaHeart, FaRegHeart, FaCirclePlay } from 'react-icons/fa6';
+import { LazyLoadImage } from 'react-lazy-load-image-component';
+import 'react-lazy-load-image-component/src/effects/blur.css';
 
 const CardActive = (Props) => {
     const { course, creator, id, course_pic, isLiked } = Props;
@@ -14,9 +15,13 @@ const CardActive = (Props) => {
 
                 <div className="course-active-card card mb-2">
                     <div className="image">
-                        <img src={course_pic} className='img-fluid' alt='img' width="100%" height="100%" />
+                        <LazyLoadImage
+                            alt="img"
+                            effect="blur"
+                            className='img-fluid'
+                            src={course_pic} />
                         <div className='play-icon-holder'>
-                           <FaPlayCircle className='display-4' />
+                            <FaCirclePlay className='display-4' />
                         </div>
 
                     </div>
@@ -25,7 +30,7 @@ const CardActive = (Props) => {
                         <div className='creator-love'>
                             <p className="active-creator">{creator}</p>
                             <p className="active-creator">
-                            {isLiked ? <FaHeart style={{ color: "#ff0000", fontSize: "1.5em" }} /> : <FaRegHeart style={{ color: "#202124", fontSize: "1.5em" }} />}
+                                {isLiked ? <FaHeart style={{ color: "#ff0000", fontSize: "1.5em" }} /> : <FaRegHeart style={{ color: "#202124", fontSize: "1.5em" }} />}
                             </p>
                         </div>
                         {/* <h4 className="card-p-h4 card-h4">{chapter}<br /></h4>

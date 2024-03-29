@@ -1,4 +1,5 @@
-require("dotenv").config({ path: "../config.env" });
+// require("dotenv").config({ path: "../config.env" });
+require("dotenv").config();
 const express = require("express");
 const router = express.Router();
 require("../DB/conn");
@@ -100,12 +101,16 @@ router.post("/api/enroll", isAuthorised, async (req, res) => {
     const lastModule = "Yet to start";
 
     try {
-        await User.findOneAndUpdate(
+        const user = await User.findOneAndUpdate(
             { _id: userId },
-            { $push: { courseEnrolled: { courseId, lastModule } } },
-            { upsert: true }
+            { $addToSet: { courseEnrolled: { courseId, lastModule } } }
         );
-        return res.status(200).json({ msg: "Enrolled successfully!" });
+
+        if (user) {
+            return res.status(200).json({ msg: "Enrolled successfully!" });
+        } else {
+            return res.status(400).json({ msg: "Failed!" });
+        }
     } catch (error) {
         res.status(404).json({ msg: "User not found! Try again." });
     }
@@ -393,35 +398,49 @@ router.get("/api/recommended/course", async (req, res) => {
     }
 });
 
-router.put('/api/lesson/complete/:userId', isAuthorised, async (req, res) => {
+router.put('/api/lesson/complete', isAuthorised, async (req, res) => {
     const { courseId, lessonId } = req.body;
-    const userId = req.cookies.user_id;
+    const userId = req.user._id;
 
     try {
         // Find the user
-        const user = await User.findById(req.params.userId);
+        let user = await User.findOne({_id: userId});
 
         // Check if the lessonId already exists in the completed array for the given courseId
-        const course = user.courseEnrolled.find(course => course.courseId === courseId);
+        let course = user.courseEnrolled.find(course => course.courseId === courseId);
 
         if (course && course.completed.includes(lessonId)) {
             // If the lessonId exists, remove it
-            await User.updateOne(
-                { _id: req.params.userId, 'courseEnrolled.courseId': courseId },
-                { $pull: { 'courseEnrolled.$.completed': lessonId } }
+            user = await User.findOneAndUpdate(
+                { _id: userId, 'courseEnrolled.courseId': courseId },
+                { $pull: { 'courseEnrolled.$.completed': lessonId } },
+                { new: true }
             );
         } else {
             // If the lessonId does not exist, add it
-            await User.updateOne(
-                { _id: req.params.userId, 'courseEnrolled.courseId': courseId },
-                { $addToSet: { 'courseEnrolled.$.completed': lessonId } }
+            user = await User.findOneAndUpdate(
+                { _id: userId, 'courseEnrolled.courseId': courseId },
+                { $addToSet: { 'courseEnrolled.$.completed': lessonId } },
+                { new: true }
             );
         }
 
-        res.status(200).send('Updated successfully');
+        course = user.courseEnrolled.find(course => course.courseId === courseId);
+
+        res.status(200).json(course.completed);
     } catch (err) {
+        console.log(err);
         res.status(500).send('Server error');
     }
+});
+
+router.get('/api/lesson/completed/:courseId', isAuthorised, async (req, res) => {
+    const user = await User.findOne({ _id: req.user._id });
+    const course = user.courseEnrolled.find(course => course.courseId === req.params.courseId);
+    if (!course) {
+        return res.status(404).send('Course not found');
+    }
+    return res.status(200).json(course.completed);
 });
 
 router.post("/api/new/course", async (req, res) => {
@@ -446,15 +465,8 @@ router.post("/api/new/course", async (req, res) => {
     }
 
     try {
-        let _id = await Course.countDocuments({}) + 1;
-
-        const isExist = await Course.findById(_id);
-        if (isExist) {
-            return res.status(422).json({ error: "Course with same ID not allowed" });
-        }
 
         const course = new Course({
-            _id,
             name,
             creator,
             love,
