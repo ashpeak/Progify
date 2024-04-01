@@ -49,6 +49,7 @@ const Login = () => {
             setLoader(false);
             if (response.status === 200) {
                 setLoggedUser(response.data);
+                navigate("/dashboard");
             } else {
                 const { data } = response;
                 setLoader(false);

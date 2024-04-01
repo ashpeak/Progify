@@ -22,7 +22,7 @@ import RequestList from "./components/RequestList";
 import TermsOfService from "./components/TermsOfService";
 import PrivacyPolicy from "./components/PrivacyPolicy";
 import { userState } from "./store/userState";
-import { Toaster, toast } from 'sonner';
+import { Toaster } from 'sonner';
 import axiosHelper from "./lib/axiosHelper";
 
 let firstRender = true;
@@ -36,10 +36,11 @@ const App = () => {
     if (res.status === 200) {
       setLoggedUser(res.data);
     } else {
-      toast.error("Session expired, please login again");
       setLoggedUser({ loggedIn: false, name: "", role: "" });
     }
   }
+
+  console.log(user);
 
   useEffect(() => {
     if (firstRender) {

@@ -35,7 +35,7 @@ const Navbar = () => {
                         {/* <li className="nav-item"><Link onClick={collapse} className="nav-link" to={"/blog"}>BLOG</Link></li> */}
                         <li className="nav-item"><a onClick={collapse} className="nav-link" href="/community">Community</a></li>
 
-                        {user.loggedIn ?
+                        {user.loggedIn ? (
                             <li className="nav-item custom-dropdown">
                                 <Link className="dropdown-toggle nav-link" aria-expanded="true" data-bs-toggle="dropdown">{(user.name)?.substring(0, 15)}</Link>
                                 <div className="dropdown-menu" data-bs-popper="none">
@@ -49,11 +49,11 @@ const Navbar = () => {
                                         <span style={{ color: "rgb(29, 215, 166)" }}>240 </span>C-Coins</Link> */}
                                     <Link onClick={() => logout()} className="dropdown-item" to={''}><FaRightFromBracket className="me-2" />Logout</Link>
                                 </div>
-                            </li> :
+                            </li>) : (
                             <div>
                                 <Link onClick={() => collapse()} className="btn my-btn-outline nav-item" to={"/login"}><span>Log in</span></Link>
                                 <Link onClick={collapse} className="btn my-btn nav-item" to={"/register"}><span>Sign up</span></Link>
-                            </div>}
+                            </div>)}
                     </ul>
                 </div>
             </div>

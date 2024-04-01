@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import axios from 'axios';
+import axiosHelper from '../lib/axiosHelper';
 import MoonLoader from "react-spinners/MoonLoader";
 
 const PassResetForm = () => {
@@ -22,7 +22,7 @@ const PassResetForm = () => {
         }
 
         try {
-            const response = await axios.get(`/api/users/${user}/reset/`);
+            const response = await axiosHelper(`/api/users/${user}/reset`, 'GET');
             if (response.status === 200) {
                 setUser("");
                 setData(response.data.msg);

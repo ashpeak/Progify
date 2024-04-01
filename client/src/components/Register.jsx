@@ -44,7 +44,7 @@ const Register = () => {
         }
 
         if (user.password !== user.confirmPassword) {
-            window.alert("Password & Confirm Password should be same!");
+            toast.error("Password & Confirm Password should be same!");
             return;
         }
         if (user.name.length > 20 || user.name.length < 5 || user.password.length < 8 || user.password.length > 30) {
@@ -84,10 +84,10 @@ const Register = () => {
                     color: "#dc5a5a",
                     msg: res.data.msg
                 });
+                setLoader(false);
             }
 
         } catch (error) {
-            setLoader(false);
             console.log(error);
         }
     }

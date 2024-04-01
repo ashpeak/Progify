@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useParams } from 'react-router-dom';
-import axios from 'axios';
+import axiosHelper from '../lib/axiosHelper';
 import HashLoader from "react-spinners/HashLoader";
 import MoonLoader from "react-spinners/MoonLoader";
 
@@ -39,7 +39,7 @@ const PasswordReset = () => {
         }
 
         try {
-            const response = await axios.get(`/api/users/${params.id}/reset/${params.token}/pass/${pass.password}`);
+            const response = await axiosHelper(`/api/users/${params.id}/reset/${params.token}/pass/${pass.password}`, 'GET');
             if (response.status === 200) {
                 setData(response.data.msg);
                 setColor("#5cdc5a");
@@ -48,12 +48,13 @@ const PasswordReset = () => {
                     password: "",
                     confirmPassword: ""
                 });
+            } else {
+                setColor("#dc5a5a");
+                setMoon(false);
+                setData(response.data.msg);
             }
         } catch (error) {
-            const { data } = error.response;
-            setColor("#dc5a5a");
-            setMoon(false);
-            setData(data.msg);
+            console.log(error);
         }
     }
 
@@ -62,7 +63,7 @@ const PasswordReset = () => {
         const token = params.token;
 
         try {
-            const response = await axios.get(`/api/users/${id}/reset/${token}/pass/0`);
+            const response = await axiosHelper(`/api/users/${id}/reset/${token}/pass/0`, 'GET');
             if (response.status === 200) {
                 setLoading(false);
                 setValid(true);

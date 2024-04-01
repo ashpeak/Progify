@@ -1,13 +1,15 @@
-import axios from 'axios';
+import axiosHelper from '../lib/axiosHelper';
 import React, { useState, useEffect } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import HashLoader from "react-spinners/HashLoader";
 import { FaCheckCircle } from "react-icons/fa";
+import { userState } from "../store/userState";
 
 const EmailVerify = () => {
 
     const [validUrl, setValidUrl] = useState(false);
     const [loading, setLoading] = useState(true);
+    const { setLoggedUser } = userState();
 
     const params = useParams();
 
@@ -15,11 +17,15 @@ const EmailVerify = () => {
         try {
             const url = `/api/users/${params.id}/verify/${params.token}`;
 
-            const response = await axios.get(url);
+            const response = await axiosHelper(url, 'GET');
 
             if (response.status === 200) {
+                setLoggedUser(response.data);
                 setLoading(false);
                 setValidUrl(true);
+            } else {
+                setLoading(false);
+                setValidUrl(false);
             }
         } catch (error) {
             setLoading(false);

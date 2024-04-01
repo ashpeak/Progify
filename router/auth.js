@@ -157,7 +157,11 @@ router.post("/api/register", async (req, res) => {
         return res.status(400).json({ msg: "Invalid Input!" });
     }
     try {
-        user = await User.create(req.body);
+        user = await User.create({
+            name,
+            email,
+            password
+        });
 
         const token = new Token({
             userId: user._id,
@@ -166,43 +170,40 @@ router.post("/api/register", async (req, res) => {
 
         token.save();
 
-        const url = `${process.env.BASE_URL}/api/users/${user.id}/verify/${token.token}`;
+        const url = `${process.env.BASE_URL}/users/${user.id}/verify/${token.token}`;
         await sendEmail(user.email, "Confirm account", url, "VERIFY");
 
         res.status(201).json({ msg: "An Email sent to your account please verify" });
     } catch (err) {
         console.log(err);
+        res.status(500).json({ msg: "Error occured!" });
     }
 });
 
 router.get("/api/users/:id/verify/:token", async (req, res) => {
     try {
-        const user = await User.findOne({ _id: req.params.id });
-
-        if (!user) return res.status(400).json({ msg: "Invalid link!" });
-
         const token = await Token.findOne({
-            userId: user._id,
+            userId: req.params.id,
             token: req.params.token
         });
 
         if (!token) return res.status(400).json({ msg: "Invalid link!" });
 
-        await User.updateOne(
-            { _id: user._id },
+        const user = await User.findOneAndUpdate(
+            { _id: req.params.id },
             { $set: { verified: true } }
         );
 
-        if (user.verified) return res.status(200).json({ msg: "Email already verified!" });
+        if (!user) return res.status(400).json({ msg: "Invalid link!" });
 
-        const accessToken = jwt.sign({ id: user._id, role: user.role }, process.env.JWT_ACCESS_SECRET, { expiresIn: "2m" });
+        const accessToken = jwt.sign({ id: user._id, role: user.role, name: user.name }, process.env.JWT_ACCESS_SECRET, { expiresIn: "5m" });
         const refreshToken = jwt.sign({ id: user._id }, process.env.JWT_ACCESS_SECRET, { expiresIn: "90d" });
 
         const options = {
             path: "/",
             httpOnly: true,
             sameSite: "lax",
-            expires: new Date(2 * 60 * 1000),
+            expires: new Date(5 * 60 * 1000),
         }
 
         await RefreshToken.create({
@@ -213,7 +214,7 @@ router.get("/api/users/:id/verify/:token", async (req, res) => {
         res.cookie("accessToken", accessToken, { ...options });
         res.cookie("refreshToken", refreshToken, { ...options, expires: new Date(Date.now() + 90 * 24 * 60 * 60 * 1000) });
 
-        return res.status(200).json({ msg: "Email verified successfully!" });
+        return res.status(200).json({ name: user.name, role: user.role });
 
     } catch (error) {
         console.log(error);
@@ -221,7 +222,7 @@ router.get("/api/users/:id/verify/:token", async (req, res) => {
     }
 });
 
-router.get("/api/users/:email/reset/", async (req, res) => {
+router.get("/api/users/:email/reset", async (req, res) => {
     try {
         const user = await User.findOne({ email: req.params.email });
 
@@ -238,7 +239,7 @@ router.get("/api/users/:email/reset/", async (req, res) => {
             token.save();
         }
 
-        const url = `${process.env.BASE_URL}/api/users/${user.id}/reset/${token.token}`;
+        const url = `${process.env.BASE_URL}/users/${user.id}/reset/${token.token}`;
         await sendEmail(user.email, "Password Reset", url, "RESET");
 
         return res.status(200).json({ msg: "Password reset link sent" });
@@ -310,7 +311,7 @@ router.post('/api/login', async (req, res) => {
     res.cookie("accessToken", accessToken, { ...options });
     res.cookie("refreshToken", refreshToken, { ...options, expires: new Date(Date.now() + 90 * 24 * 60 * 60 * 1000) });
 
-    return res.status(200).json({ msg: "Logged in!" });
+    return res.status(200).json({ name: user.name, role: user.role });
 
 });
 
