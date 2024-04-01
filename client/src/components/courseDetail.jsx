@@ -3,9 +3,11 @@ import { Link, useNavigate, useParams } from 'react-router-dom';
 import axiosHelper from '../lib/axiosHelper';
 import { FaGlobe } from "react-icons/fa";
 import { toast } from 'sonner';
+import { userState } from '../store/userState';
 
 const CourseDetail = () => {
 
+    const user = userState((state) => state.user);
     const params = useParams();
     const id = params.id;
 
@@ -16,11 +18,14 @@ const CourseDetail = () => {
     const enrollCourse = async (courseId) => {
 
         try {
+
+            if (!user.loggedIn) return navigate(`/login?redirect=${encodeURIComponent(window.location.href)}`);
+
             const res = await axiosHelper('/api/enroll', 'POST', { courseId });
 
             if (res.status === 200) {
                 toast.success(res.data.msg);
-                return navigatePlay();
+                return navigate("/dashboard");
             } else {
                 toast.error(res.data.msg);
             }
@@ -41,23 +46,9 @@ const CourseDetail = () => {
         }
     }
 
-    const navigatePlay = () => {
-        const data = {
-            id: courseData._id,
-            course: courseData.name,
-            creator: courseData.creator,
-            course_pic: courseData.course_pic,
-            isLiked: false
-        }
-
-        navigate("/play", {
-            state: data
-        })
-    }
-
     useEffect(() => {
         if (!id) {
-            return navigate("/course");
+            return navigate("/dashboard");
         }
         getCourse(id);
     }, []);
