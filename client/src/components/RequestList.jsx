@@ -1,27 +1,20 @@
-import React, { useEffect, useState } from 'react'
-import { useNavigate } from 'react-router-dom'
-import axios from 'axios';
+import React, { useEffect, useState } from 'react';
+import axiosHelper from '../lib/axiosHelper';
 
-export default function RequestList(props) {
-    const navigate = useNavigate();
+export default function RequestList() {
 
     const [data, setData] = useState([]);
 
     const getRequests = async () => {
         try {
-            const response = await axios.post('/api/request/list');
+            const response = await axiosHelper('/api/request/list', 'POST');
             setData(response.data);
-            console.log(response.data);
         } catch (error) {
             console.log(error.response.data);
         }
     }
 
     useEffect(() => {
-        if (props.setLoggedOff() === false) {
-            navigate("/login");
-        }
-
         getRequests();
     }, []);
 

@@ -1,23 +1,10 @@
-import React, { useEffect, useState } from 'react';
-import Cookies from 'js-cookie'
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import Typewriter from 'typewriter-effect';
+import { userState } from '../../store/userState';
 
 const Home = () => {
-
-    const [loggedBtn, setLoggedBtn] = useState(false);
-
-    useEffect(() => {
-        const cookie = Cookies.get('user');
-        if (cookie === undefined) {
-            return setLoggedBtn(false);
-        }
-
-        const loginStatus = JSON.parse(cookie).isLoggedIn;
-        if (loginStatus === 'true') {
-            setLoggedBtn(true);
-        }
-    }, []);
+    const user = userState((state) => state.user);
 
     return (<>
         <section id="home" className="banner-wrapper">
@@ -51,7 +38,7 @@ const Home = () => {
                             />
                         </h1>
                         <h4>Join Now And Start Learning<br />From Leading Teachers In Industry.</h4>
-                        {loggedBtn ? <Link className="btn my-btn-outline" style={{ width: "6.2rem" }} to={"/dashboard"}>Dashboard</Link> : <Link className="btn my-btn-outline" to={"/register"}>Sign Up</Link>}
+                        {user.loggedIn ? <Link className="btn my-btn-outline" style={{ width: "6.2rem" }} to={"/dashboard"}>Dashboard</Link> : <Link className="btn my-btn-outline" to={"/register"}>Sign Up</Link>}
                         <Link className="btn my-btn" to={"/course"}>Courses</Link>
                     </div>
                     <div className="col-md-5 order-md-2 order-1 banner-img" style={{ textAlign: "center" }}>

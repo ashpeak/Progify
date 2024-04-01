@@ -5,10 +5,24 @@ const userSchema = new mongoose.Schema({
         type: String,
         required: true
     },
-    username: {
+    email: {
         type: String,
         required: true,
-        unique: true
+        unique: true,
+        validate: {
+            validator: function (value) {
+                // Regular expression to validate email format
+                const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+                return emailRegex.test(value);
+            },
+            message: "Invalid email format"
+        }
+    },
+    role: {
+        type: String,
+        required: true,
+        enum: ["user", "admin"],
+        default: "user"
     },
     password: {
         type: String,
@@ -20,7 +34,10 @@ const userSchema = new mongoose.Schema({
     },
     courseEnrolled: [{
         id: String,
-        courseId: String,
+        courseId: {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: "Course"
+        },
         lastModule: String,
         completed: {
             type: Array,
@@ -28,9 +45,7 @@ const userSchema = new mongoose.Schema({
         }
     }],
     courseLoved: [],
-    email: String,
-    googleId: String,
-    secret: String
+    googleId: String
 });
 
 const User = mongoose.model("User", userSchema);

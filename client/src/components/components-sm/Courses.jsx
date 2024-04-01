@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import axios from 'axios';
+import axiosHelper from '../../lib/axiosHelper';
 import SearchCourseCard from './SearchCourseCard';
 import "react-loading-skeleton/dist/skeleton.css";
 import { FaSearch } from "react-icons/fa";
@@ -16,7 +16,7 @@ const Courses = () => {
 
 
     const fetchCourse = async () => {
-        const res = await axios.get("/api/course");
+        const res = await axiosHelper("/api/course", "GET");
         if (res) {
             setCourses(res.data);
         }

@@ -4,14 +4,10 @@ import { FaHeart, FaRegHeart, FaCirclePlay } from 'react-icons/fa6';
 import { LazyLoadImage } from 'react-lazy-load-image-component';
 import 'react-lazy-load-image-component/src/effects/blur.css';
 
-const CardActive = (Props) => {
-    const { course, creator, id, course_pic, isLiked } = Props;
+const CardActive = ({ course, creator, id, course_pic, isLiked }) => {
     return (<>
         <div className="col-md-6 item-center" key={id}>
-            <Link className="custom-link"
-                to={"/play"}
-                state={Props}>
-                {/* state={{ data: Props }}> */}
+            <Link className="custom-link" to={`/play/${id}`}>
 
                 <div className="course-active-card card mb-2">
                     <div className="image">

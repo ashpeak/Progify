@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { Link, useNavigate, useParams } from 'react-router-dom';
-import axios from 'axios';
+import axiosHelper from '../lib/axiosHelper';
 import { FaGlobe } from "react-icons/fa";
+import { toast } from 'sonner';
 
 const CourseDetail = () => {
 
@@ -15,33 +16,28 @@ const CourseDetail = () => {
     const enrollCourse = async (courseId) => {
 
         try {
-            const res = await axios.post('/api/enroll', { courseId });
+            const res = await axiosHelper('/api/enroll', 'POST', { courseId });
 
             if (res.status === 200) {
-                window.alert("Course Enrolled!");
-                // return navigate("/dashboard");
+                toast.success(res.data.msg);
                 return navigatePlay();
+            } else {
+                toast.error(res.data.msg);
             }
         } catch (error) {
-            if (error.response.status === 401) {
-                navigate("/login", {
-                    state: {
-                        data: id
-                    }
-                });
-            }
+            console.log(error);
         }
     }
 
     const getCourse = async (courseID) => {
         try {
-            const res = await axios.get('/api/course/detail/' + courseID);
+            const res = await axiosHelper('/api/course/detail/' + courseID, 'GET');
 
             if (res.status === 200) {
                 setCoursedata(res.data);
             }
         } catch (error) {
-            window.alert("Check your network connection!");
+            toast.error("Something went wrong!");
         }
     }
 
@@ -117,9 +113,7 @@ const CourseDetail = () => {
                             <div id="panelsStayOpen-collapseOne" className="accordion-collapse collapse show" aria-labelledby="panelsStayOpen-headingOne">
                                 <div className="accordion-body">
                                     <ul className='list-group'>
-                                        {courseData && courseData.lessons.map(lesson => {
-                                            return <li className='list-group-item'>{lesson.lessonName}</li>
-                                        })}
+                                        {courseData && courseData.lessons.map(lesson => <li key={lesson._id} className='list-group-item'>{lesson.lessonName}</li>)}
                                     </ul>
                                 </div>
                             </div>

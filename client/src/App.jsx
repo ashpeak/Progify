@@ -1,6 +1,5 @@
-import React from "react";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
-import Cookies from 'js-cookie'
+import React, { useEffect } from "react";
+import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
@@ -22,141 +21,74 @@ import CourseRequest from "./components/CourseRequest";
 import RequestList from "./components/RequestList";
 import TermsOfService from "./components/TermsOfService";
 import PrivacyPolicy from "./components/PrivacyPolicy";
+import { userState } from "./store/userState";
+import { Toaster, toast } from 'sonner';
+import axiosHelper from "./lib/axiosHelper";
 
-class App extends React.Component {
+let firstRender = true;
+const App = () => {
 
-  constructor() {
-    super();
-    this.state = {
-      isLoggedIn: 'false',
-      name: 'user'
+  const user = userState((state) => state.user);
+  const { setLoggedUser } = userState();
+
+  const refreshState = async () => {
+    const res = await axiosHelper('/api/token/refresh', 'GET');
+    if (res.status === 200) {
+      setLoggedUser(res.data);
+    } else {
+      toast.error("Session expired, please login again");
+      setLoggedUser({ loggedIn: false, name: "", role: "" });
     }
   }
 
-  setLoggedIn = (username) => {
-    const inTwoDay = new Date(new Date().getTime() + 2880 * 60 * 1000); //2 days
-    Cookies.set('user', JSON.stringify({ name: username, isLoggedIn: 'true', coins: '500' }), { expires: inTwoDay });
-
-    const {isLoggedIn, name} = JSON.parse(Cookies.get('user'));
-    this.setState({
-      isLoggedIn,
-      name
-    });
-  }
-
-  setLoggedOff = (state = true) => {
-    if (state) {
-      const cookie = Cookies.get('user');
-      if (cookie === undefined) {
-        return false;
-      }
-      try {
-        const loginStatus = JSON.parse(cookie).isLoggedIn;
-
-        if (loginStatus === 'true') {
-          return true;
-        } else {
-          this.setState({
-            isLoggedIn: 'false',
-          });
-          Cookies.remove('user');
-        }
-      } catch (error) {
-        this.setState({
-          isLoggedIn: 'false',
-        });
-        Cookies.remove('user');
-      }
-      return false;
+  useEffect(() => {
+    if (firstRender) {
+      firstRender = false;
+      refreshState();
     }
-    Cookies.remove('user');
-    this.setState({
-      isLoggedIn: 'false',
-      name: 'user'
-    });
-  }
 
-  componentDidMount() {
-    let status = 'false';
-    if (this.setLoggedOff()) {
-      status = 'true';
+    const intervalId = setInterval(refreshState, 290000);
 
-      this.setState({
-        isLoggedIn: status,
-        name: JSON.parse(Cookies.get('user')).name
-      });
+    return () => {
+      clearInterval(intervalId);
     }
-  }
+  }, []);
 
-  render() {
-    return (
-      <>
-        <BrowserRouter>
-          <Navbar
-            status={this.state}
-            setLoggedIn={this.setLoggedIn}
-            setLoggedOff={this.setLoggedOff}
-          />
-          <Routes>
+  return (
+    <>
+      <BrowserRouter>
+        <Toaster richColors />
+        <Navbar />
+        <Routes>
 
-            <Route path="/" element={<Landing
-              setLoggedOff={this.setLoggedOff}
-            />} />
-            <Route path="/dashboard" element={<Dashboard
-              setLoggedOff={this.setLoggedOff}
-            />} />
-            <Route path="/course" element={<Courses
-              setLoggedOff={this.setLoggedOff}
-            />} />
-            <Route path="/login" element={<Login
-              setLoggedIn={this.setLoggedIn}
-              setLoggedOff={this.setLoggedOff}
-            />} />
-            <Route path="/register" element={<Register
-              setLoggedOff={this.setLoggedOff}
-            />} />
-            <Route path="/course/id/:id/detail" element={<CourseDetail
-              setLoggedOff={this.setLoggedOff}
-            />} />
-            <Route path="/play" element={<Play
-              setLoggedOff={this.setLoggedOff}
-            />} />
-            <Route path="/course" element={<Courses
-              setLoggedOff={this.setLoggedOff}
-            />} />
-            {/* <Route path="/blog" element={<Blog
-              setLoggedOff={this.setLoggedOff}
+          <Route path="/" element={<Landing />} />
+          <Route path="/dashboard" element={user.loggedIn ? <Dashboard /> : <Navigate to={`/login?redirect=${encodeURIComponent(window.location.href)}`} />} />
+          <Route path="/course" element={<Courses />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/register" element={user.loggedIn ? <Navigate to="/dashboard" /> : <Register />} />
+          <Route path="/course/id/:id/detail" element={<CourseDetail />} />
+          <Route path="/play/:id" element={user.loggedIn ? <Play /> : <Navigate to={`/login?redirect=${encodeURIComponent(window.location.href)}`} />} />
+          {/* <Route path="/blog" element={<Blog
+              setLoggedOff={setLoggedOff}
             />} /> */}
-            <Route path="/course/request" element={<CourseRequest
-              setLoggedOff={this.setLoggedOff}
-            />} />
-            <Route path="/about" element={<About
-              setLoggedOff={this.setLoggedOff}
-            />} />
-            <Route path="/about" element={<About
-              setLoggedOff={this.setLoggedOff}
-            />} />
-            <Route path="/request/list" element={<RequestList
-              setLoggedOff={this.setLoggedOff}
-            />} />
-            <Route path="/community" element={<Community
-              setLoggedOff={this.setLoggedOff}
-            />} />
-            <Route path="/users/:id/verify/:token" element={<EmailVerify />} />
-            <Route path="/users/:id/reset/:token" element={<PasswordReset />} />
-            <Route path="/users/reset/" element={<PassResetForm />} />
-            <Route path="/terms-of-service" element={<TermsOfService />} />
-            <Route path="/privacy-policy" element={<PrivacyPolicy />} />
-            <Route path="*" element={<Errorpage
-              setLoggedOff={this.setLoggedOff}
-            />} />
+          <Route path="/course/request" element={user.loggedIn ? <CourseRequest /> : <Navigate to={`/login?redirect=${encodeURIComponent(window.location.href)}`} />} />
+          <Route path="/request/list" element={(user.loggedIn) ? <RequestList /> : <Navigate to={`/login?redirect=${encodeURIComponent(window.location.href)}`} />} />
+          {/* <Route path="/request/list" element={(user.loggedIn && user.role === "admin") ? <RequestList /> : <Navigate to={`/error`} />} /> */}
+          <Route path="/community" element={<Community />} />
+          <Route path="/users/:id/verify/:token" element={<EmailVerify />} />
+          <Route path="/users/:id/reset/:token" element={<PasswordReset />} />
+          <Route path="/users/reset/" element={user.loggedIn ? <PassResetForm /> : <Navigate to={'/dashboard'} />} />
+          <Route path="/terms-of-service" element={<TermsOfService />} />
+          <Route path="/privacy-policy" element={<PrivacyPolicy />} />
+          <Route path="/about" element={<About />} />
+          <Route path="/error" element={<Errorpage />} />
+          <Route path="*" element={<Errorpage />} />
 
-          </Routes>
-          <Footer />
-        </BrowserRouter>
-      </>
-    );
-  }
+        </Routes>
+        <Footer />
+      </BrowserRouter>
+    </>
+  );
 }
 
 export default App;

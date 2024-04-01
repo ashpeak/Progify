@@ -1,33 +1,20 @@
 require('dotenv').config();
 
 const express = require("express");
-const passport = require("passport");
-const initializingPassport = require("./router/passportConfig");
-const expressSession = require("express-session");
 const cors = require("cors");
 const path = require("path");
+const cookieParser = require('cookie-parser');
 
 const app = express();
 require("./DB/conn");
 
-initializingPassport(passport);
-
 app.use(express.json());
 app.use(express.urlencoded({extended: true}));
-app.use(cors());
-app.use(expressSession({
-    secret: process.env.SECRET,
-    resave: false,
-    saveUninitialized: false,
-    cookie: {
-        sameSite: true,
-        maxAge: parseInt(process.env.COOKIE_MAX_AGE),
-        httpOnly: true
-    }
+app.use(cookieParser());
+app.use(cors({
+    origin: "http://localhost:5173", // Replace with your client's origin
+    credentials: true,
 }));
-
-app.use(passport.initialize());
-app.use(passport.session());
 
 // Serving the Frontend
 app.use(express.static(path.join(__dirname, "./client/dist")));

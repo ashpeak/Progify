@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
 import YouTube from 'react-youtube';
-import { Link, useLocation, useNavigate } from 'react-router-dom';
+import { Link, useNavigate, useParams } from 'react-router-dom';
 import axios from "axios";
 import { IoChatboxOutline } from "react-icons/io5";
 import { FaRegNoteSticky, FaLink, FaLinkSlash } from "react-icons/fa6";
@@ -8,13 +8,14 @@ import { VscBook } from "react-icons/vsc";
 import { FaHeart, FaRegHeart, FaVideo } from "react-icons/fa";
 import { FaRegFolderOpen } from "react-icons/fa6";
 import { FaPencilAlt, FaTrash } from "react-icons/fa";
+import axiosHelper from "../lib/axiosHelper";
+import { toast } from "sonner";
 
 
-const Play = (props) => {
+const Play = () => {
 
-    const Location = useLocation();
-    const data = Location.state?.id;
-    const likeStatus = Location.state?.isLiked;
+    const params = useParams();
+    const id = params.id;
 
     const navigate = useNavigate();
     const pdfRef = useRef();
@@ -27,7 +28,7 @@ const Play = (props) => {
     const [notes, setNotes] = useState([]);
     const [isEditing, setIsEditing] = useState(false);
     const [editingId, setEditingId] = useState(null);
-    const [isLiked, setIsLiked] = useState(likeStatus);
+    const [isLiked, setIsLiked] = useState(false);
     const [totalLikes, setTotalLikes] = useState(0);
 
     const opts = {
@@ -53,11 +54,12 @@ const Play = (props) => {
 
     const fetchCourseData = async (data) => {
         try {
-            const res = await axios.get(`/api/course/detail/${data}`);
-            const completed = await axios.get(`/api/lesson/completed/${data}`);
+            const res = await axiosHelper(`/api/course/play/${id}`, 'GET');
+            const completed = await axiosHelper(`/api/lesson/completed/${id}`, 'GET');
 
-            const courseData = res.data;
+            const courseData = res.data.response;
             setTotalLikes(courseData.love);
+            setIsLiked((res.data.courseLoved).includes(res.data.response._id));
 
             if (completed.status === 200) {
                 setCompleted(completed.data);
@@ -92,7 +94,7 @@ const Play = (props) => {
             content: noteMsg
         }
         try {
-            const res = await axios.post('/api/note/new', note);
+            const res = await axiosHelper('/api/note/new', 'POST', note);
 
             if (res.status === 201) {
                 setNoteMsg("");
@@ -100,7 +102,7 @@ const Play = (props) => {
                 fetchNotes();
             }
         } catch (error) {
-            window.alert("Failed to save!");
+            toast.error("Failed to save!");
         }
     }
 
@@ -128,7 +130,7 @@ const Play = (props) => {
             noteId: id
         }
         try {
-            const res = await axios.post('/api/note/edit', note);
+            const res = await axiosHelper('/api/note/edit', 'POST', note);
 
             if (res.status === 201) {
                 setNoteMsg("");
@@ -138,7 +140,7 @@ const Play = (props) => {
                 setEditingId(null);
             }
         } catch (error) {
-            window.alert("Failed to save!");
+            toast.error("Failed to edit!");
         }
     }
     const deleteNote = async (id) => {
@@ -154,19 +156,19 @@ const Play = (props) => {
         }
 
         try {
-            const res = await axios.post('/api/note/delete', note);
+            const res = await axiosHelper('/api/note/delete', 'POST', note);
 
-            if (res.status === 200 && res.data.msg === 1) {
+            if (res.status === 200) {
                 fetchNotes();
             }
         } catch (error) {
-            window.alert("Failed to delete!");
+            toast.error("Failed to delete!");
         }
     }
 
     const fetchNotes = async () => {
         try {
-            const notes = await axios.post('/api/note', { lessonId: link.lesson, courseId: course._id });
+            const notes = await axiosHelper('/api/note', 'POST', { lessonId: link.lesson, courseId: course._id });
 
             if (notes.status === 200) {
                 setNotes(notes.data);
@@ -193,7 +195,7 @@ const Play = (props) => {
         }
 
         try {
-            const res = await axios.post(link, { id: course._id });
+            const res = await axiosHelper(link, 'POST', { id: course._id });
 
             if (res.status === 200) {
                 setTotalLikes(res.data.love);
@@ -212,7 +214,7 @@ const Play = (props) => {
         checkbox.disabled = true;
 
         try {
-            const res = await axios.put('/api/lesson/complete', { courseId: course._id, lessonId: link.lesson });
+            const res = await axiosHelper('/api/lesson/complete', 'PUT', { courseId: course._id, lessonId: link.lesson });
 
             if (res.status === 200) {
                 setCompleted(res.data);
@@ -241,14 +243,10 @@ const Play = (props) => {
     const handleNoteTitle = e => setNoteTitle(e.target.value);
 
     useEffect(() => {
-        if (props.setLoggedOff() === false) {
-            navigate("/login");
-        }
-        if (!data) {
+        if (!id) {
             return navigate("/dashboard");
         }
-
-        fetchCourseData(data);
+        fetchCourseData(id);
     }, []);
 
 
@@ -341,8 +339,8 @@ const Play = (props) => {
                                         <div className="accordion-body">
                                             <ul className='list-group'>
                                                 {course && <>{course.lessons.map(chapter => {
-                                                    const { lesson, link, lessonName } = chapter;
-                                                    return <li className='list-group-item'>
+                                                    const { lesson, link, lessonName, _id } = chapter;
+                                                    return <li className='list-group-item' key={_id}>
                                                         <Link onClick={() => nextLesson({ lesson, link, lessonName })}>
                                                             <div>
                                                                 <FaVideo />
@@ -399,7 +397,7 @@ const Play = (props) => {
                                 </div>
                             </div>
                             {notes && notes.map(note => {
-                                return <>
+                                return <div key={note._id}>
                                     <div ref={pdfRef} className="show-note mb-2" style={{ width: '100%' }}>
                                         <div className="note-top">
                                             <div className="saved-note">
@@ -414,7 +412,7 @@ const Play = (props) => {
                                             <p id={"i" + note._id}>{note.content}</p>
                                         </div>
                                     </div>
-                                </>
+                                </div>
                             })}
                         </div>
                         <div id="tab-4" className="tab-pane" role="tabpanel">

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import CardCourse from './CardCourse';
-import axios from 'axios';
+import axiosHelper from '../../lib/axiosHelper';
 
 import RecommendSkeleton from './RecommendSkeleton';
 
@@ -10,7 +10,7 @@ const Recommended = () => {
 
     const fetchCourse = async () => {
         try {
-            const res = await axios.get("/api/recommended/course");
+            const res = await axiosHelper('/api/recommended/course', 'GET');
             if (res.status === 200 && typeof res.data !== 'string') {
                 setCourses(res.data);
             }
@@ -29,6 +29,7 @@ const Recommended = () => {
                 <div className="row card-holder">
                     {(courses && courses?.length > 0) ? courses?.map((course) => {
                         return <CardCourse
+                            key={"rec" + course._id}
                             id={course._id}
                             name={course.name}
                             creator={course.creator}

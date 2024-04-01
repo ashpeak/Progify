@@ -1,59 +1,29 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { Link } from "react-router-dom";
-import axios from "axios";
-import { useNavigate } from "react-router-dom";
 import { FaBarsStaggered } from "react-icons/fa6";
 import { FaUser } from "react-icons/fa";
 import { FaHand, FaGear, FaRightFromBracket } from "react-icons/fa6";
+import { userState } from "../store/userState";
 
 // import logo from "../img/Braintube.png";
 
 
-const Navbar = (props) => {
+const Navbar = () => {
+
+    const user = userState((state) => state.user);
+    const { logout } = userState();
 
     const collapse = () => {
         const item = document.getElementById("navcol-2");
         item.classList.remove('show');
     }
 
-    const isLoggedIn = (props.status.isLoggedIn === 'true');
-    const navigate = useNavigate();
-
-    const check = async () => {
-        try {
-            const response = await axios.get('/api/checklogin');
-            if (response.data.loggedin === true) {
-                props.setLoggedIn(response.data.name);
-            }
-        } catch (error) {
-            const { data, request } = error.response;
-            if (data.msg === 'Unauthorized' || request.status === 401) {
-                props.setLoggedOff(false);
-            }
-        }
-    }
-    const logout = async () => {
-        try {
-            const response = await axios.get('/api/logout');
-            if (response.status === 200) {
-                props.setLoggedOff(false);
-                navigate('/');
-            }
-        } catch (error) {
-            window.alert("Failed to logout!");
-        }
-    }
-
-    useEffect(() => {
-        check();
-    }, []);
-
     return (<>
         <nav className="navbar navbar-light navbar-expand-md py-3 fixed-top blur-background">
             <div className="container-fluid">
                 <Link className="navbar-brand d-flex align-items-center" to={"/"}>
                     {/* <span className="Braintube">&lt; Progify /&gt;</span> */}
-                    <img src={"/image/braintube.png"} alt="Braintube" style={{height: '2.8125rem'}} />
+                    <img src={"/image/braintube.png"} alt="Braintube" style={{ height: '2.8125rem' }} />
                 </Link>
                 <button type="button" className="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navcol-2">
                     <FaBarsStaggered /></button>
@@ -65,9 +35,9 @@ const Navbar = (props) => {
                         {/* <li className="nav-item"><Link onClick={collapse} className="nav-link" to={"/blog"}>BLOG</Link></li> */}
                         <li className="nav-item"><a onClick={collapse} className="nav-link" href="/community">Community</a></li>
 
-                        {isLoggedIn ?
+                        {user.loggedIn ?
                             <li className="nav-item custom-dropdown">
-                                <Link className="dropdown-toggle nav-link" aria-expanded="true" data-bs-toggle="dropdown">{(props.status.name)?.substring(0, 15)}</Link>
+                                <Link className="dropdown-toggle nav-link" aria-expanded="true" data-bs-toggle="dropdown">{(user.name)?.substring(0, 15)}</Link>
                                 <div className="dropdown-menu" data-bs-popper="none">
                                     <Link className="dropdown-item" to={'/dashboard'}>
                                         <FaUser className="me-2" />Dashboard</Link>

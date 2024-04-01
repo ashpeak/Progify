@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 
 import Home from "./components-sm/Home";
 import Banner from "./components-sm/Banner";
@@ -8,11 +8,7 @@ import Recommended from './components-sm/Recommended';
 import Testimonial from "./components-sm/Testimonial";
 import Join from "./components-sm/Join";
 
-const Landing = (props) => {
-
-    useEffect(() => {
-        props.setLoggedOff();
-    }, []);
+const Landing = () => {
 
     return (<>
         <Home />

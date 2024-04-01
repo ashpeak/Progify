@@ -1,52 +1,38 @@
 import React, { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
-import axios from "axios";
+import axiosHelper from "../lib/axiosHelper";
+import { toast } from "sonner";
 
 import CardActive from "./components-sm/CardActive";
 import Recommended from "./components-sm/Recommended";
 
-const Dashboard = (props) => {
+const Dashboard = () => {
 
     const [userData, setUserData] = useState([]);
     const [likes, setLikes] = useState([]);
 
-    const navigate = useNavigate();
-
     const fetchUserData = async () => {
 
-        try {
-            const res = await axios.get('/api/users/dashboard');
+        const res = await axiosHelper('/api/users/dashboard', 'GET');
 
-            const Courses = res.data.result;
-            setLikes(res.data.courseLoved);
-
-            Courses.forEach(course => {
-                    const { name, _id, creator, course_pic } = course;
-                    setUserData(prevValue => {
-                        return [
-                            ...prevValue,
-                            {
-                                _id,
-                                name,
-                                creator,
-                                course_pic
-                            }
-                        ];
-                    });
-                })
-        } catch (error) {
-            const { data, request } = error.response;
-            if (data.msg === 'Unauthorized' || request.status === 401) {
-                props.setLoggedOff(false);
-                navigate("/login");
-            }
+        if (res.status !== 200) {
+            toast.error(res.data.msg);
         }
+
+        const Courses = res.data.courseEnrolled;
+        setLikes(res.data.courseLoved);
+
+        setUserData([]);
+        Courses.map(course => {
+            setUserData(prevValue => {
+                return [
+                    ...prevValue,
+                    course.courseId
+                ];
+            });
+        });
     }
     useEffect(() => {
-        if (props.setLoggedOff() === false) {
-            navigate("/login");  //<--------------------------------------------------
-        }
-        fetchUserData();         //<--------------------------------------------------
+        fetchUserData();
     }, []);
 
     return (<>
@@ -57,17 +43,9 @@ const Dashboard = (props) => {
             <div className="container">
 
                 {userData && <div className="row">{userData.map(course => {
-
-                    let isLiked = false;
-                    const like = likes.find(Element => {
-                        return Element === course._id;
-                    });
-                    
-                    if (like) {
-                        isLiked = true;
-                    }
-
+                    const isLiked = likes.includes(course._id);
                     return <CardActive
+                        key={course._id}
                         id={course._id}
                         course={course.name}
                         creator={course.creator}

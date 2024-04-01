@@ -1,10 +1,8 @@
-import React, { useEffect, useState } from 'react'
-import { useNavigate } from 'react-router-dom'
-import axios from 'axios';
+import React, { useEffect, useState } from 'react';
+import axiosHelper from '../lib/axiosHelper';
 
-export default function CourseRequest(props) {
+export default function CourseRequest() {
 
-    const navigate = useNavigate();
 
     const [data, setData] = useState({
         name: "",
@@ -37,7 +35,7 @@ export default function CourseRequest(props) {
         }
 
         try {
-            const response = await axios.post('/api/course/request', data);
+            const response = await axiosHelper('/api/course/request', 'POST', data);
             if (response.status === 201) {
                 setAlert({
                     status: true,
@@ -51,21 +49,17 @@ export default function CourseRequest(props) {
                     playlist: "",
                     message: "",
                 });
+            } else {
+                setAlert({
+                    status: true,
+                    success: false,
+                    message: "Failed to submit your request!",
+                });
             }
         } catch (error) {
-            setAlert({
-                status: true,
-                success: false,
-                message: "Failed to submit your request!",
-            });
+            console.log(error);
         }
     }
-
-    useEffect(() => {
-        if (props.setLoggedOff() === false) {
-            navigate("/login");
-        }
-    }, []);
 
     useEffect(() => {
 

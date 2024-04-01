@@ -1,17 +1,17 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import axios from 'axios';
+import axiosHelper from '../lib/axiosHelper';
 
 import MoonLoader from "react-spinners/MoonLoader";
 // import Google from '../img/Social-google.svg';
 
-const Register = (props) => {
+const Register = () => {
 
     const navigate = useNavigate();
 
     const [user, setUser] = useState({
         name: "",
-        username: "",
+        email: "",
         password: "",
         confirmPassword: ""
     });
@@ -39,7 +39,7 @@ const Register = (props) => {
             msg: ""
         });
         setShow(false);
-        if (!user.name || !user.username || !user.password || !user.confirmPassword) {
+        if (!user.name || !user.email || !user.password || !user.confirmPassword) {
             return;
         }
 
@@ -58,12 +58,12 @@ const Register = (props) => {
         setLoader(true);
 
         try {
-            const res = await axios.post('/api/register', user);
+            const res = await axiosHelper('/api/register', 'POST', user);
 
             if (res.status === 201) {
                 setUser({
                     name: "",
-                    username: "",
+                    email: "",
                     password: "",
                     confirmPassword: ""
                 });
@@ -74,13 +74,7 @@ const Register = (props) => {
 
                 setShow(true);
                 setLoader(false);
-            }
-
-        } catch (error) {
-            setLoader(false);
-
-            const { status, data } = error.response;
-            if (status === 400) {
+            } else {
                 setUser({
                     ...user,
                     password: "",
@@ -88,17 +82,15 @@ const Register = (props) => {
                 });
                 setData({
                     color: "#dc5a5a",
-                    msg: data.msg
+                    msg: res.data.msg
                 });
             }
+
+        } catch (error) {
+            setLoader(false);
+            console.log(error);
         }
     }
-
-    useEffect(() => {
-        if (props.setLoggedOff()) {
-            navigate('/dashboard');
-        }
-    });
 
     return (<>
         <section>
@@ -118,7 +110,7 @@ const Register = (props) => {
                     <form method='POST' onSubmit={formSubmit}>
                         <div>
                             <div><input className='login-input form-control' type="text" maxLength={20} minLength={5} onChange={handleInput} name='name' placeholder="Name" value={user.name} required /></div>
-                            <div><input className='login-input form-control' type="email" onChange={handleInput} name='username' placeholder="Email" value={user.username} required /></div>
+                            <div><input className='login-input form-control' type="email" onChange={handleInput} name='email' placeholder="Email" value={user.email} required /></div>
                             <div>
                                 <input className='login-input form-control' type="password"
                                     style={{ marginBottom: "0" }} maxLength={30} minLength={8} onChange={handleInput} name='password' autoComplete='true' placeholder="password" value={user.password} required />
