@@ -16,7 +16,6 @@ const Login = () => {
     const redirect = queryParams.get('redirect');
     const loggedUser = userState((state) => state.user);
     const { setLoggedUser } = userState();
-
     const [user, setUser] = useState({
         email: "",
         password: ""
@@ -49,7 +48,6 @@ const Login = () => {
             setLoader(false);
             if (response.status === 200) {
                 setLoggedUser(response.data);
-                navigate("/dashboard");
             } else {
                 const { data } = response;
                 setLoader(false);
@@ -77,7 +75,7 @@ const Login = () => {
                 navigate("/dashboard");
             }
         }
-    }, [loggedUser]);
+    }, [loggedUser.loggedIn]);
 
     return (<>
         <section>

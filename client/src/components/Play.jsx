@@ -8,6 +8,7 @@ import { VscBook } from "react-icons/vsc";
 import { FaHeart, FaRegHeart, FaVideo } from "react-icons/fa";
 import { FaRegFolderOpen } from "react-icons/fa6";
 import { FaPencilAlt, FaTrash } from "react-icons/fa";
+import { MdOutlineRateReview } from "react-icons/md";
 import axiosHelper from "../lib/axiosHelper";
 import { toast } from "sonner";
 
@@ -30,6 +31,7 @@ const Play = () => {
     const [editingId, setEditingId] = useState(null);
     const [isLiked, setIsLiked] = useState(false);
     const [totalLikes, setTotalLikes] = useState(0);
+    const [hovered, setHovered] = useState(null);
 
     const opts = {
         height: '100%',
@@ -208,18 +210,19 @@ const Play = () => {
         }
     }
 
-    const lessonCompleted = async () => {
-        const checkbox = document.getElementById("checkbox");
+    const lessonCompleted = async (lessonId) => {
+        console.log(link.lesson, lessonId);
+        const checkbox = document.getElementById("checkbox" + lessonId);
         // disable checkbox
         checkbox.disabled = true;
 
         try {
-            const res = await axiosHelper('/api/lesson/complete', 'PUT', { courseId: course._id, lessonId: link.lesson });
+            const res = await axiosHelper('/api/lesson/complete', 'PUT', { courseId: course._id, lessonId: lessonId });
 
             if (res.status === 200) {
                 setCompleted(res.data);
             } else {
-                console.log("Failed to update");
+                toast.error("Failed to update");
             }
 
         } catch (error) {
@@ -229,10 +232,10 @@ const Play = () => {
         checkbox.disabled = false;
     }
 
-    const checkCompleted = () => {
+    const checkCompleted = (lesson) => {
         if (!completed || completed.length === 0) {
             return false;
-        } else if (completed.includes(link?.lesson)) {
+        } else if (completed.includes(lesson)) {
             return true;
         } else {
             return false;
@@ -300,10 +303,9 @@ const Play = () => {
                             </div>
                             <div className="d-flex justify-content-between">
                                 <p style={{ marginRight: "1rem" }}>{link.lessonName}</p>
-                                <div className="round d-flex align-items-baseline mt-3">
-                                    <input type="checkbox" onChange={lessonCompleted} checked={checkCompleted()} id="checkbox" />
-                                    <label htmlFor="checkbox"></label>
-                                    <p style={{ marginLeft: "1.5rem", color: "#298f2d" }}>Complete</p>
+                                <div className="like-comp d-flex align-item-center" style={{width: "5.6rem", height: "2.1rem"}}>
+                                    <MdOutlineRateReview style={{ fontSize: "1.5em" }} />
+                                    <p style={{ fontSize: "1rem", marginBottom: "0 !important", fontWeight: 500 }}>Rate</p>
                                 </div>
                             </div>
                         </div>}
@@ -338,17 +340,25 @@ const Play = () => {
                                     <div id="panelsStayOpen-collapseOne" className="accordion-collapse collapse show" aria-labelledby="panelsStayOpen-headingOne">
                                         <div className="accordion-body">
                                             <ul className='list-group'>
-                                                {course && <>{course.lessons.map(chapter => {
+                                                {course && course.lessons.map(chapter => {
                                                     const { lesson, link, lessonName, _id } = chapter;
+                                                    const check = checkCompleted(lesson);
+                                                    {/* console.log(lesson); */ }
                                                     return <li className='list-group-item' key={_id}>
-                                                        <Link onClick={() => nextLesson({ lesson, link, lessonName })}>
-                                                            <div>
-                                                                <FaVideo />
-                                                                <p className="module-name">{lessonName}</p>
+                                                        <div>
+                                                            <FaVideo style={{ color: hovered === lesson ? "#5766c7ff" : "inherit" }} />
+                                                            <div className="d-flex align-items-center justify-content-between">
+                                                                <Link>
+                                                                    <p onClick={() => nextLesson({ lesson, link, lessonName })} onMouseLeave={() => setHovered(null)} onMouseEnter={() => setHovered(lesson)} className={`${check ? "lesson-color" : ""} module-name w-100`}>{lessonName}</p>
+                                                                </Link>
+                                                                <div className="round d-flex align-items-baseline" style={{ width: "fit-content", marginTop: "-10px", marginRight: "0.8rem" }}>
+                                                                    <input type="checkbox" onChange={() => lessonCompleted(lesson)} checked={check} id={"checkbox" + lesson} />
+                                                                    <label htmlFor={"checkbox" + lesson}></label>
+                                                                </div>
                                                             </div>
-                                                        </Link>
+                                                        </div>
                                                     </li>
-                                                })}</>}
+                                                })}
                                             </ul>
                                         </div>
                                     </div>

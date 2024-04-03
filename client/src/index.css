@@ -955,6 +955,10 @@ input {
   margin-left: .5rem;
 }
 
+.lesson-color {
+  color: #0b8911;
+}
+
 .tab-pane a:hover {
   color: var(--han-blue);
 }

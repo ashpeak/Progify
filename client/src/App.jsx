@@ -40,8 +40,6 @@ const App = () => {
     }
   }
 
-  console.log(user);
-
   useEffect(() => {
     if (firstRender) {
       firstRender = false;

@@ -28,8 +28,7 @@ const EmailVerify = () => {
                 setValidUrl(false);
             }
         } catch (error) {
-            setLoading(false);
-            setValidUrl(false);
+            console.log(error);
         }
     }
 
@@ -52,7 +51,7 @@ const EmailVerify = () => {
                     <FaCheckCircle style={{ color: "#5cdc5a", fontSize: "120px" }} />
                     <br />
                     <h4>Your email has been verified successfully. Welcome aboard!</h4>
-                    <span>Go to <Link to={'/login'}>Login</Link></span>
+                    <span>Go to <Link to={'/dashboard'}>Dashboard</Link></span>
                 </> : <>
                     <img src={"/image/expired.png"} alt='expired' />
                     <br />
