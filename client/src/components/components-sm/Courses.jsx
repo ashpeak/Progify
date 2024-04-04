@@ -25,19 +25,31 @@ const Courses = () => {
     const searchCourse = async (e) => {
         e.preventDefault();
 
-        if (!searchText) {
-            window.alert("Can't be empty!")
-            return;
-        }
+        // if (!searchText) {
+        //     window.alert("Can't be empty!")
+        //     return;
+        // }
 
-        setCourses([]);
-        try {
-            const res = await axios.post("/api/search/course", { searchText });
-            if (res) {
-                setCourses(res.data);
+        const data = [...courses].sort((a, b) => {
+            const aMatch = a.name.toLowerCase().includes(searchText.toLowerCase());
+            const bMatch = b.name.toLowerCase().includes(searchText.toLowerCase());
+
+            if (aMatch && !bMatch) {
+                return -1;
+            } else if (!aMatch && bMatch) {
+                return 1;
+            } else {
+                return 0;
             }
-        } catch (error) {
-        }
+        });
+        setCourses(data);
+        // try {
+        //     const res = await axios.post("/api/search/course", { searchText });
+        //     if (res) {
+        //         setCourses(res.data);
+        //     }
+        // } catch (error) {
+        // }
     }
 
     const filter = (e) => {
@@ -157,6 +169,7 @@ const Courses = () => {
 
                             {courses.map(course => {
                                 return <SearchCourseCard
+                                    key={course._id}
                                     _id={course._id}
                                     course_pic={course.course_pic}
                                     name={course.name}

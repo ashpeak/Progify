@@ -3,13 +3,11 @@ import React, { useState, useEffect } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import HashLoader from "react-spinners/HashLoader";
 import { FaCheckCircle } from "react-icons/fa";
-import { userState } from "../store/userState";
 
 const EmailVerify = () => {
 
     const [validUrl, setValidUrl] = useState(false);
     const [loading, setLoading] = useState(true);
-    const { setLoggedUser } = userState();
 
     const params = useParams();
 
@@ -20,7 +18,6 @@ const EmailVerify = () => {
             const response = await axiosHelper(url, 'GET');
 
             if (response.status === 200) {
-                setLoggedUser(response.data);
                 setLoading(false);
                 setValidUrl(true);
             } else {
@@ -51,7 +48,7 @@ const EmailVerify = () => {
                     <FaCheckCircle style={{ color: "#5cdc5a", fontSize: "120px" }} />
                     <br />
                     <h4>Your email has been verified successfully. Welcome aboard!</h4>
-                    <span>Go to <Link to={'/dashboard'}>Dashboard</Link></span>
+                    <span>Go to <Link to={'/login'}>Login</Link></span>
                 </> : <>
                     <img src={"/image/expired.png"} alt='expired' />
                     <br />

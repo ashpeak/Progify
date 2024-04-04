@@ -196,25 +196,7 @@ router.get("/api/users/:id/verify/:token", async (req, res) => {
 
         if (!user) return res.status(400).json({ msg: "Invalid link!" });
 
-        const accessToken = jwt.sign({ id: user._id, role: user.role, name: user.name }, process.env.JWT_ACCESS_SECRET, { expiresIn: "5m" });
-        const refreshToken = jwt.sign({ id: user._id }, process.env.JWT_ACCESS_SECRET, { expiresIn: "90d" });
-
-        const options = {
-            path: "/",
-            httpOnly: true,
-            sameSite: "lax",
-            expires: new Date(5 * 60 * 1000),
-        }
-
-        await RefreshToken.create({
-            userId: user._id,
-            token: refreshToken
-        });
-
-        res.cookie("accessToken", accessToken, { ...options });
-        res.cookie("refreshToken", refreshToken, { ...options, expires: new Date(Date.now() + 90 * 24 * 60 * 60 * 1000) });
-
-        return res.status(200).json({ name: user.name, role: user.role });
+       return res.status(200).json({ msg: "Account verified!" });
 
     } catch (error) {
         console.log(error);

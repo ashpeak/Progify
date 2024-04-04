@@ -211,7 +211,6 @@ const Play = () => {
     }
 
     const lessonCompleted = async (lessonId) => {
-        console.log(link.lesson, lessonId);
         const checkbox = document.getElementById("checkbox" + lessonId);
         // disable checkbox
         checkbox.disabled = true;
@@ -343,7 +342,6 @@ const Play = () => {
                                                 {course && course.lessons.map(chapter => {
                                                     const { lesson, link, lessonName, _id } = chapter;
                                                     const check = checkCompleted(lesson);
-                                                    {/* console.log(lesson); */ }
                                                     return <li className='list-group-item' key={_id}>
                                                         <div>
                                                             <FaVideo style={{ color: hovered === lesson ? "#5766c7ff" : "inherit" }} />
