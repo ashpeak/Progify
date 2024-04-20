@@ -24,6 +24,10 @@ import PrivacyPolicy from "./components/PrivacyPolicy";
 import { userState } from "./store/userState";
 import { Toaster } from 'sonner';
 import axiosHelper from "./lib/axiosHelper";
+import ReactGA from "react-ga4";
+
+const TRACKING_ID = "G-ZVWK1VVKBD"; // OUR_TRACKING_ID
+ReactGA.initialize(TRACKING_ID);
 
 let firstRender = true;
 const App = () => {
@@ -41,6 +45,8 @@ const App = () => {
   }
 
   useEffect(() => {
+    ReactGA.send({ hitType: "pageview", page: window.location.pathname + window.location.search});
+
     if (firstRender) {
       firstRender = false;
       refreshState();
@@ -52,6 +58,11 @@ const App = () => {
       clearInterval(intervalId);
     }
   }, []);
+
+  useEffect(() => {
+    // whenever the location changes, report a new page view
+    ReactGA.send({ hitType: "pageview", page: window.location.pathname + window.location.search});
+  }, [location]);
 
   return (
     <>
@@ -73,7 +84,7 @@ const App = () => {
           <Route path="/course/request" element={user.loggedIn ? <CourseRequest /> : <Navigate to={`/login?redirect=${encodeURIComponent(window.location.href)}`} />} />
           <Route path="/request/list" element={(user.loggedIn) ? <RequestList /> : <Navigate to={`/login?redirect=${encodeURIComponent(window.location.href)}`} />} />
           {/* <Route path="/request/list" element={(user.loggedIn && user.role === "admin") ? <RequestList /> : <Navigate to={`/error`} />} /> */}
-          <Route path="/community" element={<Community />} />
+          <Route path="/community" element={user.loggedIn ? <Community /> : <Navigate to={`/login?redirect=${encodeURIComponent(window.location.href)}`} />} />
           <Route path="/users/:id/verify/:token" element={<EmailVerify />} />
           <Route path="/users/:id/reset/:token" element={<PasswordReset />} />
           <Route path="/users/reset/" element={user.loggedIn ? <PassResetForm /> : <Navigate to={'/dashboard'} />} />

@@ -33,7 +33,7 @@ const Navbar = () => {
                         <li className="nav-item"><Link onClick={collapse} className="nav-link" to={"/about"}>ABOUT US</Link></li>
                         <li className="nav-item"><Link onClick={collapse} className="nav-link" to={"/course"}>Courses</Link></li>
                         {/* <li className="nav-item"><Link onClick={collapse} className="nav-link" to={"/blog"}>BLOG</Link></li> */}
-                        <li className="nav-item"><a onClick={collapse} className="nav-link" href="/community">Community</a></li>
+                        <li className="nav-item"><Link onClick={collapse} className="nav-link" to="/community">Community</Link></li>
 
                         {user.loggedIn ? (
                             <li className="nav-item custom-dropdown">
