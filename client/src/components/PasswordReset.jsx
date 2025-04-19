@@ -91,7 +91,7 @@ const PasswordReset = () => {
                     <br />
                     <h4 style={{ color: "#363636" }}>Processing your request... Please wait.</h4></div> : <>{valid ? <div className="login">
                         <h4>Enter new password</h4>
-                        <form method='POST'>
+                        <form method='POST' onSubmit={formSubmit}>
                             <div>
                                 <div>
                                     <input className='form-control login-input' type="password" onChange={handleChange} autoComplete="off"
@@ -114,7 +114,7 @@ const PasswordReset = () => {
                                                 aria-label="Processing"
                                                 data-testid="loader"
                                             />
-                                        </div> : <button className="btn my-btn btn-lg-rg" onClick={formSubmit}>Submit</button>}
+                                        </div> : <button className="btn my-btn btn-lg-rg" type='submit'>Submit</button>}
                                 </div>
                             </div>
                         </form>

@@ -29,6 +29,12 @@ const PassResetForm = () => {
                 setColor("#5cdc5a");
                 setLoading(false);
             }
+
+            if( response.status === 400) {
+                setData(response.data.msg);
+                setColor("#dc5a5a");
+                setLoading(false);
+            }
         } catch (error) {
             const { data } = error.response;
             setData(data.msg);
@@ -42,7 +48,7 @@ const PassResetForm = () => {
             <div className="login-holder">
                 <div className="login">
                     <h4>Forgot password</h4>
-                    <form method='POST'>
+                    <form method='POST' onSubmit={formSubmit}>
                         <div>
                             <div>
                                 <label htmlFor="email" className="form-label" style={{ color: "#656d77", fontSize: "0.82rem", marginBottom: 0, marginLeft: "0.3rem" }}>Enter email to reset password</label>
@@ -76,7 +82,7 @@ const PassResetForm = () => {
                                             aria-label="Processing"
                                             data-testid="loader"
                                         />
-                                    </div> : <button className="btn my-btn btn-lg-rg" onClick={formSubmit}>Reset</button>}
+                                    </div> : <button className="btn my-btn btn-lg-rg" type="submit">Reset</button>}
                             </div>
                         </div>
                     </form>

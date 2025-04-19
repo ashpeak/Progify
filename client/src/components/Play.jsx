@@ -1,16 +1,15 @@
 import React, { useState, useEffect, useRef } from "react";
 import YouTube from 'react-youtube';
 import { Link, useNavigate, useParams } from 'react-router-dom';
-import axios from "axios";
-import { IoChatboxOutline } from "react-icons/io5";
 import { FaRegNoteSticky, FaLink, FaLinkSlash } from "react-icons/fa6";
 import { VscBook } from "react-icons/vsc";
 import { FaHeart, FaRegHeart, FaVideo } from "react-icons/fa";
-import { FaRegFolderOpen } from "react-icons/fa6";
 import { FaPencilAlt, FaTrash } from "react-icons/fa";
 import { MdOutlineRateReview } from "react-icons/md";
 import axiosHelper from "../lib/axiosHelper";
 import { toast } from "sonner";
+import MCQGenerator from "./MCQGenerator";
+import { IoNewspaperOutline } from "react-icons/io5";
 
 
 const Play = () => {
@@ -277,7 +276,7 @@ const Play = () => {
                         </li>
                         <li className="nav-item" role="presentation">
                             <a className="nav-link" role="tab" data-bs-toggle="tab"
-                                href="#tab-2"><IoChatboxOutline className="me-2" size={"1.2rem"} />Discussion</a>
+                                href="#tab-2"><IoNewspaperOutline className="me-2" size={"1.2rem"} />Test</a>
                         </li>
                         <li onClick={fetchNotes} className="nav-item" role="presentation">
                             <a className="nav-link" role="tab" data-bs-toggle="tab"
@@ -363,9 +362,11 @@ const Play = () => {
                                 </div>
                             </div>
                         </div>
+                        
                         <div id="tab-2" className="tab-pane" role="tabpanel">
-                            <h5>It's empty!<FaRegFolderOpen className="ms-3" /></h5>
+                            <MCQGenerator lessonName={link?.lessonName} />
                         </div>
+
                         <div id="tab-3" className="tab-pane" role="tabpanel">
                             <div id="notes-sec" className="note mb-5">
                                 <form>

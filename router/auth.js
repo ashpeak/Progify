@@ -13,7 +13,7 @@ const newCourse = require("../model/newCourseReq");
 const jwt = require("jsonwebtoken");
 const RefreshToken = require("../model/refreshToken");
 const mongoose = require("mongoose");
-
+const axios = require("axios");
 
 const isAuthorized = (req, res, next) => {
     const accessToken = req.cookies?.accessToken;
@@ -119,7 +119,7 @@ router.get("/api/token/refresh", async (req, res) => {
 
             res.cookie("accessToken", accessToken, { ...options });
 
-            return res.status(200).json({ name: userData.userId.name, role: userData.userId.role });
+            return res.status(200).json({ loggedIn: true, name: userData.userId.name, role: userData.userId.role });
         } else return res.status(401).json({ msg: "Unauthorized" });
     } else return res.status(401).json({ msg: "Unauthorized" });
 });
@@ -293,7 +293,7 @@ router.post('/api/login', async (req, res) => {
     res.cookie("accessToken", accessToken, { ...options });
     res.cookie("refreshToken", refreshToken, { ...options, expires: new Date(Date.now() + 90 * 24 * 60 * 60 * 1000) });
 
-    return res.status(200).json({ name: user.name, role: user.role });
+    return res.status(200).json({ loggedIn: true, name: user.name, role: user.role });
 
 });
 
@@ -570,5 +570,32 @@ router.post("/api/request/list", isAuthorized, async (req, res) => {
     }
 });
 
+// Gemini MCQ generation endpoint
+router.post("/api/gemini-mcq", isAuthorized, async (req, res) => {
+    const { lessonName } = req.body;
+    if (!lessonName) return res.status(400).json({ error: "lessonName is required" });
+    try {
+        const GEMINI_API_KEY = process.env.GEMINI_API_KEY;
+        const GEMINI_API_URL = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${GEMINI_API_KEY}`;
+        const prompt = `Generate 5 multiple choice questions (MCQs) with 4 options each and the correct answer for the lesson: \"${lessonName}\". Format as JSON: [{question, options:[], answer}]`;
+        const response = await axios.post(GEMINI_API_URL, {
+            contents: [{ parts: [{ text: prompt }] }]
+        });
+        // Parse and send only the MCQs part
+        let text = response.data.candidates[0].content.parts[0].text;
+        text = text.replace(/```json/g, "").replace(/```/g, "").trim();
+        let mcqs = [];
+        try {
+            mcqs = JSON.parse(text);
+        } catch (e) {
+            return res.status(500).json({ error: "Failed to parse MCQs from Gemini response", raw: text });
+        }
+        res.json({ mcqs });
+    } catch (error) {
+        console.log(error);
+        
+        res.status(500).json({ error: "Failed to generate MCQs" });
+    }
+});
 
 module.exports = router;

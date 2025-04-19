@@ -167,7 +167,7 @@ const Courses = () => {
                     <div className='col-lg-9'>
                         {(courses && courses.length > 0) ? <div className='row'>
 
-                            {courses.map(course => {
+                            {Array.isArray(courses) ? courses.map(course => {
                                 return <SearchCourseCard
                                     key={course._id}
                                     _id={course._id}
@@ -175,7 +175,7 @@ const Courses = () => {
                                     name={course.name}
                                     creator={course.creator}
                                 />
-                            })}
+                            }) : <h4 className='text-center fw-bold'>No courses found</h4>}
                         </div> : <>
                             <LoadingSkeleton />
                             <LoadingSkeleton />

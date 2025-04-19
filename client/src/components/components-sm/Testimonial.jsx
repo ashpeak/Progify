@@ -92,7 +92,7 @@ const Testimonial = () => {
                         >
                             {testimonials.map((testimonial, index) => (
                                 <SwiperSlide key={`testimonial${index}`}>
-                                    <div style={{ textAlign: "center" }}>
+                                    <div style={{ cursor: "pointer", textAlign: "center" }}>
                                         <div className="card d-inline-block" style={{ textAlign: "center", background: "rgba(255,255,255,0)", border: "1px solid #b1a3febd", boxShadow: "rgb(209 215 220 / 74%) 0px 0px 18px 0px" }}>
                                             <div className="card-body">
                                                 <h2 className="card-title">{testimonial.name}</h2>

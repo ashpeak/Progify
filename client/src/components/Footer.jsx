@@ -73,7 +73,7 @@ const Footer = () => {
 
                     <div className="col-md-12 text-center mt-2">
                         <p className='ashish'>
-                            Made with ❤️ by <a className='ashish-in' rel='noopener noreferrer' target="_blank" href="https://www.linkedin.com/in/ashishsingh09dev/"><CiLinkedin style={{ marginTop: "-0.25rem" }} /> Ashish Singh</a>
+                            Made with ❤️ by <a className='ashish-in' rel='noopener noreferrer' target="_blank" href="https://www.linkedin.com/in/ashpeak/"><CiLinkedin style={{ marginTop: "-0.25rem" }} /> Ashish Singh</a>
                         </p>
                     </div>
                 </div>
