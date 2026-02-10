@@ -108,7 +108,7 @@ router.get("/api/token/refresh", async (req, res) => {
     if (user) {
         const userData = await RefreshToken.findOne({ userId: user.id, token: refreshToken }).populate("userId");
 
-        if (userData) {
+        if (userData && userData.userId) {
             const accessToken = jwt.sign({ id: userData.userId._id, name: userData.userId.name, role: userData.userId.role }, process.env.JWT_ACCESS_SECRET, { expiresIn: "5m" });
             const options = {
                 path: "/",
@@ -120,7 +120,11 @@ router.get("/api/token/refresh", async (req, res) => {
             res.cookie("accessToken", accessToken, { ...options });
 
             return res.status(200).json({ loggedIn: true, name: userData.userId.name, role: userData.userId.role });
-        } else return res.status(401).json({ msg: "Unauthorized" });
+        } else {
+            // Clean up orphaned refresh token if user doesn't exist
+            if (userData) await RefreshToken.deleteOne({ _id: userData._id });
+            return res.status(401).json({ msg: "Unauthorized" });
+        }
     } else return res.status(401).json({ msg: "Unauthorized" });
 });
 

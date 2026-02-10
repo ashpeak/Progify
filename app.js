@@ -19,12 +19,8 @@ app.use(cors({
     credentials: true,
 }));
 
-const redisClient = new redis.createClient({
-    password: process.env.REDIS_PASSWORD,
-    socket: {
-        host: process.env.REDIS_HOST,
-        port: process.env.REDIS_PORT,
-    }
+const redisClient = redis.createClient({
+    url: process.env.REDIS_URL
 });
 
 redisClient.connect();
