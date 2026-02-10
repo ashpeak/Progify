@@ -1,6 +1,7 @@
-import React, { useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import React, { useState, useEffect } from 'react';
+import { Link, useNavigate, useLocation } from 'react-router-dom';
 import axiosHelper from '../lib/axiosHelper';
+import { userState } from '../store/userState';
 
 import MoonLoader from "react-spinners/MoonLoader";
 // import Google from '../img/Social-google.svg';
@@ -8,6 +9,11 @@ import MoonLoader from "react-spinners/MoonLoader";
 const Register = () => {
 
     const navigate = useNavigate();
+    const location = useLocation();
+    const loggedUser = userState((state) => state.user);
+    const authChecked = userState((state) => state.authChecked);
+    const queryParams = new URLSearchParams(location.search);
+    const redirect = queryParams.get('redirect');
 
     const [user, setUser] = useState({
         name: "",
@@ -21,6 +27,25 @@ const Register = () => {
     });
     const [show, setShow] = useState(false);
     const [loader, setLoader] = useState(false);
+
+    useEffect(() => {
+        if (authChecked && loggedUser.loggedIn) {
+            if (redirect) {
+                let redirectPath = decodeURIComponent(redirect);
+                if (redirectPath.startsWith('http')) {
+                    try {
+                        const url = new URL(redirectPath);
+                        redirectPath = url.pathname + url.search;
+                    } catch (e) {
+                        redirectPath = '/dashboard';
+                    }
+                }
+                navigate(redirectPath);
+            } else {
+                navigate("/dashboard");
+            }
+        }
+    }, [authChecked, loggedUser.loggedIn, navigate, redirect]);
 
     const handleInput = (e) => {
         const { name, value } = e.target;

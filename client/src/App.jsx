@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
+import { BrowserRouter, Routes, Route, Navigate, useLocation } from "react-router-dom";
 
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
@@ -25,6 +25,42 @@ import { userState } from "./store/userState";
 import { Toaster } from 'sonner';
 import axiosHelper from "./lib/axiosHelper";
 import ReactGA from "react-ga4";
+
+// ProtectedRoute component that waits for auth check before redirecting
+const ProtectedRoute = ({ children }) => {
+  const user = userState((state) => state.user);
+  const authChecked = userState((state) => state.authChecked);
+  const location = useLocation();
+
+  // Show nothing while checking auth status
+  if (!authChecked) {
+    return null; // Or a loading spinner
+  }
+
+  if (!user.loggedIn) {
+    const redirectPath = encodeURIComponent(location.pathname + location.search);
+    return <Navigate to={`/login?redirect=${redirectPath}`} replace />;
+  }
+
+  return children;
+};
+
+// GuestRoute component for pages that should only be accessible when NOT logged in
+const GuestRoute = ({ children, redirectTo = "/dashboard" }) => {
+  const user = userState((state) => state.user);
+  const authChecked = userState((state) => state.authChecked);
+
+  // Show nothing while checking auth status
+  if (!authChecked) {
+    return null;
+  }
+
+  if (user.loggedIn) {
+    return <Navigate to={redirectTo} replace />;
+  }
+
+  return children;
+};
 
 const TRACKING_ID = "G-ZVWK1VVKBD"; // OUR_TRACKING_ID
 ReactGA.initialize(TRACKING_ID);
@@ -72,22 +108,22 @@ const App = () => {
         <Routes>
 
           <Route path="/" element={<Landing />} />
-          <Route path="/dashboard" element={user.loggedIn ? <Dashboard /> : <Navigate to={`/login?redirect=${encodeURIComponent(window.location.href)}`} />} />
+          <Route path="/dashboard" element={<ProtectedRoute><Dashboard /></ProtectedRoute>} />
           <Route path="/course" element={<Courses />} />
           <Route path="/login" element={<Login />} />
-          <Route path="/register" element={user.loggedIn ? <Navigate to="/dashboard" /> : <Register />} />
+          <Route path="/register" element={<Register />} />
           <Route path="/course/id/:id/detail" element={<CourseDetail />} />
-          <Route path="/play/:id" element={user.loggedIn ? <Play /> : <Navigate to={`/login?redirect=${encodeURIComponent(window.location.href)}`} />} />
+          <Route path="/play/:id" element={<ProtectedRoute><Play /></ProtectedRoute>} />
           {/* <Route path="/blog" element={<Blog
               setLoggedOff={setLoggedOff}
             />} /> */}
-          <Route path="/course/request" element={user.loggedIn ? <CourseRequest /> : <Navigate to={`/login?redirect=${encodeURIComponent(window.location.href)}`} />} />
-          <Route path="/request/list" element={(user.loggedIn) ? <RequestList /> : <Navigate to={`/login?redirect=${encodeURIComponent(window.location.href)}`} />} />
+          <Route path="/course/request" element={<ProtectedRoute><CourseRequest /></ProtectedRoute>} />
+          <Route path="/request/list" element={<ProtectedRoute><RequestList /></ProtectedRoute>} />
           {/* <Route path="/request/list" element={(user.loggedIn && user.role === "admin") ? <RequestList /> : <Navigate to={`/error`} />} /> */}
-          <Route path="/community" element={user.loggedIn ? <Community /> : <Navigate to={`/login?redirect=${encodeURIComponent(window.location.href)}`} />} />
+          <Route path="/community" element={<ProtectedRoute><Community /></ProtectedRoute>} />
           <Route path="/users/:id/verify/:token" element={<EmailVerify />} />
           <Route path="/users/:id/reset/:token" element={<PasswordReset />} />
-          <Route path="/users/reset/" element={!(user?.loggedIn) ? <PassResetForm /> : <Navigate to={'/dashboard'} />} />
+          <Route path="/users/reset/" element={<GuestRoute><PassResetForm /></GuestRoute>} />
           <Route path="/terms-of-service" element={<TermsOfService />} />
           <Route path="/privacy-policy" element={<PrivacyPolicy />} />
           <Route path="/about" element={<About />} />

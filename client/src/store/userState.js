@@ -7,8 +7,9 @@ export const userState = create((set) => ({
         name: "",
         role: "",
     },
+    authChecked: false,
 
-    setLoggedUser: (data) => set({ user: { loggedIn: data.loggedIn ? data.loggedIn : false, name: data.name, role: data.role } }),
+    setLoggedUser: (data) => set({ user: { loggedIn: data.loggedIn ? data.loggedIn : false, name: data.name, role: data.role }, authChecked: true }),
 
     logout: async () => {
         const response = await axiosHelper("/api/logout", "GET");

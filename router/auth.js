@@ -576,7 +576,7 @@ router.post("/api/gemini-mcq", isAuthorized, async (req, res) => {
     if (!lessonName) return res.status(400).json({ error: "lessonName is required" });
     try {
         const GEMINI_API_KEY = process.env.GEMINI_API_KEY;
-        const GEMINI_API_URL = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${GEMINI_API_KEY}`;
+        const GEMINI_API_URL = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-lite:generateContent?key=${GEMINI_API_KEY}`;
         const prompt = `Generate 5 multiple choice questions (MCQs) with 4 options each and the correct answer for the lesson: \"${lessonName}\". Format as JSON: [{question, options:[], answer}]`;
         const response = await axios.post(GEMINI_API_URL, {
             contents: [{ parts: [{ text: prompt }] }]

@@ -7,7 +7,7 @@ import { toast } from 'sonner';
 import MoonLoader from "react-spinners/MoonLoader";
 // import Google from '../img/Social-google.svg';
 
-const frontendUrl = import.meta.env.VITE_FRONTEND_URL;
+
 
 const Login = () => {
 
@@ -15,6 +15,7 @@ const Login = () => {
     const queryParams = new URLSearchParams(location.search);
     const redirect = queryParams.get('redirect');
     const loggedUser = userState((state) => state.user);
+    const authChecked = userState((state) => state.authChecked);
     const { setLoggedUser } = userState();
     const [user, setUser] = useState({
         email: "",
@@ -68,14 +69,25 @@ const Login = () => {
     }
 
     useEffect(() => {
-        if (loggedUser.loggedIn) {
+        if (authChecked && loggedUser.loggedIn) {
             if (redirect) {
-                navigate(decodeURIComponent(redirect).split(frontendUrl)[1]);
+                // Handle both full URLs and paths
+                let redirectPath = decodeURIComponent(redirect);
+                // If it's a full URL, extract just the path
+                if (redirectPath.startsWith('http')) {
+                    try {
+                        const url = new URL(redirectPath);
+                        redirectPath = url.pathname + url.search;
+                    } catch (e) {
+                        redirectPath = '/dashboard';
+                    }
+                }
+                navigate(redirectPath);
             } else {
                 navigate("/dashboard");
             }
         }
-    }, [loggedUser.loggedIn]);
+    }, [authChecked, loggedUser.loggedIn, navigate, redirect]);
 
     return (<>
         <section>
